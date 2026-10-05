@@ -1,0 +1,116 @@
+{
+  "architecture": "resnet50",
+  "checkpoint_sha256": "4f451129451e79367017cebb184b819f1c1b6a18657edc1eca88181cb15572be",
+  "split_sha256": "773016ba6a13f0f92da7520a5461bda2bf70f036fc96d75c24beba52d036c026",
+  "test_images": 389,
+  "test": {
+    "loss": 0.18094922602176666,
+    "accuracy": 0.9434447300771208,
+    "macro_precision": 0.9455699745123116,
+    "macro_recall": 0.9449271619693821,
+    "macro_f1": 0.9442814784862673
+  },
+  "evaluation_seconds": 78.9528147999954,
+  "per_class": {
+    "bacterial_leaf_blight": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 59.0
+    },
+    "brown_spot": {
+      "precision": 0.8695652173913043,
+      "recall": 0.9375,
+      "f1-score": 0.9022556390977443,
+      "support": 64.0
+    },
+    "healthy": {
+      "precision": 0.9324324324324325,
+      "recall": 0.9857142857142858,
+      "f1-score": 0.9583333333333334,
+      "support": 70.0
+    },
+    "leaf_blast": {
+      "precision": 0.9344262295081968,
+      "recall": 0.8382352941176471,
+      "f1-score": 0.8837209302325582,
+      "support": 68.0
+    },
+    "leaf_scald": {
+      "precision": 0.953125,
+      "recall": 0.9838709677419355,
+      "f1-score": 0.9682539682539683,
+      "support": 62.0
+    },
+    "narrow_brown_spot": {
+      "precision": 0.9838709677419355,
+      "recall": 0.9242424242424242,
+      "f1-score": 0.953125,
+      "support": 66.0
+    },
+    "accuracy": 0.9434447300771208,
+    "macro avg": {
+      "precision": 0.9455699745123116,
+      "recall": 0.9449271619693821,
+      "f1-score": 0.9442814784862673,
+      "support": 389.0
+    },
+    "weighted avg": {
+      "precision": 0.9447112124957299,
+      "recall": 0.9434447300771208,
+      "f1-score": 0.9430815257664499,
+      "support": 389.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      59,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      60,
+      2,
+      2,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      69,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      6,
+      3,
+      57,
+      1,
+      1
+    ],
+    [
+      0,
+      1,
+      0,
+      0,
+      61,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      2,
+      2,
+      61
+    ]
+  ],
+  "limitations": "One held-out image split, one seed, no field-level grouping metadata, no confidence calibration, no unknown-class detection."
+}

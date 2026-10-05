@@ -1,0 +1,131 @@
+{
+  "architecture": "resnet50",
+  "total_parameters": 23520326,
+  "trainable_parameters": 12294,
+  "best_epoch": 37,
+  "epochs_run": 40,
+  "train": {
+    "loss": 0.09949516505002975,
+    "accuracy": 0.9798549556809025,
+    "macro_precision": 0.9806056597723264,
+    "macro_recall": 0.9804471623455132,
+    "macro_f1": 0.9803782834773473
+  },
+  "validation": {
+    "loss": 0.14273731410503387,
+    "accuracy": 0.954983922829582,
+    "macro_precision": 0.9585579645502852,
+    "macro_recall": 0.955681468953759,
+    "macro_f1": 0.9564001083205534
+  },
+  "feature_extraction_seconds": 394.8301294000121,
+  "head_training_seconds": 6.237986300024204,
+  "total_training_seconds": 401.0681157000363,
+  "checkpoint_size_mb": 94.390981,
+  "inference_ms_batch1": 151.93131499981973,
+  "inference_scope": "Model forward only, synthetic input, 3 warmups and 20 repeats; excludes preprocessing.",
+  "device": "cpu",
+  "train_validation_accuracy_gap": 0.02487103285132053,
+  "overfitting_observation": "No large accuracy gap; inspect loss curves and per-class validation performance.",
+  "validation_per_class": {
+    "bacterial_leaf_blight": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 48.0
+    },
+    "brown_spot": {
+      "precision": 0.9565217391304348,
+      "recall": 0.8627450980392157,
+      "f1-score": 0.9072164948453608,
+      "support": 51.0
+    },
+    "healthy": {
+      "precision": 0.9473684210526315,
+      "recall": 0.9642857142857143,
+      "f1-score": 0.9557522123893806,
+      "support": 56.0
+    },
+    "leaf_blast": {
+      "precision": 0.847457627118644,
+      "recall": 0.9259259259259259,
+      "f1-score": 0.8849557522123894,
+      "support": 54.0
+    },
+    "leaf_scald": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 49.0
+    },
+    "narrow_brown_spot": {
+      "precision": 1.0,
+      "recall": 0.9811320754716981,
+      "f1-score": 0.9904761904761905,
+      "support": 53.0
+    },
+    "accuracy": 0.954983922829582,
+    "macro avg": {
+      "precision": 0.9585579645502852,
+      "recall": 0.955681468953759,
+      "f1-score": 0.9564001083205534,
+      "support": 311.0
+    },
+    "weighted avg": {
+      "precision": 0.9569065985177053,
+      "recall": 0.954983922829582,
+      "f1-score": 0.9552186940373821,
+      "support": 311.0
+    }
+  },
+  "validation_confusion_matrix": [
+    [
+      48,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      44,
+      1,
+      6,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      54,
+      2,
+      0,
+      0
+    ],
+    [
+      0,
+      2,
+      2,
+      50,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      49,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      0,
+      52
+    ]
+  ]
+}

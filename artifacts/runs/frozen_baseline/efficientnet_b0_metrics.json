@@ -1,0 +1,131 @@
+{
+  "architecture": "efficientnet_b0",
+  "total_parameters": 4015234,
+  "trainable_parameters": 7686,
+  "best_epoch": 12,
+  "epochs_run": 20,
+  "train": {
+    "loss": 0.08668620139360428,
+    "accuracy": 0.983883964544722,
+    "macro_precision": 0.9846635635840298,
+    "macro_recall": 0.9844693814631421,
+    "macro_f1": 0.9842114883388469
+  },
+  "validation": {
+    "loss": 0.1447264552116394,
+    "accuracy": 0.9581993569131833,
+    "macro_precision": 0.9599711740041929,
+    "macro_recall": 0.958897447868036,
+    "macro_f1": 0.9590938388070196
+  },
+  "feature_extraction_seconds": 113.25124429998687,
+  "head_training_seconds": 3.020354900014354,
+  "total_training_seconds": 116.27159920000122,
+  "checkpoint_size_mb": 16.343007,
+  "inference_ms_batch1": 52.232639999419916,
+  "inference_scope": "Model forward only, synthetic input, 3 warmups and 20 repeats; excludes preprocessing.",
+  "device": "cpu",
+  "train_validation_accuracy_gap": 0.02568460763153879,
+  "overfitting_observation": "No large accuracy gap; inspect loss curves and per-class validation performance.",
+  "validation_per_class": {
+    "bacterial_leaf_blight": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 48.0
+    },
+    "brown_spot": {
+      "precision": 0.9375,
+      "recall": 0.8823529411764706,
+      "f1-score": 0.9090909090909091,
+      "support": 51.0
+    },
+    "healthy": {
+      "precision": 0.9166666666666666,
+      "recall": 0.9821428571428571,
+      "f1-score": 0.9482758620689655,
+      "support": 56.0
+    },
+    "leaf_blast": {
+      "precision": 0.9056603773584906,
+      "recall": 0.8888888888888888,
+      "f1-score": 0.897196261682243,
+      "support": 54.0
+    },
+    "leaf_scald": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 49.0
+    },
+    "narrow_brown_spot": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 53.0
+    },
+    "accuracy": 0.9581993569131833,
+    "macro avg": {
+      "precision": 0.9599711740041929,
+      "recall": 0.958897447868036,
+      "f1-score": 0.9590938388070196,
+      "support": 311.0
+    },
+    "weighted avg": {
+      "precision": 0.9583649315456328,
+      "recall": 0.9581993569131833,
+      "f1-score": 0.9579282404190983,
+      "support": 311.0
+    }
+  },
+  "validation_confusion_matrix": [
+    [
+      48,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      45,
+      2,
+      4,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      55,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      3,
+      3,
+      48,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      49,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      53
+    ]
+  ]
+}

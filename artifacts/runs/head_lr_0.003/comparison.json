@@ -1,0 +1,264 @@
+[
+  {
+    "architecture": "resnet50",
+    "total_parameters": 23520326,
+    "trainable_parameters": 12294,
+    "best_epoch": 10,
+    "epochs_run": 18,
+    "train": {
+      "loss": 0.06943169236183167,
+      "accuracy": 0.9782433521353747,
+      "macro_precision": 0.9789778949733892,
+      "macro_recall": 0.979018683866499,
+      "macro_f1": 0.9785135260851466
+    },
+    "validation": {
+      "loss": 0.12491723150014877,
+      "accuracy": 0.9710610932475884,
+      "macro_precision": 0.9717868616373103,
+      "macro_recall": 0.9716193255778901,
+      "macro_f1": 0.9713696027987891
+    },
+    "feature_extraction_seconds": 394.8301294000121,
+    "head_training_seconds": 2.7745572999992874,
+    "total_training_seconds": 397.60468670001137,
+    "checkpoint_size_mb": 94.390981,
+    "inference_ms_batch1": 152.82832000084454,
+    "inference_scope": "Model forward only, synthetic input, 3 warmups and 20 repeats; excludes preprocessing.",
+    "device": "cpu",
+    "train_validation_accuracy_gap": 0.007182258887786341,
+    "overfitting_observation": "No large accuracy gap; inspect loss curves and per-class validation performance.",
+    "validation_per_class": {
+      "bacterial_leaf_blight": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 48.0
+      },
+      "brown_spot": {
+        "precision": 0.96,
+        "recall": 0.9411764705882353,
+        "f1-score": 0.9504950495049505,
+        "support": 51.0
+      },
+      "healthy": {
+        "precision": 0.9491525423728814,
+        "recall": 1.0,
+        "f1-score": 0.9739130434782609,
+        "support": 56.0
+      },
+      "leaf_blast": {
+        "precision": 0.9607843137254902,
+        "recall": 0.9074074074074074,
+        "f1-score": 0.9333333333333333,
+        "support": 54.0
+      },
+      "leaf_scald": {
+        "precision": 0.9607843137254902,
+        "recall": 1.0,
+        "f1-score": 0.98,
+        "support": 49.0
+      },
+      "narrow_brown_spot": {
+        "precision": 1.0,
+        "recall": 0.9811320754716981,
+        "f1-score": 0.9904761904761905,
+        "support": 53.0
+      },
+      "accuracy": 0.9710610932475884,
+      "macro avg": {
+        "precision": 0.9717868616373103,
+        "recall": 0.9716193255778901,
+        "f1-score": 0.9713696027987891,
+        "support": 311.0
+      },
+      "weighted avg": {
+        "precision": 0.9712968703749416,
+        "recall": 0.9710610932475884,
+        "f1-score": 0.9708347783111678,
+        "support": 311.0
+      }
+    },
+    "validation_confusion_matrix": [
+      [
+        48,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        48,
+        1,
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        56,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        2,
+        2,
+        49,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        49,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1,
+        52
+      ]
+    ]
+  },
+  {
+    "architecture": "efficientnet_b0",
+    "total_parameters": 4015234,
+    "trainable_parameters": 7686,
+    "best_epoch": 7,
+    "epochs_run": 15,
+    "train": {
+      "loss": 0.0640208050608635,
+      "accuracy": 0.983883964544722,
+      "macro_precision": 0.9850523168908819,
+      "macro_recall": 0.9845205670787065,
+      "macro_f1": 0.9841622736229416
+    },
+    "validation": {
+      "loss": 0.13102753460407257,
+      "accuracy": 0.9581993569131833,
+      "macro_precision": 0.9610648148148148,
+      "macro_recall": 0.9587872185911402,
+      "macro_f1": 0.9590189222542165
+    },
+    "feature_extraction_seconds": 113.25124429998687,
+    "head_training_seconds": 2.209601200011093,
+    "total_training_seconds": 115.46084549999796,
+    "checkpoint_size_mb": 16.343071,
+    "inference_ms_batch1": 55.276054999558255,
+    "inference_scope": "Model forward only, synthetic input, 3 warmups and 20 repeats; excludes preprocessing.",
+    "device": "cpu",
+    "train_validation_accuracy_gap": 0.02568460763153879,
+    "overfitting_observation": "No large accuracy gap; inspect loss curves and per-class validation performance.",
+    "validation_per_class": {
+      "bacterial_leaf_blight": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 48.0
+      },
+      "brown_spot": {
+        "precision": 0.9375,
+        "recall": 0.8823529411764706,
+        "f1-score": 0.9090909090909091,
+        "support": 51.0
+      },
+      "healthy": {
+        "precision": 0.8888888888888888,
+        "recall": 1.0,
+        "f1-score": 0.9411764705882353,
+        "support": 56.0
+      },
+      "leaf_blast": {
+        "precision": 0.94,
+        "recall": 0.8703703703703703,
+        "f1-score": 0.9038461538461539,
+        "support": 54.0
+      },
+      "leaf_scald": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 49.0
+      },
+      "narrow_brown_spot": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 53.0
+      },
+      "accuracy": 0.9581993569131833,
+      "macro avg": {
+        "precision": 0.9610648148148148,
+        "recall": 0.9587872185911402,
+        "f1-score": 0.9590189222542165,
+        "support": 311.0
+      },
+      "weighted avg": {
+        "precision": 0.959325652018578,
+        "recall": 0.9581993569131833,
+        "f1-score": 0.95780453705553,
+        "support": 311.0
+      }
+    },
+    "validation_confusion_matrix": [
+      [
+        48,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        45,
+        3,
+        3,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        56,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        3,
+        4,
+        47,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        49,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        53
+      ]
+    ]
+  }
+]

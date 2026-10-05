@@ -1,0 +1,12 @@
+{
+  "architectures": [
+    "resnet50",
+    "efficientnet_b0"
+  ],
+  "learning_rates": [
+    0.0003,
+    0.003
+  ],
+  "fixed": "Every other setting remains the baseline value; feature caches are reused.",
+  "selection": "Validation macro F1, then smaller parameter count for exact ties. Test images are not loaded."
+}

@@ -1,0 +1,35 @@
+{
+  "seed": 42,
+  "models": [
+    "mobilenet_v3_small",
+    "efficientnet_b0",
+    "resnet18",
+    "resnet50"
+  ],
+  "weights": "IMAGENET1K_V1",
+  "image_size": 224,
+  "mean": [
+    0.485,
+    0.456,
+    0.406
+  ],
+  "std": [
+    0.229,
+    0.224,
+    0.225
+  ],
+  "batch_size": 32,
+  "feature_batch_size": 16,
+  "workers": 0,
+  "cpu_threads": 4,
+  "training_views": 2,
+  "epochs": 40,
+  "patience": 8,
+  "learning_rate": 0.003,
+  "weight_decay": 0.0001,
+  "optimizer": "AdamW",
+  "loss": "CrossEntropyLoss",
+  "training_mode": "frozen_backbone_linear_probe",
+  "selection_metric": "validation_macro_f1",
+  "augmentation": "One original view and one seeded view: horizontal/vertical flips, 90-degree rotations, brightness/contrast within 10%. No crop or hue shift."
+}

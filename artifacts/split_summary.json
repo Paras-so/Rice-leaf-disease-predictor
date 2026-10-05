@@ -1,0 +1,42 @@
+{
+  "dataset": "C:\\paras\\college\\project\\Final Year Project\\Dataset\\clean_dataset-20261001T114830Z-1-001\\clean_dataset",
+  "seed": 42,
+  "classes": [
+    "bacterial_leaf_blight",
+    "brown_spot",
+    "healthy",
+    "leaf_blast",
+    "leaf_scald",
+    "narrow_brown_spot"
+  ],
+  "manifest_sha256": "773016ba6a13f0f92da7520a5461bda2bf70f036fc96d75c24beba52d036c026",
+  "split_counts": {
+    "train": {
+      "bacterial_leaf_blight": 190,
+      "brown_spot": 205,
+      "healthy": 222,
+      "leaf_blast": 215,
+      "leaf_scald": 197,
+      "narrow_brown_spot": 212
+    },
+    "validation": {
+      "bacterial_leaf_blight": 48,
+      "brown_spot": 51,
+      "healthy": 56,
+      "leaf_blast": 54,
+      "leaf_scald": 49,
+      "narrow_brown_spot": 53
+    },
+    "test": {
+      "bacterial_leaf_blight": 59,
+      "brown_spot": 64,
+      "healthy": 70,
+      "leaf_blast": 68,
+      "leaf_scald": 62,
+      "narrow_brown_spot": 66
+    }
+  },
+  "strategy": "Retain the verified existing 389-image test holdout; stratify 20% of the 1552-image development pool for validation.",
+  "reason": "Avoid unnecessary test reassignment; validation supports model selection without test feedback. Overall fractions are approximately 64/16/20.",
+  "test_policy": "No test feature extraction, prediction, or scoring until configuration and model selection are frozen."
+}
