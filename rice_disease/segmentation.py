@@ -16,3 +16,25 @@ def affected_area(mask):
             "affected_area_percent": diseased_pixels / leaf_pixels * 100,
             "source": "User-supplied labelled mask, not model segmentation",
             "severity_grade": None}
+
+
+if __name__ == "__main__":
+    import argparse
+    import json
+    from pathlib import Path
+    from PIL import Image
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--mask", type=Path, help="2D PNG/TIFF or .npy mask: 0=background, 1=unaffected, 2=diseased")
+    args = parser.parse_args()
+    if args.mask is None:
+        parser.print_help()
+    else:
+        try:
+            if args.mask.suffix.lower() == ".npy":
+                mask = np.load(args.mask, allow_pickle=False)
+            else:
+                with Image.open(args.mask) as image:
+                    mask = np.array(image)
+            print(json.dumps(affected_area(mask), indent=2))
+        except (OSError, ValueError) as exc:
+            parser.exit(1, f"Mask error: {exc}\n")

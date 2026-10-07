@@ -44,6 +44,52 @@ outputs remain unavailable. This is a research prototype.
 
 ## Reproduce the pipeline
 
+### Inspect preprocessing output
+
+`image_size` is defined in `configs/benchmark.json` (currently **224**), alongside
+the RGB normalization `mean` and `std`. Training and inference pass this config to
+`image_tensor`; loading the Python file alone previously did not call that function.
+Running it now produces console output, viewable resized PNGs, and `summary.json`
+with original/output dimensions, normalized tensor shapes, ranges, and any failures.
+
+```powershell
+# One training-image preview per class, using the prepared split manifest
+.\.venv\Scripts\python.exe rice_disease/preprocessing.py
+
+# Process one image or every supported image recursively in a folder
+.\.venv\Scripts\python.exe -m rice_disease.preprocessing --input "path/to/leaf.jpg"
+.\.venv\Scripts\python.exe -m rice_disease.preprocessing --input "path/to/images" --output "artifacts/my_preprocessing"
+
+# Optional export-only size override; does not change trained-model settings
+.\.venv\Scripts\python.exe -m rice_disease.preprocessing --input "path/to/leaf.jpg" --image-size 224
+```
+
+Default output: `artifacts/preprocessing/images/` and
+`artifacts/preprocessing/summary.json`. Nested folders and original filenames are
+retained (with `.png` appended). Source images are preserved. Exported PNGs show
+the resized RGB image; normalization is applied to tensors, not saved as display
+colors. This preview/export has no training augmentation. Failures are printed,
+recorded in the summary, and return a nonzero exit code.
+
+Every executable module in `rice_disease` supports `--help` and both
+`python -m rice_disease.<module>` and `python rice_disease/<module>.py`.
+The helper modules now provide these outputs:
+
+| Module | Output / input |
+|---|---|
+| `models` | Lists available architectures and training/inference commands |
+| `binary --class-name healthy` | Prints healthy/diseased status as JSON |
+| `binary --metrics artifacts/final_evaluation/metrics.json` | Prints binary metrics from saved confusion counts |
+| `segmentation --mask path/to/mask.png` | Prints annotated leaf/disease pixel counts and area percentage |
+| `quantity --help` | Shows required rule and volume/area arguments; no verified rules are bundled |
+
+Helpers that require inputs display usage when run without arguments. `inference`
+requires an image path. `__init__.py` is a package marker, not a pipeline command.
+Existing tuning and evaluation results are printed when reused; benchmark output
+includes validation scores and the results path.
+
+### Run the experiment
+
 The virtual environment contains CPU PyTorch; CUDA is unavailable here. For a new
 environment, install `requirements.txt`. Official weights require internet once.
 

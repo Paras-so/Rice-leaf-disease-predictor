@@ -53,3 +53,14 @@ def load_checkpoint(path, device="cpu"):
                             num_classes=len(checkpoint["classes"]))
     model.load_state_dict(checkpoint["state_dict"])
     return model.to(device).eval(), checkpoint
+
+
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.parse_args()
+    print("Available architectures (six-class classification):")
+    for name in BUILDERS:
+        print(f"  {name}: pretrained weights IMAGENET1K_V1; only the final head is trained")
+    print("Train/compare: python -m rice_disease.benchmark\n"
+          "Predict: python -m rice_disease.inference path/to/leaf.jpg")

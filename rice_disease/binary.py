@@ -34,3 +34,28 @@ def binary_metrics(matrix, classes):
         "confusion_labels": ["healthy", "diseased"],
         "images": tp + tn + fp + fn,
     }
+
+
+if __name__ == "__main__":
+    import argparse
+    import json
+    import sys
+    from pathlib import Path
+    if not __package__:
+        sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    from rice_disease.data import CLASSES
+    parser = argparse.ArgumentParser(description=__doc__)
+    source = parser.add_mutually_exclusive_group()
+    source.add_argument("--class-name", choices=CLASSES, help="Map a predicted class to healthy/diseased")
+    source.add_argument("--metrics", type=Path, help="Saved final evaluation metrics.json")
+    args = parser.parse_args()
+    if args.class_name:
+        print(json.dumps({"class_name": args.class_name, "status": health_status(args.class_name)}, indent=2))
+    elif args.metrics:
+        try:
+            result = json.loads(args.metrics.read_text(encoding="utf-8"))
+            print(json.dumps(binary_metrics(result["confusion_matrix"], CLASSES), indent=2))
+        except (OSError, ValueError, KeyError) as exc:
+            parser.exit(1, f"Binary reporting error: {exc}\n")
+    else:
+        parser.print_help()

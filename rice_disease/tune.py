@@ -7,6 +7,11 @@ import json
 import os
 from pathlib import Path
 
+if __name__ == "__main__" and not __package__:
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    __package__ = "rice_disease"
+
 import torch
 
 from .benchmark import benchmark_one, summarize
@@ -25,6 +30,7 @@ def tune(artifacts):
         if selected["split_sha256"] != split_info["manifest_sha256"]:
             raise ValueError("Frozen selection belongs to another split.")
         print("Returning the existing frozen selection; no further tuning performed.")
+        print(json.dumps(selected, indent=2))
         return selected
     os.environ["TORCH_HOME"] = str(artifacts / "cache/torch")
     baseline = artifacts / "runs/frozen_baseline"

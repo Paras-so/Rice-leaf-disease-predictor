@@ -10,6 +10,11 @@ import random
 import time
 from pathlib import Path
 
+if __name__ == "__main__" and not __package__:
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    __package__ = "rice_disease"
+
 import numpy as np
 import torch
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, precision_recall_fscore_support
@@ -216,4 +221,8 @@ if __name__ == "__main__":
     parser.add_argument("--run", default="frozen_baseline")
     parser.add_argument("--models", nargs="+")
     args = parser.parse_args()
-    run_benchmark(args.config, args.artifacts, args.run, args.models)
+    results = run_benchmark(args.config, args.artifacts, args.run, args.models)
+    for result in results:
+        print(f"{result['architecture']}: validation accuracy={result['validation']['accuracy']:.2%}, "
+              f"macro F1={result['validation']['macro_f1']:.4f}")
+    print(f"Results: {args.artifacts.resolve() / 'runs' / args.run / 'comparison.csv'}")

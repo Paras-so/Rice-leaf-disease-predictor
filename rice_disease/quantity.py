@@ -31,3 +31,27 @@ def calculate_quantity(rule, *, region, application_authorized, spray_litres=Non
         raise ValueError("The corresponding spray volume or area must be a positive finite number.")
     return {"quantity": dose * scale, "unit": output_unit, "product": rule["product"],
             "formulation": rule["formulation"], "source_url": rule["source_url"]}
+
+
+if __name__ == "__main__":
+    import argparse
+    import json
+    from pathlib import Path
+    parser = argparse.ArgumentParser(description=__doc__, epilog="No verified rules are bundled with this project.")
+    parser.add_argument("--rule", type=Path, help="JSON file containing a verified product-label rule")
+    parser.add_argument("--region", help="Region for which the rule is verified")
+    parser.add_argument("--application-authorized", action="store_true")
+    parser.add_argument("--spray-litres", type=float)
+    parser.add_argument("--area-hectares", type=float)
+    args = parser.parse_args()
+    if args.rule is None:
+        parser.print_help()
+    else:
+        try:
+            rule = json.loads(args.rule.read_text(encoding="utf-8"))
+            result = calculate_quantity(rule, region=args.region,
+                application_authorized=args.application_authorized,
+                spray_litres=args.spray_litres, area_hectares=args.area_hectares)
+            print(json.dumps(result, indent=2))
+        except (OSError, ValueError) as exc:
+            parser.exit(1, f"Quantity error: {exc}\n")

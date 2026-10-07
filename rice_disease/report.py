@@ -5,6 +5,11 @@ import csv
 import json
 from pathlib import Path
 
+if __name__ == "__main__" and not __package__:
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    __package__ = "rice_disease"
+
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -98,6 +103,7 @@ def final_report(artifacts):
     artifacts = Path(artifacts)
     evaluation_path = artifacts / "final_evaluation/metrics.json"
     if not evaluation_path.exists():
+        print(f"Final report skipped: no saved evaluation at {evaluation_path}")
         return
     evaluation = json.loads(evaluation_path.read_text())
     selection = json.loads((artifacts / "selected_model.json").read_text())

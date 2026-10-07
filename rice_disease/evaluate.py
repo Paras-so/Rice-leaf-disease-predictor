@@ -6,6 +6,11 @@ import json
 import time
 from pathlib import Path
 
+if __name__ == "__main__" and not __package__:
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    __package__ = "rice_disease"
+
 import torch
 from sklearn.metrics import classification_report, confusion_matrix
 from torch.utils.data import DataLoader
@@ -30,6 +35,7 @@ def evaluate(artifacts):
         if existing["checkpoint_sha256"] != digest:
             raise ValueError("Holdout results already exist for a different model.")
         print("Returning existing final evaluation; no test inference repeated.")
+        print(json.dumps(existing, indent=2))
         return existing
     model, checkpoint = load_checkpoint(path)
     if checkpoint["split_sha256"] != split["manifest_sha256"]:
@@ -38,12 +44,14 @@ def evaluate(artifacts):
     test_rows = [r for r in rows if r["split"] == "test"]
     dataset = LeafDataset(test_rows, split["dataset"], checkpoint["config"], artifacts / "cache/images")
     loader = DataLoader(dataset, batch_size=checkpoint["config"]["feature_batch_size"], shuffle=False)
+    print(f"Evaluating {len(test_rows)} test images with {checkpoint['architecture']}...", flush=True)
     logits, labels = [], []
     started = time.perf_counter()
     with torch.inference_mode():
-        for images, target in loader:
+        for index, (images, target) in enumerate(loader, 1):
             logits.append(model(images).cpu())
             labels.append(target)
+            print(f"Evaluation batch {index}/{len(loader)}", flush=True)
     logits, labels = torch.cat(logits), torch.cat(labels)
     prediction = logits.argmax(1)
     result = {"architecture": checkpoint["architecture"], "checkpoint_sha256": digest,
