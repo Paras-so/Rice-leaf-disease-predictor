@@ -29,7 +29,7 @@ def evaluate(artifacts):
     digest = hashlib.sha256(path.read_bytes()).hexdigest()
     if digest != selection["checkpoint_sha256"] or split["manifest_sha256"] != selection["split_sha256"]:
         raise ValueError("Selected checkpoint or dataset split changed after model selection.")
-    output = artifacts / "final_evaluation"
+    output = artifacts / selection.get("evaluation_dir", "final_evaluation")
     if (output / "metrics.json").exists():
         existing = json.loads((output / "metrics.json").read_text())
         if existing["checkpoint_sha256"] != digest:
@@ -60,6 +60,7 @@ def evaluate(artifacts):
               "per_class": classification_report(labels.numpy(), prediction.numpy(), labels=list(range(6)),
                                                   target_names=CLASSES, output_dict=True, zero_division=0),
               "confusion_matrix": confusion_matrix(labels.numpy(), prediction.numpy(), labels=list(range(6))).tolist(),
+              "test_policy": selection.get("test_policy", "Frozen before evaluation."),
               "limitations": "One held-out image split, one seed, no field-level grouping metadata, no confidence calibration, no unknown-class detection."}
     examples = [{"path": row["path"], "actual": row["class_name"], "predicted": CLASSES[prediction[i].item()],
                  "softmax_score": logits[i].softmax(0).max().item()} for i, row in enumerate(test_rows)]

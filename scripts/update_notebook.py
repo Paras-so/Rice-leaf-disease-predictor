@@ -23,7 +23,7 @@ the project Python environment. The CLI modules perform the work; saved reports
 make every stage reviewable. The original cleaning notebook is preserved.
 
 The current model study compares frozen pretrained features, then tunes the final
-linear layer on the top two architectures. No growth-stage model or hardware is included.
+linear layer across optimizer, loss and hyperparameter recipes on all four architectures. No growth-stage model or hardware is included.
 """),
     code("""import json
 from pathlib import Path
@@ -70,24 +70,27 @@ First-time execution requires official weights: `python -m rice_disease.download
 Training can take several minutes on CPU. Selection uses validation macro F1.
 """),
     code("""from rice_disease.benchmark import run_benchmark
-results = run_benchmark(ROOT / 'configs/benchmark.json', artifacts, 'frozen_baseline')
+results = run_benchmark(ROOT / 'configs/benchmark.json', artifacts, 'frozen_baseline', verbose=1)
 display(pd.read_csv(artifacts / 'runs/frozen_baseline/comparison.csv'))
 """),
-    markdown("""## 5. Targeted head learning-rate tuning
+    markdown("""## 5. Optimizer, loss and hyperparameter comparison
 
-After all four baseline models complete, compare rates 0.0003 and 0.003 on the two
-highest validation-F1 architectures. All other settings remain fixed. Freeze the
-winner and its checkpoint hash before using test data. Rerunning returns an existing
-frozen selection, rather than starting further tuning.
+Keep the original four baselines, then run twelve training recipes on each architecture:
+AdamW, Adam and momentum SGD; cross-entropy, label smoothing and focal loss; plus
+learning-rate, batch-size and weight-decay variants. Rank all 52 candidates by validation
+macro F1. Export and activate only the winner for Streamlit. Rerunning resumes this
+versioned experiment or returns its verified selection. Historical v1 results remain saved.
 """),
     code("""from rice_disease.tune import tune
-selection = tune(artifacts)
+selection = tune(artifacts, verbose=1)
+display(pd.read_csv(artifacts / selection['comparison']))
 display({'checkpoint': selection['checkpoint'], 'validation': selection['metrics']['validation']})
 """),
     markdown("""## 6. Final held-out evaluation
 
-This step consumes the reserved test set once for the frozen v1 configuration.
-Do not tune against the resulting scores. Rerunning reads the existing report.
+Evaluate only after the new selection is frozen. The 389-image holdout was already
+evaluated for v1, so this is a reused holdout, not fresh independent confirmation.
+Do not tune against these scores. Results are versioned; rerunning reads the saved report.
 """),
     code("""from rice_disease.evaluate import evaluate
 evaluation = evaluate(artifacts)

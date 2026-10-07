@@ -28,7 +28,7 @@
 
 14. I used the Torchvision model builders, replaced each model's final layer with a six-class output layer, and froze the other layers. I trained only the final layer of each model. **File:** `rice_disease/models.py`.
 
-15. I set the shared training settings: **AdamW**, cross-entropy loss, learning rate **0.001**, weight decay **0.0001**, batch size **32**, and a maximum of **40 epochs**. I used early stopping after eight epochs without improved validation macro F1. **Files:** `configs/benchmark.json`, `rice_disease/benchmark.py`.
+15. I set the shared **baseline** training settings: **AdamW**, cross-entropy loss, learning rate **0.001**, weight decay **0.0001**, batch size **32**, and a maximum of **40 epochs**. I used early stopping after eight epochs without improved validation macro F1. These remain the original base parameters for all later comparisons. **Files:** `configs/benchmark.json`, `rice_disease/benchmark.py`.
 
 16. I loaded training and validation images in batches, extracted features using the frozen models, and cached those features for reuse during training and tuning. **Files:** `rice_disease/preprocessing.py`, `rice_disease/benchmark.py`.
 
@@ -46,7 +46,7 @@
 
 23. I tried learning rates **0.0003 and 0.003** on the two best architectures, ResNet50 and EfficientNet-B0. ResNet50 reached **95.50% and 97.11% validation accuracy**, respectively; EfficientNet-B0 reached **96.46% and 95.82%**. **File:** `rice_disease/tune.py`. **Saved results:** `artifacts/runs/head_lr_0.0003/comparison.json`, `artifacts/runs/head_lr_0.003/comparison.json`.
 
-24. I selected the original **ResNet50 at learning rate 0.001** because its validation macro F1 remained the highest across all eight trials. I saved the selected model details before evaluating the test set. **File:** `rice_disease/tune.py`. **Saved files:** `artifacts/selected_model.json`, `artifacts/runs/frozen_baseline/resnet50.pt`.
+24. In the **historical v1 study**, I selected the original **ResNet50 at learning rate 0.001** because its validation macro F1 remained the highest across all eight trials. I saved the selected model details before evaluating the test set. The previous selection is archived in `artifacts/selection_history/` when the expanded study activates its winner; `artifacts/selected_model.json` always identifies the current final model. **Baseline checkpoint:** `artifacts/runs/frozen_baseline/resnet50.pt`.
 
 25. I evaluated the selected ResNet50 once on the **389 reserved test images**. It correctly classified **367 images** and misclassified **22**, achieving **94.34% test accuracy** and **0.9443 macro F1**. **File:** `rice_disease/evaluate.py`. **Saved result:** `artifacts/final_evaluation/metrics.json`.
 
@@ -60,12 +60,62 @@
 
 30. I added an optional calculator for affected leaf area from a supplied labelled mask. I left automatic segmentation and severity prediction unfinished because the dataset has no labelled masks. **Files:** `rice_disease/segmentation.py`, `docs/SEGMENTATION_PLAN.md`.
 
-31. I built a Streamlit app where I can upload a leaf image, click **Analyze leaf**, view predictions and management references, and download the result as JSON. I also added model-comparison and dataset tabs. **File:** `app.py`.
+31. I built a Streamlit app where I can upload a leaf image, click **Analyze leaf**, view predictions and management references, and download the result as JSON. The updated app uses only the final selected classifier, with **Analyze a leaf**, **Final model**, and **Dataset** tabs. There is no model dropdown or baseline fallback. **File:** `app.py`.
 
-32. I handled image replacement, model changes, clearing uploads, and invalid files so the app does not keep showing an old result for a new input. **Files:** `app.py`, `tests/test_app.py`.
+32. I handled image replacement, changes to the deployed checkpoint, clearing uploads, and invalid files so the app does not keep showing an old result for a new input. The app checks the selected model's checksum before loading and displays test metrics only when their checkpoint and split match the final selection. **Files:** `app.py`, `tests/test_app.py`.
 
 33. I generated learning curves, confusion matrices, example error images, and the final project report. I also added a notebook that runs the local pipeline and displays its saved results. **Files:** `rice_disease/report.py`, `artifacts/PROJECT_REPORT.md`, `RiceDiseaseBenchmark.ipynb`.
 
 34. I checked dataset separation, preprocessing, model outputs, saved-model loading, healthy-or-diseased calculations, mask arithmetic, and app uploads. The project log records **10 passing tests** and a successful browser upload and prediction check. **Files:** `tests/test_pipeline.py`, `tests/test_app.py`, `PROJECT_LOG.md`.
 
 35. I ran the finished local app using `.\.venv\Scripts\python.exe -m streamlit run app.py --server.address 127.0.0.1 --server.port 8501` and opened `http://127.0.0.1:8501`. **Files:** `app.py`, `README.md`.
+
+
+36. I expanded the study while keeping the original baseline configuration unchanged. I declared **52 candidates** before running the search: the four original baselines plus **12 new recipes on each of the four architectures**. All trials share seed 42, the same train/validation membership, image preprocessing, cached frozen features, maximum 40 epochs and patience 8. **Files:** `rice_disease/tune.py`, `artifacts/experiments/hyperparameter_search_v2/plan.json`.
+
+37. I compared **AdamW, Adam and SGD with momentum 0.9**, each with ordinary cross-entropy, label-smoothed cross-entropy (smoothing **0.1**) and multiclass focal loss (gamma **2**). Adam and AdamW use learning rate 0.001; SGD uses 0.01. I also compared AdamW/cross-entropy variants changing one setting at a time: learning rate **0.0003** or **0.003**, batch size **64**, or weight decay **0.001**. The original AdamW/cross-entropy combination is represented by the preserved baselines. **Files:** `rice_disease/benchmark.py`, `rice_disease/tune.py`.
+
+38. I enabled live epoch and batch progress with **verbose=1**. Each trial saves its configuration, best validation checkpoint, training history and metrics. Training uses the configured loss; reported cross-entropy remains a common comparison measure, and history also records the actual objective loss. Interrupted searches resume completed trials only after checking their configuration, split and checkpoint metrics. **Log:** `artifacts/hyperparameter_search.log`.
+
+    To watch each epoch run live, use the run name **`live_training_demo`**. Run this command from the project directory:
+
+    ```powershell
+    .\.venv\Scripts\python.exe -u -m rice_disease.benchmark --run live_training_demo --verbose 1
+    ```
+
+    This starts a separate four-model baseline training run using `configs/benchmark.json`, with live batch progress, training/validation loss and accuracy, and validation macro F1. Results are saved under `artifacts/runs/live_training_demo/`: `<model>_history.json` contains every epoch's metrics, `<model>_metrics.json` contains the best checkpoint's results, and `comparison.csv` compares the models. This command does not activate a new deployed model.
+
+    `verbose=1` is already enabled by default. Completed models are skipped even with verbose output enabled. Once `live_training_demo` finishes, use a new name such as `live_training_demo_02` to watch another fresh run. This is a command to run yourself, not a record that the demonstration has already been executed.
+
+39. I completed all **52 candidates**. The winner was **ResNet50 + AdamW + label-smoothed cross-entropy (0.1)**, with **97.43% validation accuracy (303/311 correct)** and **0.9749 validation macro F1**. Its learning rate is **0.001**, weight decay **0.0001**, batch size **32**, and best checkpoint is from **epoch 22** (early stopping ended training at epoch 30). Training accuracy is **98.87%**. The original baseline achieved **97.11% accuracy (302/311)** and **0.9718 macro F1**. The gain is one validation image; it does not establish statistical superiority. Candidates rank by validation macro F1, then smaller parameter count; exact ties retain the earlier candidate. No test images were read during selection. **All results:** `artifacts/experiments/hyperparameter_search_v2/comparison.csv`.
+
+40. The deployment step copies only the winning checkpoint and its configuration into `artifacts/final_model/hyperparameter_search_v2/`, archives the previous selection, and atomically updates `artifacts/selected_model.json`. Research checkpoints remain in `artifacts/runs/` for audit and reproducibility, but cannot be selected in Streamlit. Rerunning the same completed search returns its verified winner.
+
+41. The original 389-image test holdout was already evaluated for v1 in steps 25–27. Any new winner evaluation is saved separately in `artifacts/evaluations/hyperparameter_search_v2/` and is explicitly a **reused holdout**, not fresh independent confirmation. No test metric participates in ranking, and no further search is driven by its errors. One split and one seed do not establish statistical superiority.
+
+
+42. After freezing the new winner, I evaluated it on the previously used **389-image holdout**. It classified **368 correctly** and **21 incorrectly**, with **94.60% test accuracy**, **0.9472 macro F1**, **0.9503 macro precision** and **0.9477 macro recall**. The historical v1 model classified 367 correctly. This test comparison did not change the selected model or trigger additional tuning. The healthy/diseased mapping achieved **97.94% accuracy**. **Saved results:** `artifacts/evaluations/hyperparameter_search_v2/metrics.json`, `misclassified.json`, `binary_metrics.json`.
+
+43. I generated the selected recipe's learning curves and the final model's confusion matrix, error examples and report. The app displays results only for the deployed checkpoint. **Files:** `artifacts/runs/hyperparameter_search_v2_adamw_smooth/figures/`, `artifacts/PROJECT_REPORT.md`, `app.py`.
+
+44. I ran **20 tests successfully**, covering preprocessing and CLI commands, model loading, app upload/analyze/replace/clear behavior, absence of model selection options, loss values and gradients, optimizer updates, validation ranking, preservation of historical selection/test records, deployment checksums and completed-search resume. **Command:** `.\.venv\Scripts\python.exe -m unittest discover -s tests -v`. **Log:** `artifacts/verification.log`.
+
+The current final recipe is:
+
+| Setting | Final value |
+|---|---|
+| Architecture | ResNet50, frozen ImageNet backbone with trained six-class linear head |
+| Optimizer | AdamW |
+| Training loss | Label-smoothed cross-entropy |
+| Label smoothing | 0.1 |
+| Learning rate | 0.001 |
+| Weight decay | 0.0001 |
+| Batch size | 32 |
+| Maximum epochs / patience | 40 / 8 |
+| Selected epoch / epochs run | 22 / 30 |
+| Seed | 42 |
+| Validation accuracy / macro F1 | 97.43% / 0.9749 |
+| Reused-holdout accuracy / macro F1 | 94.60% / 0.9472 |
+| App checkpoint | `artifacts/final_model/hyperparameter_search_v2/model.pt` |
+
+For reproducibility, the training APIs follow [PyTorch cross-entropy documentation](https://docs.pytorch.org/docs/2.14/generated/torch.nn.CrossEntropyLoss.html) and [PyTorch SGD documentation](https://docs.pytorch.org/docs/2.14/generated/torch.optim.SGD.html). Focal loss is implemented as the mean of `(1 - p_target)^gamma * cross_entropy`; gamma zero is tested against ordinary cross-entropy for both value and gradient.

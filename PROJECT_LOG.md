@@ -153,3 +153,14 @@ and pending-user-run notes above are historical and superseded.
   JavaScript errors or server errors observed.
 - Updated `UPLOAD_FIX_PROGRESS.md` with completed checks and restart instructions.
   Browser check results and a screenshot are stored in `.cache/`.
+
+
+## 2026-10-07: expanded training comparison and single-model app
+
+- Kept all four original baselines unchanged. Completed 48 additional trials (12 recipes per architecture), comparing AdamW/Adam/momentum SGD, cross-entropy/label smoothing/focal loss, and learning-rate/batch-size/weight-decay variants.
+- Selected ResNet50 + AdamW + label-smoothed cross-entropy (0.1) using validation macro F1: 97.43% accuracy, 0.9749 F1. Learning rate 0.001, weight decay 0.0001, batch size 32; checkpoint epoch 22 of 30 run.
+- Exported one deployed model to `artifacts/final_model/hyperparameter_search_v2/model.pt`; archived the old selection. Preserved original research checkpoints and historical test results.
+- The winner scored 94.60% accuracy and 0.9472 macro F1 on the previously evaluated holdout (368/389 correct). The holdout was not used to rank trials; this is not fresh independent evaluation.
+- Removed the Streamlit model dropdown and baseline fallback. Only the selected checkpoint can run; metrics must match its checksum and split.
+- Updated notebook sources, README, PROJECT_STEP_BY_STEP and generated PROJECT_REPORT. All 20 tests passed.
+- Search plan and ranked results: `artifacts/experiments/hyperparameter_search_v2/`.

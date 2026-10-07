@@ -20,8 +20,9 @@ disables usage telemetry so browser sessions do not need to create a telemetry
 identifier in the Windows user profile.
 
 Open http://127.0.0.1:8501. Choose a rice leaf image and click **Analyze leaf** for a six-class prediction,
-uncalibrated model scores, and sourced cultural-management information. The model
-comparison and dataset tabs show recorded experiment results.
+uncalibrated model scores, and sourced cultural-management information. The app uses
+only the final selected checkpoint; there is no classifier dropdown. The Final model
+and Dataset tabs show its results and dataset details.
 
 There are no labelled segmentation masks in the supplied dataset. The app does not
 predict lesion area or severity. An optional supplied annotation can be measured,
@@ -103,10 +104,10 @@ environment, install `requirements.txt`. Official weights require internet once.
 # Four models; only train and validation images are loaded
 .\.venv\Scripts\python.exe -u -m rice_disease.benchmark
 
-# Two extra head learning rates on the top two architectures
+# Compare 52 candidates (original baselines plus optimizer/loss/hyperparameter variants)
 .\.venv\Scripts\python.exe -u -m rice_disease.tune
 
-# One final holdout evaluation after freezing model selection
+# Evaluate the frozen winner; save separately from the historical v1 evaluation
 .\.venv\Scripts\python.exe -u -m rice_disease.evaluate
 
 # Figures and benchmark report
@@ -116,10 +117,11 @@ environment, install `requirements.txt`. Official weights require internet once.
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-Completed baseline runs preserve saved results. Final evaluation returns its recorded
-result rather than repeatedly scoring the test set. Do not tune v1 against final
-test scores; future development needs an independent holdout or a documented nested
-evaluation protocol.
+Completed baseline runs preserve saved results. Tuning resumes the versioned
+`hyperparameter_search_v2` experiment and activates its verified winner when complete.
+Final evaluation returns its recorded result rather than repeatedly scoring the test
+set. The 389-image holdout was already evaluated for v1: the new evaluation is a reused
+holdout, not independent confirmation. Search uses validation macro F1 only.
 
 `RiceDiseaseBenchmark.ipynb` provides a local notebook view of stages and outputs.
 It uses the package files here and is not a standalone Colab upload. Run it from
@@ -139,10 +141,18 @@ original and one seeded augmented view: flips, 90-degree rotations, brightness a
 contrast within 10%. Validation/test images have no augmentation. Backbone batch
 normalization and dropout remain in evaluation mode. Frozen features are cached.
 
-Shared settings: cross-entropy, AdamW, batch size 32, learning rate 0.001, weight
+Unchanged baseline settings: cross-entropy, AdamW, batch size 32, learning rate 0.001, weight
 decay 0.0001, up to 40 epochs, early stopping after eight epochs without improved
 validation macro F1. Mild class imbalance does not justify initial oversampling.
-Targeted tuning changes only learning rate (0.0003 and 0.003) on the top two models.
+The new search compares AdamW, Adam and SGD with momentum 0.9 against cross-entropy,
+label-smoothed cross-entropy (0.1) and focal loss (gamma 2). Adam/AdamW use 0.001;
+SGD uses 0.01. Four additional AdamW/cross-entropy recipes change learning rate
+(0.0003 or 0.003), batch size (64), or weight decay (0.001), one at a time.
+All four architectures receive every recipe: 48 new trials plus four unchanged
+baselines. Epoch limit, patience, seed, split and preprocessing stay fixed.
+Candidates rank by validation macro F1, then parameter count; exact ties keep the
+earlier candidate. The final deployment directory contains only the winner, while
+research checkpoints and comparison records remain saved for reproducibility.
 Single-seed differences are descriptive, not statistically established superiority.
 Exact checkpoint versions use `IMAGENET1K_V1`.
 
@@ -153,9 +163,13 @@ Sources: [TorchVision models](https://docs.pytorch.org/vision/stable/models.html
 
 - `artifacts/dataset_audit.json`: dimensions, readability and imbalance.
 - `artifacts/runs/frozen_baseline/`: weights, histories, metrics, CSV and figures.
-- `artifacts/tuning_candidates.json`: baseline and targeted trial results.
+- `artifacts/tuning_candidates.json`: historical v1 learning-rate study.
+- `artifacts/experiments/hyperparameter_search_v2/`: search plan, ranked CSV, all candidate results and frozen selection.
+- `artifacts/final_model/hyperparameter_search_v2/`: one final checkpoint and its training configuration.
+- `artifacts/selection_history/`: previous selection records preserved before activation.
 - `artifacts/selected_model.json`: frozen checkpoint identity and rationale.
-- `artifacts/final_evaluation/`: test metrics and misclassified image paths.
+- `artifacts/final_evaluation/`: historical v1 test results.
+- `artifacts/evaluations/hyperparameter_search_v2/`: new winner's evaluation on the previously used holdout.
 - `PROJECT_LOG.md`: decisions and verified outcomes.
 - [Segmentation annotation plan](docs/SEGMENTATION_PLAN.md): required pixel-mask data.
 - [Agricultural sources](docs/KNOWLEDGE_BASE.md): source regions and missing label verification.

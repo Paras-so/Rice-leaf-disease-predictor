@@ -1,0 +1,168 @@
+{
+  "architecture": "resnet50",
+  "training_config": {
+    "seed": 42,
+    "models": [
+      "mobilenet_v3_small",
+      "efficientnet_b0",
+      "resnet18",
+      "resnet50"
+    ],
+    "weights": "IMAGENET1K_V1",
+    "image_size": 224,
+    "mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "std": [
+      0.229,
+      0.224,
+      0.225
+    ],
+    "batch_size": 32,
+    "feature_batch_size": 16,
+    "workers": 0,
+    "cpu_threads": 4,
+    "training_views": 2,
+    "epochs": 40,
+    "patience": 8,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "optimizer": "AdamW",
+    "loss": "FocalLoss",
+    "training_mode": "frozen_backbone_linear_probe",
+    "selection_metric": "validation_macro_f1",
+    "augmentation": "One original view and one seeded view: horizontal/vertical flips, 90-degree rotations, brightness/contrast within 10%. No crop or hue shift.",
+    "focal_gamma": 2.0
+  },
+  "reported_loss": "Unsmoothed cross-entropy (comparable across training objectives)",
+  "total_parameters": 23520326,
+  "trainable_parameters": 12294,
+  "best_epoch": 9,
+  "epochs_run": 17,
+  "train": {
+    "loss": 0.20500795543193817,
+    "accuracy": 0.975825946817083,
+    "macro_precision": 0.9765211978165479,
+    "macro_recall": 0.9763575766072047,
+    "macro_f1": 0.9763117927337327
+  },
+  "validation": {
+    "loss": 0.23335163295269012,
+    "accuracy": 0.9614147909967846,
+    "macro_precision": 0.9638869003754781,
+    "macro_recall": 0.9619256332861587,
+    "macro_f1": 0.9623038133571526
+  },
+  "feature_extraction_seconds": 394.8301294000121,
+  "head_training_seconds": 3.481428600032814,
+  "total_training_seconds": 398.3115580000449,
+  "checkpoint_size_mb": 94.390981,
+  "inference_ms_batch1": 151.80846499861218,
+  "inference_scope": "Model forward only, synthetic input, 3 warmups and 20 repeats; excludes preprocessing.",
+  "device": "cpu",
+  "train_validation_accuracy_gap": 0.014411155820298394,
+  "overfitting_observation": "No large accuracy gap; inspect loss curves and per-class validation performance.",
+  "validation_per_class": {
+    "bacterial_leaf_blight": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 48.0
+    },
+    "brown_spot": {
+      "precision": 0.9782608695652174,
+      "recall": 0.8823529411764706,
+      "f1-score": 0.9278350515463918,
+      "support": 51.0
+    },
+    "healthy": {
+      "precision": 0.9322033898305084,
+      "recall": 0.9821428571428571,
+      "f1-score": 0.9565217391304348,
+      "support": 56.0
+    },
+    "leaf_blast": {
+      "precision": 0.8928571428571429,
+      "recall": 0.9259259259259259,
+      "f1-score": 0.9090909090909091,
+      "support": 54.0
+    },
+    "leaf_scald": {
+      "precision": 0.98,
+      "recall": 1.0,
+      "f1-score": 0.98989898989899,
+      "support": 49.0
+    },
+    "narrow_brown_spot": {
+      "precision": 1.0,
+      "recall": 0.9811320754716981,
+      "f1-score": 0.9904761904761905,
+      "support": 53.0
+    },
+    "accuracy": 0.9614147909967846,
+    "macro avg": {
+      "precision": 0.9638869003754781,
+      "recall": 0.9619256332861587,
+      "f1-score": 0.9623038133571526,
+      "support": 311.0
+    },
+    "weighted avg": {
+      "precision": 0.9624726041563353,
+      "recall": 0.9614147909967846,
+      "f1-score": 0.9613376292970034,
+      "support": 311.0
+    }
+  },
+  "validation_confusion_matrix": [
+    [
+      48,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      45,
+      1,
+      5,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      55,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      3,
+      50,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      49,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      1,
+      52
+    ]
+  ]
+}

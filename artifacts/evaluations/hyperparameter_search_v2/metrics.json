@@ -1,0 +1,117 @@
+{
+  "architecture": "resnet50",
+  "checkpoint_sha256": "5bfaf2669f55f7276688d9335059a7c62023fc0a48607250ab0de1a2e3f78abc",
+  "split_sha256": "773016ba6a13f0f92da7520a5461bda2bf70f036fc96d75c24beba52d036c026",
+  "test_images": 389,
+  "test": {
+    "loss": 0.26234886050224304,
+    "accuracy": 0.9460154241645244,
+    "macro_precision": 0.9503382263446722,
+    "macro_recall": 0.9476845149105584,
+    "macro_f1": 0.947226806352619
+  },
+  "evaluation_seconds": 52.953662899904884,
+  "per_class": {
+    "bacterial_leaf_blight": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 59.0
+    },
+    "brown_spot": {
+      "precision": 0.8611111111111112,
+      "recall": 0.96875,
+      "f1-score": 0.9117647058823529,
+      "support": 64.0
+    },
+    "healthy": {
+      "precision": 0.9078947368421053,
+      "recall": 0.9857142857142858,
+      "f1-score": 0.9452054794520548,
+      "support": 70.0
+    },
+    "leaf_blast": {
+      "precision": 0.9491525423728814,
+      "recall": 0.8235294117647058,
+      "f1-score": 0.8818897637795275,
+      "support": 68.0
+    },
+    "leaf_scald": {
+      "precision": 0.9838709677419355,
+      "recall": 0.9838709677419355,
+      "f1-score": 0.9838709677419355,
+      "support": 62.0
+    },
+    "narrow_brown_spot": {
+      "precision": 1.0,
+      "recall": 0.9242424242424242,
+      "f1-score": 0.9606299212598425,
+      "support": 66.0
+    },
+    "accuracy": 0.9460154241645244,
+    "macro avg": {
+      "precision": 0.9503382263446722,
+      "recall": 0.9476845149105584,
+      "f1-score": 0.947226806352619,
+      "support": 389.0
+    },
+    "weighted avg": {
+      "precision": 0.9491159783326849,
+      "recall": 0.9460154241645244,
+      "f1-score": 0.9457259729518559,
+      "support": 389.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      59,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      62,
+      2,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      69,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      7,
+      5,
+      56,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      0,
+      61,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      3,
+      1,
+      61
+    ]
+  ],
+  "test_policy": "Test data is not read during search. The holdout was previously evaluated for v1.",
+  "limitations": "One held-out image split, one seed, no field-level grouping metadata, no confidence calibration, no unknown-class detection."
+}

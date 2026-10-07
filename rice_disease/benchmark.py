@@ -45,7 +45,44 @@ def metrics(logits, labels):
             "macro_recall": recall, "macro_f1": f1}
 
 
-def extract(model, loader, device, name):
+class FocalLoss(nn.Module):
+    """Multiclass focal loss on logits, with a mean over samples."""
+
+    def __init__(self, gamma=2.0):
+        super().__init__()
+        if gamma < 0:
+            raise ValueError("Focal gamma must be nonnegative.")
+        self.gamma = gamma
+
+    def forward(self, logits, labels):
+        ce = nn.functional.cross_entropy(logits, labels, reduction="none")
+        return ((1 - torch.exp(-ce)).pow(self.gamma) * ce).mean()
+
+
+def create_loss(config):
+    name = config["loss"]
+    if name == "CrossEntropyLoss":
+        return nn.CrossEntropyLoss()
+    if name == "LabelSmoothedCrossEntropy":
+        return nn.CrossEntropyLoss(label_smoothing=config.get("label_smoothing", 0.1))
+    if name == "FocalLoss":
+        return FocalLoss(config.get("focal_gamma", 2.0))
+    raise ValueError(f"Unsupported loss: {name}")
+
+
+def create_optimizer(parameters, config):
+    settings = {"lr": config["learning_rate"], "weight_decay": config["weight_decay"]}
+    name = config["optimizer"]
+    if name == "AdamW":
+        return torch.optim.AdamW(parameters, **settings)
+    if name == "Adam":
+        return torch.optim.Adam(parameters, **settings)
+    if name == "SGD":
+        return torch.optim.SGD(parameters, momentum=config.get("momentum", 0.9), **settings)
+    raise ValueError(f"Unsupported optimizer: {name}")
+
+
+def extract(model, loader, device, name, verbose=1):
     embeddings, labels = [], []
     start = time.perf_counter()
     model.eval()
@@ -53,12 +90,12 @@ def extract(model, loader, device, name):
         for index, (images, target) in enumerate(loader):
             embeddings.append(model(images.to(device)).cpu())
             labels.append(target)
-            if (index + 1) % 20 == 0 or index + 1 == len(loader):
+            if verbose:
                 print(f"{name}: batch {index + 1}/{len(loader)} ({time.perf_counter()-start:.1f}s)", flush=True)
     return torch.cat(embeddings), torch.cat(labels)
 
 
-def benchmark_one(name, config, rows, split_info, artifacts, run, feature_config=None):
+def benchmark_one(name, config, rows, split_info, artifacts, run, feature_config=None, verbose=1):
     seed_everything(config["seed"])
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model, head = create_model(name)
@@ -86,7 +123,7 @@ def benchmark_one(name, config, rows, split_info, artifacts, run, feature_config
                                   artifacts / "cache" / "images", training=split == "train")
             loader = DataLoader(dataset, batch_size=config["feature_batch_size"], shuffle=False,
                                 num_workers=config["workers"])
-            features[split] = extract(model, loader, device, f"{name}/{split}")
+            features[split] = extract(model, loader, device, f"{name}/{split}", verbose=verbose)
         extraction_seconds = time.perf_counter() - started
         features["extraction_seconds"] = extraction_seconds
         feature_path.parent.mkdir(parents=True, exist_ok=True)
@@ -96,33 +133,54 @@ def benchmark_one(name, config, rows, split_info, artifacts, run, feature_config
     generator = torch.Generator().manual_seed(config["seed"])
     batches = DataLoader(TensorDataset(train_x, train_y), batch_size=config["batch_size"],
                          shuffle=True, generator=generator)
-    optimizer = torch.optim.AdamW(head.parameters(), lr=config["learning_rate"],
-                                 weight_decay=config["weight_decay"])
-    loss_function = nn.CrossEntropyLoss()
+    optimizer = create_optimizer(head.parameters(), config)
+    loss_function = create_loss(config)
     history, best_score, stale = [], -1.0, 0
     best_state, best_epoch = None, None
     train_started = time.perf_counter()
     for epoch in range(1, config["epochs"] + 1):
+        epoch_started = time.perf_counter()
+        if verbose:
+            print(f"{name} epoch {epoch}/{config['epochs']}", flush=True)
         head.train()
-        for x, y in batches:
+        running_loss, samples_seen = 0.0, 0
+        for batch_index, (x, y) in enumerate(batches, start=1):
             optimizer.zero_grad(set_to_none=True)
             loss = loss_function(head(x), y)
             loss.backward()
             optimizer.step()
+            if verbose:
+                samples_seen += len(y)
+                running_loss += loss.item() * len(y)
+                print(f"\r{name} epoch {epoch}/{config['epochs']} - batch {batch_index}/{len(batches)} "
+                      f"- loss={running_loss / samples_seen:.4f}",
+                      end="\n" if batch_index == len(batches) else "", flush=True)
         head.eval()
         with torch.inference_mode():
             # Original training views only, so reported train/validation scores are comparable.
-            train_metrics = metrics(head(train_x[::config["training_views"]]), train_y[::config["training_views"]])
-            val_metrics = metrics(head(val_x), val_y)
+            train_logits = head(train_x[::config["training_views"]])
+            val_logits = head(val_x)
+            train_metrics = metrics(train_logits, train_y[::config["training_views"]])
+            val_metrics = metrics(val_logits, val_y)
+            # Keep ordinary cross-entropy as the comparable reported loss for every trial.
+            train_metrics["objective_loss"] = loss_function(train_logits, train_y[::config["training_views"]]).item()
+            val_metrics["objective_loss"] = loss_function(val_logits, val_y).item()
         entry = {"epoch": epoch, "train": train_metrics, "validation": val_metrics}
         history.append(entry)
-        print(f"{name} epoch {epoch:02}: train acc={train_metrics['accuracy']:.4f}, val acc={val_metrics['accuracy']:.4f}, val F1={val_metrics['macro_f1']:.4f}", flush=True)
+        if verbose:
+            print(f"{name} epoch {epoch}/{config['epochs']}: "
+                  f"train loss={train_metrics['loss']:.4f}, train acc={train_metrics['accuracy']:.4f}, "
+                  f"val loss={val_metrics['loss']:.4f}, val acc={val_metrics['accuracy']:.4f}, "
+                  f"val F1={val_metrics['macro_f1']:.4f} "
+                  f"({time.perf_counter() - epoch_started:.1f}s)", flush=True)
         if val_metrics["macro_f1"] > best_score + 1e-6:
             best_score, best_epoch, best_state = val_metrics["macro_f1"], epoch, copy.deepcopy(head.state_dict())
             stale = 0
         else:
             stale += 1
         if stale >= config["patience"]:
+            if verbose:
+                print(f"{name}: early stopping at epoch {epoch}; best epoch {best_epoch}", flush=True)
             break
     training_seconds = time.perf_counter() - train_started
     head.load_state_dict(best_state)
@@ -150,7 +208,9 @@ def benchmark_one(name, config, rows, split_info, artifacts, run, feature_config
                 "classes": CLASSES, "config": config, "split_sha256": split_info["manifest_sha256"],
                 "best_epoch": best_epoch, "validation": val_metrics}, checkpoint_path)
     gap = train_metrics["accuracy"] - val_metrics["accuracy"]
-    result = {"architecture": name, **counts, "best_epoch": best_epoch, "epochs_run": len(history),
+    result = {"architecture": name, "training_config": config,
+              "reported_loss": "Unsmoothed cross-entropy (comparable across training objectives)",
+              **counts, "best_epoch": best_epoch, "epochs_run": len(history),
               "train": train_metrics, "validation": val_metrics,
               "feature_extraction_seconds": extraction_seconds, "head_training_seconds": training_seconds,
               "total_training_seconds": extraction_seconds + training_seconds,
@@ -166,7 +226,7 @@ def benchmark_one(name, config, rows, split_info, artifacts, run, feature_config
     return result
 
 
-def run_benchmark(config_path, artifacts, run_name, selected_models=None):
+def run_benchmark(config_path, artifacts, run_name, selected_models=None, verbose=1):
     artifacts = Path(artifacts).resolve()
     os.environ["TORCH_HOME"] = str(artifacts / "cache" / "torch")
     config = json.loads(Path(config_path).read_text(encoding="utf-8"))
@@ -191,7 +251,7 @@ def run_benchmark(config_path, artifacts, run_name, selected_models=None):
         if (run / f"{name}_metrics.json").exists() and (run / f"{name}.pt").exists():
             print(f"{name}: completed; preserving recorded results", flush=True)
             continue
-        benchmark_one(name, config, rows, split_info, artifacts, run)
+        benchmark_one(name, config, rows, split_info, artifacts, run, verbose=verbose)
         summarize(run, config)
     return summarize(run, config)
 
@@ -220,8 +280,10 @@ if __name__ == "__main__":
     parser.add_argument("--artifacts", type=Path, default=ROOT / "artifacts")
     parser.add_argument("--run", default="frozen_baseline")
     parser.add_argument("--models", nargs="+")
+    parser.add_argument("--verbose", type=int, choices=(0, 1), default=1,
+                        help="Show live batch and epoch progress (default: 1).")
     args = parser.parse_args()
-    results = run_benchmark(args.config, args.artifacts, args.run, args.models)
+    results = run_benchmark(args.config, args.artifacts, args.run, args.models, verbose=args.verbose)
     for result in results:
         print(f"{result['architecture']}: validation accuracy={result['validation']['accuracy']:.2%}, "
               f"macro F1={result['validation']['macro_f1']:.4f}")

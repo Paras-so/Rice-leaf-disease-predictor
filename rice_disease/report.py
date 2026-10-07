@@ -56,7 +56,8 @@ def generate(run):
              "Frozen pretrained ImageNet backbones with a learned six-class final linear layer. "
              "This measures transfer-feature quality; it is not an end-to-end fine-tuning comparison.", "",
              "All models use the same split, 224×224 full-image resize, normalization, two training views, "
-             "AdamW configuration, batch size and stopping criterion. The 389-image test holdout has not been scored by this benchmark.", "",
+             "training recipe, batch size and stopping criterion within this run. The test holdout is not scored by this benchmark. "
+             "Loss curves show ordinary cross-entropy for comparison, even when the training objective differs.", "",
              "| Model | Parameters | Trainable | Train accuracy | Validation accuracy | Macro F1 | Training seconds | Forward ms |",
              "|---|---:|---:|---:|---:|---:|---:|---:|"]
     for r in results:
@@ -101,27 +102,31 @@ def generate(run):
 
 def final_report(artifacts):
     artifacts = Path(artifacts)
-    evaluation_path = artifacts / "final_evaluation/metrics.json"
+    selection = json.loads((artifacts / "selected_model.json").read_text())
+    evaluation_dir = artifacts / selection.get("evaluation_dir", "final_evaluation")
+    evaluation_path = evaluation_dir / "metrics.json"
     if not evaluation_path.exists():
         print(f"Final report skipped: no saved evaluation at {evaluation_path}")
         return
     evaluation = json.loads(evaluation_path.read_text())
-    selection = json.loads((artifacts / "selected_model.json").read_text())
-    candidates = json.loads((artifacts / "tuning_candidates.json").read_text())
-    errors = json.loads((artifacts / "final_evaluation/misclassified.json").read_text())
+    if (evaluation["checkpoint_sha256"] != selection["checkpoint_sha256"]
+            or evaluation["split_sha256"] != selection["split_sha256"]):
+        raise ValueError("Evaluation does not belong to the final selected model.")
+    candidates = json.loads((artifacts / selection.get("candidates", "tuning_candidates.json")).read_text())
+    errors = json.loads((evaluation_dir / "misclassified.json").read_text())
     split = json.loads((artifacts / "split_summary.json").read_text())
     matrix = np.array(evaluation["confusion_matrix"])
     fig, axis = plt.subplots(figsize=(8, 7))
     axis.imshow(matrix, cmap="Blues")
     axis.set(xticks=range(6), yticks=range(6), xticklabels=CLASSES, yticklabels=CLASSES,
-             xlabel="Predicted", ylabel="Actual", title="Selected v1: final test confusion matrix")
+             xlabel="Predicted", ylabel="Actual", title="Final selected model: test confusion matrix")
     plt.setp(axis.get_xticklabels(), rotation=45, ha="right")
     for i in range(6):
         for j in range(6):
             axis.text(j, i, str(matrix[i, j]), ha="center", va="center",
                       color="white" if matrix[i, j] > matrix.max() / 2 else "black")
     fig.tight_layout()
-    fig.savefig(artifacts / "final_evaluation/confusion_matrix.png", dpi=160)
+    fig.savefig(evaluation_dir / "confusion_matrix.png", dpi=160)
     plt.close(fig)
     if errors:
         shown = errors[:12]
@@ -133,7 +138,7 @@ def final_report(artifacts):
                 axis.imshow(ImageOps.exif_transpose(image).resize((224, 224)))
             axis.set_title(f"True: {item['actual']}\nPredicted: {item['predicted']}\nScore: {item['softmax_score']:.2f}", fontsize=9)
         fig.tight_layout()
-        fig.savefig(artifacts / "final_evaluation/misclassified_examples.png", dpi=140)
+        fig.savefig(evaluation_dir / "misclassified_examples.png", dpi=140)
         plt.close(fig)
     confusion_pairs = sorted([(int(matrix[i, j]), CLASSES[i], CLASSES[j])
                               for i in range(6) for j in range(6) if i != j and matrix[i, j]], reverse=True)
@@ -142,10 +147,11 @@ def final_report(artifacts):
         "## Dataset", "",
         "1,941 readable RGB images across six classes. No exact-file or identical-pixel duplicates. "
         "Split: 1,241 train, 311 validation, 389 test (seed 42). Source images are preserved.", "",
-        "## Classification v1", "",
-        f"Selected **{evaluation['architecture']}**, run **{selection['run']}**, using validation macro F1 before test access. "
-        "Four ImageNet backbones were benchmarked; two extra head learning rates were tried on the top two architectures. "
+        "## Final classification model", "",
+        f"Selected **{evaluation['architecture']}**, run **{selection['run']}**, using validation macro F1 across {len(candidates)} candidates. "
         "Only the final linear layer was trained. Full-backbone fine-tuning has not been performed.", "",
+        selection.get("test_policy", "Selection frozen before evaluation."), "",
+        "Final training configuration: `" + json.dumps(selection.get("config", {}), sort_keys=True) + "`", "",
         f"Validation accuracy: **{measured['validation']['accuracy']:.2%}**; macro F1: **{measured['validation']['macro_f1']:.4f}**.", "",
         f"Final test accuracy: **{evaluation['test']['accuracy']:.2%}**; macro precision: **{evaluation['test']['macro_precision']:.4f}**; "
         f"macro recall: **{evaluation['test']['macro_recall']:.4f}**; macro F1: **{evaluation['test']['macro_f1']:.4f}**. "
@@ -163,7 +169,7 @@ def final_report(artifacts):
         f"{measured['total_parameters']:,} parameters ({measured['trainable_parameters']:,} trained). "
         f"Measured CPU batch-one forward latency is {measured['inference_ms_batch1']:.1f} ms, excluding preprocessing. "
         f"Training accuracy exceeds validation by {measured['train_validation_accuracy_gap']:.2%}. "
-        "The validation score and per-class results favor this candidate; EfficientNet-B0 is a smaller/faster alternative. "
+        "The validation ranking determines the selected candidate. "
         "The modest differences from tuned alternatives are not statistically established.", "",
         "Model size alone does not explain the results: EfficientNet-B0 outperformed the larger ResNet18, "
         "while ResNet50 performed best in this particular frozen-feature experiment. Additional seeds, "
@@ -171,11 +177,11 @@ def final_report(artifacts):
         "## Error analysis", ""]
     for count, actual, predicted in confusion_pairs:
         lines.append(f"- {actual} predicted as {predicted}: {count} {'image' if count == 1 else 'images'}.")
-    lines += ["", "See `final_evaluation/confusion_matrix.png`, `misclassified.json`, and "
+    lines += ["", f"See `{evaluation_dir.relative_to(artifacts).as_posix()}/confusion_matrix.png`, `misclassified.json`, and "
         "`misclassified_examples.png`. Error inspection does not authorize tuning against this test set.", "",
         "## Software delivered", "",
         "Reproducible CLI pipeline, saved PyTorch checkpoints and configuration, local Streamlit image upload, "
-        "class scores, model comparison, dataset views and sourced cultural-management information. "
+        "class scores, a single final classifier, dataset views and sourced cultural-management information. "
         "The optional mask calculator measures a supplied annotation and excludes image background.", "",
         "## Unfinished components and limitations", "",
         "- Segmentation: no labelled pixel masks are supplied. No segmentation model, mask prediction, disease severity grade, or image-based affected-area claim has been made.",
@@ -186,7 +192,7 @@ def final_report(artifacts):
         "Next required data: reviewed leaf/lesion pixel masks and formulation-specific current agricultural label sources. "
         "See `docs/SEGMENTATION_PLAN.md` and `docs/KNOWLEDGE_BASE.md`."]
     binary = binary_metrics(evaluation["confusion_matrix"], CLASSES)
-    (artifacts / "final_evaluation/binary_metrics.json").write_text(json.dumps(binary, indent=2) + "\n")
+    (evaluation_dir / "binary_metrics.json").write_text(json.dumps(binary, indent=2) + "\n")
     lines += ["", "## Healthy versus diseased: final test", "",
               "Derived from the saved six-class confusion matrix; no training or test inference repeated. "
               "The predicted class maps to healthy or diseased without threshold tuning.", "",

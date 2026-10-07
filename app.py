@@ -1,5 +1,6 @@
 """Laptop-only rice disease classification prototype."""
 
+import hashlib
 import json
 from pathlib import Path
 
@@ -19,18 +20,17 @@ from rice_disease.data import CLASSES
 st.set_page_config(page_title="Rice Leaf Lab", page_icon="🌾", layout="wide")
 st.title("Rice Leaf Lab")
 st.caption("Rice disease classification · local research prototype")
-run = ROOT / "artifacts/runs/frozen_baseline"
-comparison_path = run / "comparison.json"
-comparison = json.loads(comparison_path.read_text()) if comparison_path.exists() else []
 selection_path = ROOT / "artifacts/selected_model.json"
 selection = json.loads(selection_path.read_text()) if selection_path.exists() else None
-evaluation_path = ROOT / "artifacts/final_evaluation/metrics.json"
-analyze_tab, benchmark_tab, dataset_tab = st.tabs(["Analyze a leaf", "Model comparison", "Dataset"])
+evaluation_path = ROOT / "artifacts" / (selection or {}).get("evaluation_dir", "final_evaluation") / "metrics.json"
+analyze_tab, model_tab, dataset_tab = st.tabs(["Analyze a leaf", "Final model", "Dataset"])
 
 
 @st.cache_resource
-def cached_model(path, modified):
+def cached_model(path, modified, expected_hash):
     torch.set_num_threads(4)
+    if hashlib.sha256(Path(path).read_bytes()).hexdigest() != expected_hash:
+        raise ValueError("The final model file has changed. Restore the selected checkpoint before analysis.")
     return load_checkpoint(path)
 
 
@@ -40,18 +40,14 @@ def reset_analysis():
 
 with analyze_tab:
     st.write("Choose a clear rice leaf photo below, then click Analyze leaf to see the prediction.")
-    choices = {}
-    if selection:
-        choices["Selected v1: " + selection["metrics"]["architecture"]] = ROOT / "artifacts" / selection["checkpoint"]
-    choices.update({"Baseline: " + r["architecture"]: run / f"{r['architecture']}.pt"
-                    for r in comparison if (run / f"{r['architecture']}.pt").exists()})
-    available = list(choices)
-    if not available:
-        st.info("The first classifier is still being trained. Dataset details are available in the Dataset tab.")
+    path = ROOT / "artifacts" / selection["checkpoint"] if selection else None
+    if path is None or not path.is_file():
+        st.info("The final classifier is not available yet. Complete model selection before analyzing a leaf.")
     else:
-        architecture = st.selectbox("Classifier", available, format_func=lambda x: x.replace("_", " "),
-                                    on_change=reset_analysis)
-        st.caption("Selection uses validation macro F1. These classifiers use frozen pretrained backbones.")
+        if st.session_state.get("model_hash") != selection["checkpoint_sha256"]:
+            reset_analysis()
+            st.session_state["model_hash"] = selection["checkpoint_sha256"]
+        st.caption("Using the final selected model: " + selection["metrics"]["architecture"].replace("_", " "))
         uploaded = st.file_uploader("Choose a rice leaf photo", type=["jpg", "jpeg", "png", "webp"],
                                     help="Click Browse files or drag a JPG, JPEG, PNG, or WebP image here.",
                                     on_change=reset_analysis)
@@ -65,8 +61,8 @@ with analyze_tab:
                 image.load()
                 left, right = st.columns(2)
                 left.image(image, caption=uploaded.name, width="stretch")
-                path = choices[architecture]
-                model, checkpoint = cached_model(str(path), path.stat().st_mtime_ns)
+                model, checkpoint = cached_model(str(path), path.stat().st_mtime_ns,
+                                                 selection["checkpoint_sha256"])
                 with st.spinner("Analyzing leaf…"):
                     prediction = predict(model, checkpoint, image)
                 right.subheader(prediction["status"].title())
@@ -101,32 +97,31 @@ with analyze_tab:
             except (OSError, ValueError) as exc:
                 st.error(str(exc))
 
-with benchmark_tab:
-    st.subheader("Measured validation results")
-    if comparison:
-        table = [{"Model": r["architecture"], "Parameters": r["total_parameters"],
-                  "Validation accuracy": r["validation"]["accuracy"],
-                  "Macro F1": r["validation"]["macro_f1"],
-                  "Training seconds": r["total_training_seconds"],
-                  "Forward latency (ms)": r["inference_ms_batch1"]} for r in comparison]
-        st.dataframe(pd.DataFrame(table), hide_index=True, width="stretch")
-        st.caption("Single seed, one stratified split. Architecture comparison uses validation data only. Parameter counts include the new six-class layer.")
+with model_tab:
+    st.subheader("Final selected model")
+    if selection:
+        result = selection["metrics"]
+        st.write(result["architecture"].replace("_", " ").title())
+        a, b = st.columns(2)
+        a.metric("Validation accuracy", f"{result['validation']['accuracy']:.2%}")
+        b.metric("Validation macro F1", f"{result['validation']['macro_f1']:.4f}")
+        st.caption("Chosen by validation macro F1. Only this model is used for leaf analysis.")
         if evaluation_path.exists():
             evaluation = json.loads(evaluation_path.read_text())
-            st.subheader("Final held-out evaluation of selected v1")
-            a, b = st.columns(2)
-            a.metric("Test accuracy", f"{evaluation['test']['accuracy']:.2%}")
-            b.metric("Test macro F1", f"{evaluation['test']['macro_f1']:.4f}")
-            st.caption(f"{evaluation['test_images']} reserved images; configuration frozen before this evaluation.")
-            binary = binary_metrics(evaluation["confusion_matrix"], CLASSES)
-            st.metric("Healthy / diseased test accuracy", f"{binary['accuracy']:.2%}")
-            st.caption("Healthy when the predicted class is healthy; all five disease classes map to diseased.")
-        for item in comparison:
-            curve = run / "figures" / f"{item['architecture']}_learning_curves.png"
-            if curve.exists():
-                st.image(str(curve), caption=item["architecture"])
+            if (evaluation.get("checkpoint_sha256") == selection["checkpoint_sha256"]
+                    and evaluation.get("split_sha256") == selection["split_sha256"]):
+                st.subheader("Test evaluation")
+                a, b = st.columns(2)
+                a.metric("Test accuracy", f"{evaluation['test']['accuracy']:.2%}")
+                b.metric("Test macro F1", f"{evaluation['test']['macro_f1']:.4f}")
+                binary = binary_metrics(evaluation["confusion_matrix"], CLASSES)
+                st.metric("Healthy / diseased test accuracy", f"{binary['accuracy']:.2%}")
+                st.caption(f"{evaluation['test_images']} test images. " + evaluation.get("test_policy", ""))
+        curve = ROOT / "artifacts/runs" / selection["run"] / "figures" / f"{result['architecture']}_learning_curves.png"
+        if curve.exists():
+            st.image(str(curve), caption="Final model learning curves")
     else:
-        st.info("Benchmark results will appear after the first model completes.")
+        st.info("Final model details will appear after model selection.")
 
 with dataset_tab:
     audit_path = ROOT / "artifacts/dataset_audit.json"
