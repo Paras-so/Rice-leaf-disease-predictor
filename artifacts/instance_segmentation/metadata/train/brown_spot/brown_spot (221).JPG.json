@@ -1,0 +1,77 @@
+{
+  "source_path": "train/brown_spot/brown_spot (221).JPG",
+  "source_sha256": "3c25f5f9a4a68c76ab9f2311844f1fb744037182f1e57974d0b102979b09a46d",
+  "split": "train",
+  "image_class": "brown_spot",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v3",
+  "quality_status": "requires_pixel_review",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/train/brown_spot/brown_spot (221).JPG.png",
+    "lesion_instances": "lesion_instances/train/brown_spot/brown_spot (221).JPG.png",
+    "overlays": "overlays/train/brown_spot/brown_spot (221).JPG.jpg",
+    "metadata": "metadata/train/brown_spot/brown_spot (221).JPG.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        0,
+        572,
+        1600,
+        284
+      ],
+      "area_pixels": 244192
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        1088,
+        668,
+        130,
+        68
+      ],
+      "area_pixels": 5788,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        1542,
+        708,
+        20,
+        12
+      ],
+      "area_pixels": 192,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        272,
+        728,
+        46,
+        28
+      ],
+      "area_pixels": 992,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review"
+  ]
+}

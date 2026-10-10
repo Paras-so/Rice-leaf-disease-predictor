@@ -1,0 +1,89 @@
+{
+  "source_path": "train/leaf_scald/leaf_scald (330).jpg",
+  "source_sha256": "aeac55a618da52cf000d238de1dea0b295955085c35fdd13ed67cdc35d2ab0ca",
+  "split": "train",
+  "image_class": "leaf_scald",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v2",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/train/leaf_scald/leaf_scald (330).jpg.png",
+    "lesion_instances": "lesion_instances/train/leaf_scald/leaf_scald (330).jpg.png",
+    "overlays": "overlays/train/leaf_scald/leaf_scald (330).jpg.jpg",
+    "metadata": "metadata/train/leaf_scald/leaf_scald (330).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        784,
+        194,
+        126,
+        1406
+      ],
+      "area_pixels": 104752
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        784,
+        194,
+        126,
+        1406
+      ],
+      "area_pixels": 89740,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        786,
+        1472,
+        2,
+        40
+      ],
+      "area_pixels": 80,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        864,
+        1552,
+        6,
+        10
+      ],
+      "area_pixels": 44,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        788,
+        1576,
+        2,
+        18
+      ],
+      "area_pixels": 36,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review",
+    "high_candidate_coverage"
+  ]
+}

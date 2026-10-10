@@ -1,0 +1,197 @@
+{
+  "source_path": "train/narrow_brown_spot/narrow_brown (11).jpg",
+  "source_sha256": "bc2d1d1a0b291f95fa19a5c61e34e341e3b5ab84afc77fe9c30c57c41c097c47",
+  "split": "train",
+  "image_class": "narrow_brown_spot",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v3",
+  "quality_status": "requires_pixel_review",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/train/narrow_brown_spot/narrow_brown (11).jpg.png",
+    "lesion_instances": "lesion_instances/train/narrow_brown_spot/narrow_brown (11).jpg.png",
+    "overlays": "overlays/train/narrow_brown_spot/narrow_brown (11).jpg.jpg",
+    "metadata": "metadata/train/narrow_brown_spot/narrow_brown (11).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        466,
+        0,
+        580,
+        1600
+      ],
+      "area_pixels": 848620
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        980,
+        0,
+        6,
+        44
+      ],
+      "area_pixels": 184,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        804,
+        94,
+        30,
+        474
+      ],
+      "area_pixels": 6816,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        986,
+        160,
+        6,
+        22
+      ],
+      "area_pixels": 120,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        682,
+        614,
+        38,
+        770
+      ],
+      "area_pixels": 18644,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 5,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        518,
+        618,
+        20,
+        146
+      ],
+      "area_pixels": 1936,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 6,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        732,
+        704,
+        30,
+        590
+      ],
+      "area_pixels": 8724,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 7,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        970,
+        706,
+        26,
+        338
+      ],
+      "area_pixels": 4888,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 8,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        642,
+        722,
+        20,
+        214
+      ],
+      "area_pixels": 2828,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 9,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        602,
+        752,
+        8,
+        42
+      ],
+      "area_pixels": 216,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 10,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        524,
+        766,
+        22,
+        174
+      ],
+      "area_pixels": 2176,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 11,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        932,
+        882,
+        22,
+        252
+      ],
+      "area_pixels": 3792,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 12,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        504,
+        1526,
+        14,
+        74
+      ],
+      "area_pixels": 624,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 13,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        600,
+        1550,
+        14,
+        50
+      ],
+      "area_pixels": 500,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review"
+  ]
+}

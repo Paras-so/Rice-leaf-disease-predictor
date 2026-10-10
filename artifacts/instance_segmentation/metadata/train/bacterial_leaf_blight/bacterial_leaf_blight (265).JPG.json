@@ -1,0 +1,89 @@
+{
+  "source_path": "train/bacterial_leaf_blight/bacterial_leaf_blight (265).JPG",
+  "source_sha256": "d72237728b4b11aae54483277e871f0ac21a92edbbd7cf83bd72c5190f578782",
+  "split": "train",
+  "image_class": "bacterial_leaf_blight",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v3",
+  "quality_status": "requires_pixel_review",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/train/bacterial_leaf_blight/bacterial_leaf_blight (265).JPG.png",
+    "lesion_instances": "lesion_instances/train/bacterial_leaf_blight/bacterial_leaf_blight (265).JPG.png",
+    "overlays": "overlays/train/bacterial_leaf_blight/bacterial_leaf_blight (265).JPG.jpg",
+    "metadata": "metadata/train/bacterial_leaf_blight/bacterial_leaf_blight (265).JPG.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        562,
+        0,
+        232,
+        1600
+      ],
+      "area_pixels": 231948
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        704,
+        0,
+        84,
+        370
+      ],
+      "area_pixels": 17480,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        774,
+        132,
+        18,
+        190
+      ],
+      "area_pixels": 1704,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        654,
+        1006,
+        54,
+        508
+      ],
+      "area_pixels": 10740,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        654,
+        1344,
+        4,
+        22
+      ],
+      "area_pixels": 88,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review"
+  ]
+}

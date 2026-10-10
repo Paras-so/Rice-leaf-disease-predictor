@@ -1,0 +1,33 @@
+{
+  "status": "trained",
+  "best_validation_score": 0.4908970253009012,
+  "epochs_run": 11,
+  "train_images": 44,
+  "validation_images": 12,
+  "test_images_used": 0,
+  "label_quality": "ai_visual_reviewed",
+  "field_validated": false,
+  "review_methods": {
+    "ai_visual": 56
+  },
+  "quality_note": "Pilot trained against approximate AI-reviewed masks; validation measures agreement with those masks, not expert-validated disease segmentation accuracy.",
+  "class_counts": {
+    "train": {
+      "bacterial_leaf_blight": 8,
+      "brown_spot": 6,
+      "healthy": 8,
+      "leaf_blast": 7,
+      "leaf_scald": 7,
+      "narrow_brown_spot": 8
+    },
+    "validation": {
+      "bacterial_leaf_blight": 2,
+      "brown_spot": 2,
+      "healthy": 2,
+      "leaf_blast": 2,
+      "leaf_scald": 2,
+      "narrow_brown_spot": 2
+    }
+  },
+  "checkpoint_sha256": "bc03959635d143e95d881db55ff5ec2cf4bd76ae50eac4778aa46dd4bf2ef919"
+}

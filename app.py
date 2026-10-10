@@ -16,6 +16,8 @@ from rice_disease.models import load_checkpoint
 from rice_disease.segmentation import affected_area
 from rice_disease.binary import binary_metrics
 from rice_disease.data import CLASSES
+from rice_disease.unet import load_unet, predict_mask, mask_overlay
+from rice_disease.quantity import rice_tank_quantity, disease_product_reference
 
 st.set_page_config(page_title="Rice Leaf Lab", page_icon="🌾", layout="wide")
 st.title("Rice Leaf Lab")
@@ -36,6 +38,12 @@ def cached_model(path, modified, expected_hash):
 
 def reset_analysis():
     st.session_state["analyze_leaf"] = False
+
+
+@st.cache_resource
+def cached_segmentation(path, modified):
+    torch.set_num_threads(4)
+    return load_unet(path)
 
 
 with analyze_tab:
@@ -59,35 +67,124 @@ with analyze_tab:
             try:
                 image = ImageOps.exif_transpose(Image.open(uploaded)).convert("RGB")
                 image.load()
-                left, right = st.columns(2)
-                left.image(image, caption=uploaded.name, width="stretch")
                 model, checkpoint = cached_model(str(path), path.stat().st_mtime_ns,
                                                  selection["checkpoint_sha256"])
                 with st.spinner("Analyzing leaf…"):
                     prediction = predict(model, checkpoint, image)
-                right.subheader(prediction["status"].title())
-                right.write("Predicted class: " + prediction["disease"].replace("_", " ").title())
-                right.metric("Model score", f"{prediction['softmax_score']:.1%}")
-                right.caption(prediction["confidence_note"])
-                right.bar_chart(pd.DataFrame({"Class": list(prediction["scores"]), "Score": list(prediction["scores"].values())}).set_index("Class"))
+                segmentation_path = ROOT / "artifacts/unet/model.pt"
+                display_image = image.copy()
+                segmentation_checkpoint = None
+                if segmentation_path.is_file():
+                    segmentation_model, segmentation_checkpoint = cached_segmentation(str(segmentation_path), segmentation_path.stat().st_mtime_ns)
+                    with st.spinner("Segmenting leaf and affected tissue..."):
+                        predicted_mask, area, rgb = predict_mask(segmentation_model, segmentation_checkpoint, image)
+                    display_image = mask_overlay(rgb, predicted_mask)
+                    prediction['segmentation'] = area
+                    prediction['affected_area_percent'] = area['affected_area_percent']
+                    prediction['segmentation_status'] = f"U-Net prediction; label quality: {segmentation_checkpoint['label_quality']}; not field-validated"
+
+                # Bound both dimensions without changing the image used for inference.
+                display_image.thumbnail((560, 340), Image.Resampling.LANCZOS)
+                disease_name = prediction['disease'].replace('_', ' ').title()
+                percentage = prediction.get('affected_area_percent')
+                area_text = f"{percentage:.2f}%" if percentage is not None else "Unavailable"
                 info = management(prediction["disease"])
-                st.subheader("Management reference")
-                if info["management"]:
-                    for item in info["management"]:
-                        st.write("• " + item)
-                    st.markdown(f"Source: [{info['source_title']}]({info['source_url']}) · {info['source_region']}")
+                reference = disease_product_reference(prediction['disease'])
+                rule = info.get("chemical_rule")
+                application = json.loads((ROOT / "configs/application.json").read_text())
+                verified_rule = rule and rule.get("label_verified") and rule.get("region") == application["region"]
+                left, right = st.columns([3, 2])
+                left.image(display_image, caption=f"{disease_name} | Affected leaf area: {area_text}", width=display_image.width)
+                if segmentation_checkpoint is not None:
+                    left.caption("Green = unaffected leaf · Red = predicted affected tissue")
                 else:
-                    st.write(info.get("note", "No management entry available."))
-                st.info("Automatic spray advice and pesticide quantity are unavailable: no current, region-specific product-label rule has been verified. An image prediction alone does not establish a need to spray.")
-                st.subheader("Affected leaf area")
-                st.write("A segmentation model has not been trained because the dataset has no pixel masks. Classification scores do not measure disease severity.")
+                    left.caption("Original photo shown: the segmentation model is unavailable.")
+                with right:
+                    st.subheader(prediction["status"].title())
+                    st.write(f"**Predicted disease: {disease_name}**")
+                    st.metric("Estimated affected leaf area", area_text)
+                    if percentage is None:
+                        st.caption("No leaf pixels detected." if segmentation_checkpoint is not None else "Train the segmentation model to estimate affected area.")
+                    st.markdown("**Pesticide suggestion**")
+                    if verified_rule:
+                        st.write(f"{rule['product']} ({rule['formulation']})")
+                        st.markdown(f"[Product label]({rule['source_url']})")
+                    elif reference['product']:
+                        product = reference['product']
+                        st.write(product['formulation'])
+                        st.markdown(f"[{product['source_title']}]({product['source_url']})")
+                        st.caption("Disease-matched label reference; confirm diagnosis and local label suitability before use.")
+                    else:
+                        st.write(reference['note'])
+
+                st.subheader("Disease prediction scores")
+                st.metric("Model score", f"{prediction['softmax_score']:.1%}")
+                st.caption(prediction["confidence_note"])
+                scores = pd.DataFrame({
+                    "Disease": [name.replace('_', ' ').title() for name in prediction['scores']],
+                    "Score (%)": [score * 100 for score in prediction['scores'].values()],
+                }).set_index("Disease")
+                chart, percentages = st.columns([3, 2])
+                chart.bar_chart(scores, height=250)
+                percentages.dataframe(scores, column_config={
+                    "Score (%)": st.column_config.NumberColumn(format="%.2f%%"),
+                }, width="stretch")
+
+                with st.expander("Affected-area details"):
+                    if segmentation_checkpoint is not None:
+                        if segmentation_checkpoint.get('label_quality') == 'ai_visual_reviewed':
+                            st.info(f"Experimental U-Net pilot: {segmentation_checkpoint['train_images']} training images and {segmentation_checkpoint['validation_images']} validation images with AI-reviewed masks. These are approximate annotations, not expert-validated ground truth.")
+                        st.caption("Model estimate: affected pixels / total leaf pixels. Background is excluded. This is not field disease prevalence or a pesticide-dose multiplier.")
+
+                with st.expander("Pesticide reference and management details"):
+                    st.subheader("Management reference")
+                    if info["management"]:
+                        for item in info["management"]:
+                            st.write("• " + item)
+                        st.markdown(f"Source: [{info['source_title']}]({info['source_url']}) · {info['source_region']}")
+                    else:
+                        st.write(info.get("note", "No management entry available."))
+                    st.caption(f"Crop: rice | Location: {application['state']}, {application['country']} | Tank: {application['spray_tank_ml']} mL ({application['spray_tank_ml']/1000:g} L)")
+                    if verified_rule:
+                        st.subheader("Product-label quantity calculator")
+                        st.write(f"{rule['product']} ({rule['formulation']})")
+                        st.markdown(f"[Product label]({rule['source_url']})")
+                        for condition in rule.get('application_conditions', []):
+                            st.write(condition)
+                        volume = st.number_input("Spray mixture volume (mL)", min_value=1.0, value=float(application['spray_tank_ml']))
+                        area_ha = st.number_input("Area treated by this mixture (hectares)", min_value=0.0, value=0.0) if rule.get('unit', '').endswith('/ha') else None
+                        authorized = st.checkbox("I have confirmed the diagnosis and all product-label application conditions")
+                        if authorized:
+                            try:
+                                quantity = rice_tank_quantity(rule, disease=prediction['disease'], region=application['region'],
+                                                            tank_ml=volume, area_hectares=area_ha, application_authorized=True)
+                                st.write(f"Product quantity: {quantity['quantity']:.6g} {quantity['unit']}")
+                                prediction['product_label_quantity'] = quantity
+                            except ValueError as exc:
+                                st.warning(str(exc))
+                    else:
+                        st.subheader("Disease-matched product reference")
+                        if reference['product']:
+                            product = reference['product']
+                            st.write(product['formulation'])
+                            st.markdown(f"[{product['source_title']}]({product['source_url']})")
+                            water_ml = st.number_input("Water for dilution reference (mL)", min_value=1.0,
+                                                       value=float(application['spray_tank_ml']))
+                            reference = disease_product_reference(prediction['disease'], water_ml=water_ml)
+                            amount = reference['reference_quantity']
+                            st.write(f"Label-ratio example: {amount['quantity']:.6g} mL product for {water_ml:g} mL water.")
+                            st.caption(f"Derived from {product['formulation_ml_per_hectare']:g} mL product and {product['water_litres_per_hectare']:g} L water per hectare. This does not establish coverage for one plant.")
+                            for condition in product['conditions']:
+                                st.write(condition)
+                        st.info(reference['note'])
+                        prediction['pesticide_reference'] = reference
                 with st.expander("Calculate area from an existing annotated mask"):
                     st.caption("Upload a grayscale PNG aligned to this image: 0 = background, 1 = unaffected leaf, 2 = diseased leaf. This reads your annotation; it does not predict a mask.")
                     mask_file = st.file_uploader("Annotated label mask", type=["png"], key="mask")
                     if mask_file:
                         with Image.open(mask_file) as mask_image:
                             if mask_image.size != image.size:
-                                raise ValueError("Mask dimensions must match the displayed, orientation-corrected image.")
+                                raise ValueError("Mask dimensions must match the original, orientation-corrected photo.")
                             area = affected_area(np.array(mask_image))
                         st.metric("Affected leaf area in supplied annotation", f"{area['affected_area_percent']:.2f}%")
                         st.caption("Background is excluded. No low/moderate/high severity grade or treatment threshold has been assigned.")

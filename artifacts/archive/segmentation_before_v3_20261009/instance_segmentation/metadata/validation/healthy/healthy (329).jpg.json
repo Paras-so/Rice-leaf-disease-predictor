@@ -1,0 +1,89 @@
+{
+  "source_path": "train/healthy/healthy (329).jpg",
+  "source_sha256": "baf0c6dad201fdc0aef34eeaa04fffe97473507acf0911edf41d7b9ef462a9d4",
+  "split": "validation",
+  "image_class": "healthy",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v2",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/validation/healthy/healthy (329).jpg.png",
+    "lesion_instances": "lesion_instances/validation/healthy/healthy (329).jpg.png",
+    "overlays": "overlays/validation/healthy/healthy (329).jpg.jpg",
+    "metadata": "metadata/validation/healthy/healthy (329).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        358,
+        0,
+        1152,
+        1600
+      ],
+      "area_pixels": 421816
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        534,
+        0,
+        68,
+        104
+      ],
+      "area_pixels": 1208,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        596,
+        104,
+        252,
+        446
+      ],
+      "area_pixels": 6136,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        846,
+        550,
+        42,
+        66
+      ],
+      "area_pixels": 592,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        890,
+        624,
+        620,
+        976
+      ],
+      "area_pixels": 62388,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review",
+    "candidate_on_healthy_image"
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "source_path": "test/narrow_brown_spot/narrow_brown (294).jpg",
+  "source_sha256": "4c58437f16cfe78146dc76f0a8b77f60b95dee459ae002f10f2f60c668294a47",
+  "split": "test",
+  "image_class": "narrow_brown_spot",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v3",
+  "quality_status": "requires_pixel_review",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/test/narrow_brown_spot/narrow_brown (294).jpg.png",
+    "lesion_instances": "lesion_instances/test/narrow_brown_spot/narrow_brown (294).jpg.png",
+    "overlays": "overlays/test/narrow_brown_spot/narrow_brown (294).jpg.jpg",
+    "metadata": "metadata/test/narrow_brown_spot/narrow_brown (294).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        750,
+        92,
+        230,
+        1416
+      ],
+      "area_pixels": 293384
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        782,
+        704,
+        56,
+        778
+      ],
+      "area_pixels": 17756,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        854,
+        930,
+        44,
+        570
+      ],
+      "area_pixels": 15260,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        784,
+        1332,
+        8,
+        50
+      ],
+      "area_pixels": 304,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        916,
+        1478,
+        10,
+        30
+      ],
+      "area_pixels": 204,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review"
+  ]
+}

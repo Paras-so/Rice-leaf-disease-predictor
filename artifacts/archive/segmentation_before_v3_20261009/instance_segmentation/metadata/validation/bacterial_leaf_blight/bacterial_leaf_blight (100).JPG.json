@@ -1,0 +1,196 @@
+{
+  "source_path": "train/bacterial_leaf_blight/bacterial_leaf_blight (100).JPG",
+  "source_sha256": "0a2ef9451b568a713b282be304e4102d102e7c508d84c973c35bc7ecdc739cd0",
+  "split": "validation",
+  "image_class": "bacterial_leaf_blight",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v2",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/validation/bacterial_leaf_blight/bacterial_leaf_blight (100).JPG.png",
+    "lesion_instances": "lesion_instances/validation/bacterial_leaf_blight/bacterial_leaf_blight (100).JPG.png",
+    "overlays": "overlays/validation/bacterial_leaf_blight/bacterial_leaf_blight (100).JPG.jpg",
+    "metadata": "metadata/validation/bacterial_leaf_blight/bacterial_leaf_blight (100).JPG.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        242,
+        0,
+        944,
+        1600
+      ],
+      "area_pixels": 1422716
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        928,
+        0,
+        166,
+        822
+      ],
+      "area_pixels": 70060,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        1064,
+        0,
+        122,
+        1600
+      ],
+      "area_pixels": 11232,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        328,
+        436,
+        46,
+        298
+      ],
+      "area_pixels": 9080,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        434,
+        1152,
+        8,
+        46
+      ],
+      "area_pixels": 248,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 5,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        336,
+        1162,
+        8,
+        10
+      ],
+      "area_pixels": 60,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 6,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        438,
+        1216,
+        6,
+        16
+      ],
+      "area_pixels": 80,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 7,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        438,
+        1270,
+        14,
+        72
+      ],
+      "area_pixels": 520,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 8,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        340,
+        1290,
+        72,
+        310
+      ],
+      "area_pixels": 9096,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 9,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        444,
+        1330,
+        20,
+        78
+      ],
+      "area_pixels": 728,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 10,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        448,
+        1472,
+        14,
+        32
+      ],
+      "area_pixels": 360,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 11,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        416,
+        1508,
+        58,
+        92
+      ],
+      "area_pixels": 4068,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 12,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        250,
+        1574,
+        6,
+        10
+      ],
+      "area_pixels": 44,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 13,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        352,
+        1584,
+        16,
+        10
+      ],
+      "area_pixels": 108,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review"
+  ]
+}

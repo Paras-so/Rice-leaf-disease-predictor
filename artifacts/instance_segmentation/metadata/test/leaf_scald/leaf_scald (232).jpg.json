@@ -1,0 +1,90 @@
+{
+  "source_path": "test/leaf_scald/leaf_scald (232).jpg",
+  "source_sha256": "0bae26def9dbf7882b393f63d21fa708dd7e2d8e77c526da8727aa7b06789784",
+  "split": "test",
+  "image_class": "leaf_scald",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v3",
+  "quality_status": "requires_pixel_review",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/test/leaf_scald/leaf_scald (232).jpg.png",
+    "lesion_instances": "lesion_instances/test/leaf_scald/leaf_scald (232).jpg.png",
+    "overlays": "overlays/test/leaf_scald/leaf_scald (232).jpg.jpg",
+    "metadata": "metadata/test/leaf_scald/leaf_scald (232).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        726,
+        68,
+        150,
+        1518
+      ],
+      "area_pixels": 109032
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        750,
+        272,
+        120,
+        1000
+      ],
+      "area_pixels": 43496,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        830,
+        320,
+        10,
+        130
+      ],
+      "area_pixels": 796,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        836,
+        1074,
+        8,
+        12
+      ],
+      "area_pixels": 72,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        748,
+        1212,
+        2,
+        16
+      ],
+      "area_pixels": 32,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review",
+    "large_connected_candidate_review"
+  ]
+}

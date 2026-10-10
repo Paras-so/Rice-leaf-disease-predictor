@@ -1,0 +1,149 @@
+{
+  "source_path": "test/bacterial_leaf_blight/bacterial_leaf_blight (47).JPG",
+  "source_sha256": "bc19f2d68eb4c27ecf0aab58c2c0ade920fcb8352d6b0c1462cad3cd1fe647f6",
+  "split": "test",
+  "image_class": "bacterial_leaf_blight",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v3",
+  "quality_status": "requires_pixel_review",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/test/bacterial_leaf_blight/bacterial_leaf_blight (47).JPG.png",
+    "lesion_instances": "lesion_instances/test/bacterial_leaf_blight/bacterial_leaf_blight (47).JPG.png",
+    "overlays": "overlays/test/bacterial_leaf_blight/bacterial_leaf_blight (47).JPG.jpg",
+    "metadata": "metadata/test/bacterial_leaf_blight/bacterial_leaf_blight (47).JPG.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        588,
+        0,
+        292,
+        1600
+      ],
+      "area_pixels": 359076
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        588,
+        144,
+        2,
+        16
+      ],
+      "area_pixels": 32,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        608,
+        532,
+        12,
+        84
+      ],
+      "area_pixels": 520,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        638,
+        734,
+        6,
+        62
+      ],
+      "area_pixels": 264,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        630,
+        846,
+        18,
+        98
+      ],
+      "area_pixels": 752,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 5,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        642,
+        898,
+        4,
+        14
+      ],
+      "area_pixels": 56,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 6,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        640,
+        916,
+        10,
+        26
+      ],
+      "area_pixels": 128,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 7,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        632,
+        962,
+        4,
+        12
+      ],
+      "area_pixels": 48,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 8,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        630,
+        1114,
+        10,
+        8
+      ],
+      "area_pixels": 48,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 9,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        626,
+        1332,
+        6,
+        32
+      ],
+      "area_pixels": 124,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review"
+  ]
+}

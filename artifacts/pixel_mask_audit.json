@@ -1,0 +1,126 @@
+{
+  "checked_at_utc": "2026-10-10T06:27:46.269753+00:00",
+  "status": "ready_for_training",
+  "training_ready": true,
+  "expected_images": 1941,
+  "annotation_records": 1941,
+  "valid_masks": 1941,
+  "reviewed_masks": 56,
+  "valid_reviewed_masks": 56,
+  "unreviewed_masks": 1885,
+  "by_split": {
+    "train": {
+      "annotations": 1241,
+      "reviewed": 44,
+      "unreviewed": 1197,
+      "valid_masks": 1241,
+      "valid_reviewed_masks": 44,
+      "invalid_masks": 0,
+      "reviewed_affected_pixels": 3323169,
+      "healthy_with_affected_pixels": 124,
+      "diseased_without_affected_pixels": 14
+    },
+    "validation": {
+      "annotations": 311,
+      "reviewed": 12,
+      "unreviewed": 299,
+      "valid_masks": 311,
+      "valid_reviewed_masks": 12,
+      "invalid_masks": 0,
+      "reviewed_affected_pixels": 378868,
+      "healthy_with_affected_pixels": 25,
+      "diseased_without_affected_pixels": 7
+    },
+    "test": {
+      "annotations": 389,
+      "reviewed": 0,
+      "unreviewed": 389,
+      "valid_masks": 389,
+      "valid_reviewed_masks": 0,
+      "invalid_masks": 0,
+      "reviewed_affected_pixels": 0,
+      "healthy_with_affected_pixels": 43,
+      "diseased_without_affected_pixels": 3
+    }
+  },
+  "by_class": {
+    "bacterial_leaf_blight": {
+      "annotations": 297,
+      "reviewed": 10,
+      "unreviewed": 287,
+      "valid_masks": 297,
+      "valid_reviewed_masks": 10,
+      "invalid_masks": 0,
+      "reviewed_affected_pixels": 903188,
+      "healthy_with_affected_pixels": 0,
+      "diseased_without_affected_pixels": 8
+    },
+    "brown_spot": {
+      "annotations": 320,
+      "reviewed": 8,
+      "unreviewed": 312,
+      "valid_masks": 320,
+      "valid_reviewed_masks": 8,
+      "invalid_masks": 0,
+      "reviewed_affected_pixels": 395009,
+      "healthy_with_affected_pixels": 0,
+      "diseased_without_affected_pixels": 1
+    },
+    "healthy": {
+      "annotations": 348,
+      "reviewed": 10,
+      "unreviewed": 338,
+      "valid_masks": 348,
+      "valid_reviewed_masks": 10,
+      "invalid_masks": 0,
+      "reviewed_affected_pixels": 0,
+      "healthy_with_affected_pixels": 192,
+      "diseased_without_affected_pixels": 0
+    },
+    "leaf_blast": {
+      "annotations": 337,
+      "reviewed": 9,
+      "unreviewed": 328,
+      "valid_masks": 337,
+      "valid_reviewed_masks": 9,
+      "invalid_masks": 0,
+      "reviewed_affected_pixels": 250112,
+      "healthy_with_affected_pixels": 0,
+      "diseased_without_affected_pixels": 15
+    },
+    "leaf_scald": {
+      "annotations": 308,
+      "reviewed": 9,
+      "unreviewed": 299,
+      "valid_masks": 308,
+      "valid_reviewed_masks": 9,
+      "invalid_masks": 0,
+      "reviewed_affected_pixels": 1734030,
+      "healthy_with_affected_pixels": 0,
+      "diseased_without_affected_pixels": 0
+    },
+    "narrow_brown_spot": {
+      "annotations": 331,
+      "reviewed": 10,
+      "unreviewed": 321,
+      "valid_masks": 331,
+      "valid_reviewed_masks": 10,
+      "invalid_masks": 0,
+      "reviewed_affected_pixels": 419698,
+      "healthy_with_affected_pixels": 0,
+      "diseased_without_affected_pixels": 0
+    }
+  },
+  "missing_annotations": [],
+  "integrity_errors": [],
+  "training_blockers": [],
+  "annotation_manifest_sha256": "76cc566734ab1d45dd6a97c62dcee884af83beda315d2072de03367084d280d1",
+  "split_manifest_sha256": "773016ba6a13f0f92da7520a5461bda2bf70f036fc96d75c24beba52d036c026",
+  "mask_labels": {
+    "0": "background",
+    "1": "unaffected_leaf",
+    "2": "affected_leaf"
+  },
+  "accuracy_evaluated": false,
+  "note": "File validity is not boundary accuracy. Unreviewed masks remain drafts. Minimum training counts are software guards, not sufficient dataset sizes. Test masks are checked for integrity only; no model predictions or scores are computed."
+}

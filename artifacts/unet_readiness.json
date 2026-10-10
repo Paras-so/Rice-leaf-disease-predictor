@@ -1,0 +1,80 @@
+{
+  "status": "trained_ai_reviewed_pilot",
+  "architecture": "U-Net",
+  "parameters": 1964131,
+  "classes": [
+    "background",
+    "unaffected_leaf",
+    "affected_leaf"
+  ],
+  "annotation_drafts": 1885,
+  "reviewed_masks": 56,
+  "rice_checkpoint_exists": true,
+  "formula": "100 * affected_leaf_pixels / (unaffected_leaf_pixels + affected_leaf_pixels)",
+  "application": {
+    "country": "India",
+    "state": "Tripura",
+    "region": "India/Tripura",
+    "crop": "rice",
+    "spray_tank_ml": 100,
+    "product_selection": "Disease-specific verified product-label rule only",
+    "affected_area_scales_dose": false,
+    "application_authorized": false
+  },
+  "pesticide_rule_enabled": false,
+  "training_command": ".\\.venv\\Scripts\\python.exe -u -m rice_disease.train_segmentation train --config configs/segmentation_ai_pilot.json --output artifacts/unet_next",
+  "documentation": "docs/UNET_SEGMENTATION.md",
+  "checked_at_utc": "2026-10-10T05:47:39.995701+00:00",
+  "mask_audit": "artifacts/pixel_mask_audit.json",
+  "valid_mask_files": 1941,
+  "training_ready": true,
+  "training_blockers": [],
+  "conditional_product_reference_diseases": [
+    "leaf_blast",
+    "brown_spot"
+  ],
+  "required_quantity_per_plant": null,
+  "annotation_source_method": "colour_connected_components_v3",
+  "annotation_records": 1941,
+  "checkpoint": "artifacts/unet/model.pt",
+  "checkpoint_sha256": "aed0f3e6a093b4bd788cc66b2ab2d4d221f2a90bb189c81e638294814f4972f8",
+  "label_quality": "ai_visual_reviewed",
+  "expert_validated": false,
+  "train_images": 44,
+  "validation_images": 12,
+  "test_images_used": 0,
+  "epochs_run": 40,
+  "best_epoch": 32,
+  "quality_note": "Pilot trained against approximate AI-reviewed masks; validation measures agreement with those masks, not expert-validated disease segmentation accuracy.",
+  "validation_at_original_resolution": {
+    "images": 12,
+    "confusion_matrix": [
+      [
+        25758566,
+        116305,
+        6560
+      ],
+      [
+        133530,
+        4281402,
+        44769
+      ],
+      [
+        43548,
+        100759,
+        234561
+      ]
+    ],
+    "leaf_dice": 0.9688303712228871,
+    "leaf_iou": 0.9395450992596093,
+    "lesion_dice": 0.7057034289169893,
+    "lesion_iou": 0.545240901261515,
+    "affected_area_mae_percentage_points": 3.1499878152535796,
+    "area_comparable_images": 12,
+    "predicted_no_leaf_images": 0,
+    "empty_lesion_images": 2,
+    "empty_lesion_false_positive_images": 0
+  },
+  "training_summary": "artifacts/unet/summary.json",
+  "boundary_review": "artifacts/boundary_review_20261010/index.html"
+}

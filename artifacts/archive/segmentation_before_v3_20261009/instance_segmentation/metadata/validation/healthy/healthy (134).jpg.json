@@ -1,0 +1,89 @@
+{
+  "source_path": "train/healthy/healthy (134).jpg",
+  "source_sha256": "689f2cfd6fc7c8c609172f31e8b093e61fca019f0ed48495ac72d2d38720f6ae",
+  "split": "validation",
+  "image_class": "healthy",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v2",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/validation/healthy/healthy (134).jpg.png",
+    "lesion_instances": "lesion_instances/validation/healthy/healthy (134).jpg.png",
+    "overlays": "overlays/validation/healthy/healthy (134).jpg.jpg",
+    "metadata": "metadata/validation/healthy/healthy (134).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        0,
+        456,
+        1600,
+        752
+      ],
+      "area_pixels": 173412
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        1392,
+        456,
+        208,
+        80
+      ],
+      "area_pixels": 1172,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        1446,
+        516,
+        10,
+        8
+      ],
+      "area_pixels": 60,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        1566,
+        520,
+        8,
+        8
+      ],
+      "area_pixels": 44,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        0,
+        536,
+        1390,
+        534
+      ],
+      "area_pixels": 7452,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review",
+    "candidate_on_healthy_image"
+  ]
+}

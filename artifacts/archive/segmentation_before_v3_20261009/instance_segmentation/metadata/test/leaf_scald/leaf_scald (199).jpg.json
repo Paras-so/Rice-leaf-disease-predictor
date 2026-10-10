@@ -1,0 +1,89 @@
+{
+  "source_path": "test/leaf_scald/leaf_scald (199).jpg",
+  "source_sha256": "e3c4bef9dfd3b3f2d6f3ba21b07d413657b5385d477f52710c381eaa8811d620",
+  "split": "test",
+  "image_class": "leaf_scald",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v2",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/test/leaf_scald/leaf_scald (199).jpg.png",
+    "lesion_instances": "lesion_instances/test/leaf_scald/leaf_scald (199).jpg.png",
+    "overlays": "overlays/test/leaf_scald/leaf_scald (199).jpg.jpg",
+    "metadata": "metadata/test/leaf_scald/leaf_scald (199).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        592,
+        0,
+        330,
+        1600
+      ],
+      "area_pixels": 287724
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        610,
+        0,
+        312,
+        1598
+      ],
+      "area_pixels": 225564,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        826,
+        1296,
+        6,
+        6
+      ],
+      "area_pixels": 32,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        836,
+        1528,
+        6,
+        8
+      ],
+      "area_pixels": 36,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        596,
+        1538,
+        2,
+        22
+      ],
+      "area_pixels": 44,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review",
+    "high_candidate_coverage"
+  ]
+}

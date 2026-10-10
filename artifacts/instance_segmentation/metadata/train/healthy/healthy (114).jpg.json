@@ -1,0 +1,90 @@
+{
+  "source_path": "train/healthy/healthy (114).jpg",
+  "source_sha256": "a870e6900fb1e0bbc357f2cd0b8455e475675a9ce00ad2dbf8775c8f0656b273",
+  "split": "train",
+  "image_class": "healthy",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v3",
+  "quality_status": "requires_pixel_review",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/train/healthy/healthy (114).jpg.png",
+    "lesion_instances": "lesion_instances/train/healthy/healthy (114).jpg.png",
+    "overlays": "overlays/train/healthy/healthy (114).jpg.jpg",
+    "metadata": "metadata/train/healthy/healthy (114).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        0,
+        48,
+        1600,
+        1308
+      ],
+      "area_pixels": 322304
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        1428,
+        326,
+        18,
+        10
+      ],
+      "area_pixels": 104,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        1394,
+        352,
+        20,
+        20
+      ],
+      "area_pixels": 132,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        1354,
+        390,
+        6,
+        10
+      ],
+      "area_pixels": 40,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        1296,
+        442,
+        14,
+        12
+      ],
+      "area_pixels": 104,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review",
+    "candidate_on_healthy_image"
+  ]
+}

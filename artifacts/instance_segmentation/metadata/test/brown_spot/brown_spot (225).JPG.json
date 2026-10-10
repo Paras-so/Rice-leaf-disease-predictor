@@ -1,0 +1,89 @@
+{
+  "source_path": "test/brown_spot/brown_spot (225).JPG",
+  "source_sha256": "0ce738d16d17ca8a6c76d2b249bef70de4d0a86353a6e10f7ea8806401d1943a",
+  "split": "test",
+  "image_class": "brown_spot",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v3",
+  "quality_status": "requires_pixel_review",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/test/brown_spot/brown_spot (225).JPG.png",
+    "lesion_instances": "lesion_instances/test/brown_spot/brown_spot (225).JPG.png",
+    "overlays": "overlays/test/brown_spot/brown_spot (225).JPG.jpg",
+    "metadata": "metadata/test/brown_spot/brown_spot (225).JPG.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        0,
+        502,
+        1600,
+        406
+      ],
+      "area_pixels": 605836
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        1502,
+        678,
+        98,
+        16
+      ],
+      "area_pixels": 1404,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        666,
+        696,
+        102,
+        36
+      ],
+      "area_pixels": 2472,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        56,
+        754,
+        8,
+        6
+      ],
+      "area_pixels": 40,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        64,
+        864,
+        30,
+        14
+      ],
+      "area_pixels": 316,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review"
+  ]
+}

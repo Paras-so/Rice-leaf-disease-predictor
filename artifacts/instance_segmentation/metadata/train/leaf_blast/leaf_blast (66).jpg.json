@@ -1,0 +1,101 @@
+{
+  "source_path": "train/leaf_blast/leaf_blast (66).jpg",
+  "source_sha256": "664ecbdaf6a3d1d13c467972e7bff7827973218bad2dec5422c0188e9d616161",
+  "split": "train",
+  "image_class": "leaf_blast",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v3",
+  "quality_status": "requires_pixel_review",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/train/leaf_blast/leaf_blast (66).jpg.png",
+    "lesion_instances": "lesion_instances/train/leaf_blast/leaf_blast (66).jpg.png",
+    "overlays": "overlays/train/leaf_blast/leaf_blast (66).jpg.jpg",
+    "metadata": "metadata/train/leaf_blast/leaf_blast (66).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        316,
+        0,
+        862,
+        1600
+      ],
+      "area_pixels": 278388
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        492,
+        204,
+        18,
+        14
+      ],
+      "area_pixels": 144,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        498,
+        214,
+        50,
+        114
+      ],
+      "area_pixels": 1764,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        544,
+        284,
+        10,
+        20
+      ],
+      "area_pixels": 112,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        556,
+        306,
+        16,
+        36
+      ],
+      "area_pixels": 252,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 5,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        550,
+        342,
+        30,
+        46
+      ],
+      "area_pixels": 624,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review"
+  ]
+}

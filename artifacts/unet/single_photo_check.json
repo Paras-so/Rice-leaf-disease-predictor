@@ -1,0 +1,58 @@
+{
+  "status": "diseased",
+  "has_disease": true,
+  "disease": "bacterial_leaf_blight",
+  "softmax_score": 0.959494411945343,
+  "scores": {
+    "bacterial_leaf_blight": 0.959494411945343,
+    "brown_spot": 0.021544821560382843,
+    "healthy": 0.005098835565149784,
+    "leaf_blast": 0.009278269484639168,
+    "leaf_scald": 0.003107499098405242,
+    "narrow_brown_spot": 0.0014761568745598197
+  },
+  "architecture": "resnet50",
+  "confidence_note": "Uncalibrated model score; not a probability that the diagnosis is correct. No unknown-class detector is trained.",
+  "affected_area_percent": 8.91158600877734,
+  "segmentation_status": "estimated",
+  "segmentation": {
+    "leaf_pixels": 1256645,
+    "affected_pixels": 111987,
+    "affected_area_percent": 8.91158600877734,
+    "status": "estimated",
+    "formula": "100 * affected_pixels / (unaffected_leaf_pixels + affected_pixels)",
+    "source": "U-Net predicted mask",
+    "pesticide_quantity": null,
+    "label_quality": "ai_visual_reviewed",
+    "quality_note": "Pilot trained against approximate AI-reviewed masks; validation measures agreement with those masks, not expert-validated disease segmentation accuracy.",
+    "field_validated": false,
+    "note": "Estimated visible leaf area; not field disease prevalence or a spray-rate multiplier."
+  },
+  "management": {
+    "management": [
+      "Use disease-free seed and locally suitable tolerant varieties.",
+      "Avoid excessive nitrogen, maintain appropriate spacing, and control weed hosts.",
+      "Avoid clipping seedlings and movement of irrigation water from affected fields."
+    ],
+    "source_title": "TNAU \u00e2\u20ac\u201d Bacterial leaf blight, cultural management",
+    "source_url": "https://agritech.tnau.ac.in/expert_system/paddy/cpdisblb.html",
+    "source_region": "Tamil Nadu, India",
+    "chemical_rule": null,
+    "missing": [
+      "Current registered product label",
+      "Applicable location and crop stage",
+      "Verified formulation, dose, restrictions and application decision"
+    ]
+  },
+  "pesticide_reference": {
+    "disease": "bacterial_leaf_blight",
+    "product": null,
+    "reference_quantity": null,
+    "required_quantity_per_plant": null,
+    "application_authorized": false,
+    "affected_area_used_to_scale_dose": false,
+    "checked_on": "2026-10-09",
+    "status": "no_verified_label_in_catalog",
+    "note": "No matching foliar product label has been verified in this catalog. Use the disease management reference; do not substitute a different disease dose."
+  }
+}

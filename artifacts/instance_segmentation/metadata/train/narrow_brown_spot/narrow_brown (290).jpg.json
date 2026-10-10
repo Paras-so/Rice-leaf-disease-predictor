@@ -1,0 +1,89 @@
+{
+  "source_path": "train/narrow_brown_spot/narrow_brown (290).jpg",
+  "source_sha256": "d8a5b47d42ed079aa4c5881765b2c9702db19c74f90bd172164f6b0af9d272fc",
+  "split": "train",
+  "image_class": "narrow_brown_spot",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v3",
+  "quality_status": "requires_pixel_review",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/train/narrow_brown_spot/narrow_brown (290).jpg.png",
+    "lesion_instances": "lesion_instances/train/narrow_brown_spot/narrow_brown (290).jpg.png",
+    "overlays": "overlays/train/narrow_brown_spot/narrow_brown (290).jpg.jpg",
+    "metadata": "metadata/train/narrow_brown_spot/narrow_brown (290).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        620,
+        92,
+        232,
+        1416
+      ],
+      "area_pixels": 293468
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        674,
+        92,
+        10,
+        32
+      ],
+      "area_pixels": 220,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        700,
+        98,
+        44,
+        570
+      ],
+      "area_pixels": 15364,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        760,
+        120,
+        56,
+        778
+      ],
+      "area_pixels": 17488,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        806,
+        226,
+        10,
+        54
+      ],
+      "area_pixels": 276,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review"
+  ]
+}

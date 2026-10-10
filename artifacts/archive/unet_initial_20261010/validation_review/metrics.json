@@ -1,0 +1,891 @@
+{
+  "split": "validation",
+  "test_images_used": 0,
+  "resolution": "original EXIF-corrected image dimensions",
+  "checkpoint_sha256": "bc03959635d143e95d881db55ff5ec2cf4bd76ae50eac4778aa46dd4bf2ef919",
+  "best_epoch": 3,
+  "label_quality": "ai_visual_reviewed",
+  "quality_note": "Pilot trained against approximate AI-reviewed masks; validation measures agreement with those masks, not expert-validated disease segmentation accuracy.",
+  "validation": {
+    "images": 12,
+    "confusion_matrix": [
+      [
+        25477884,
+        399484,
+        4063
+      ],
+      [
+        48713,
+        4408887,
+        2101
+      ],
+      [
+        26817,
+        346593,
+        5458
+      ]
+    ],
+    "leaf_dice": 0.9521169836949053,
+    "leaf_iou": 0.9086099964212925,
+    "lesion_dice": 0.027954621117058057,
+    "lesion_iou": 0.014175445157805066,
+    "affected_area_mae_percentage_points": 9.138388038875611,
+    "area_comparable_images": 12,
+    "predicted_no_leaf_images": 0,
+    "empty_lesion_images": 2,
+    "empty_lesion_false_positive_images": 2
+  },
+  "by_class": {
+    "bacterial_leaf_blight": {
+      "images": 2,
+      "confusion_matrix": [
+        [
+          3556352,
+          39358,
+          2840
+        ],
+        [
+          19757,
+          1324288,
+          1303
+        ],
+        [
+          10416,
+          164340,
+          1346
+        ]
+      ],
+      "leaf_dice": 0.9763100567117032,
+      "leaf_iou": 0.953716565365095,
+      "lesion_dice": 0.014824523241790618,
+      "lesion_iou": 0.0074676135260340094,
+      "affected_area_mae_percentage_points": 18.590352928854593,
+      "area_comparable_images": 2,
+      "predicted_no_leaf_images": 0,
+      "empty_lesion_images": 0,
+      "empty_lesion_false_positive_images": 0
+    },
+    "brown_spot": {
+      "images": 2,
+      "confusion_matrix": [
+        [
+          4356181,
+          45070,
+          110
+        ],
+        [
+          3946,
+          689568,
+          20
+        ],
+        [
+          0,
+          25105,
+          0
+        ]
+      ],
+      "leaf_dice": 0.9667733505037497,
+      "leaf_iou": 0.935683715644675,
+      "lesion_dice": 0.0,
+      "lesion_iou": 0.0,
+      "affected_area_mae_percentage_points": 2.8778087922725137,
+      "area_comparable_images": 2,
+      "predicted_no_leaf_images": 0,
+      "empty_lesion_images": 0,
+      "empty_lesion_false_positive_images": 0
+    },
+    "healthy": {
+      "images": 2,
+      "confusion_matrix": [
+        [
+          4340507,
+          175850,
+          233
+        ],
+        [
+          14557,
+          588783,
+          70
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "leaf_dice": 0.8606785125984218,
+      "leaf_iou": 0.7554307735925788,
+      "lesion_dice": 0.0,
+      "lesion_iou": 0.0,
+      "affected_area_mae_percentage_points": 0.038024746753184215,
+      "area_comparable_images": 2,
+      "predicted_no_leaf_images": 0,
+      "empty_lesion_images": 2,
+      "empty_lesion_false_positive_images": 2
+    },
+    "leaf_blast": {
+      "images": 2,
+      "confusion_matrix": [
+        [
+          4318821,
+          83386,
+          115
+        ],
+        [
+          3360,
+          672763,
+          0
+        ],
+        [
+          0,
+          41555,
+          0
+        ]
+      ],
+      "leaf_dice": 0.9426848090098495,
+      "leaf_iou": 0.8915835287744687,
+      "lesion_dice": 0.0,
+      "lesion_iou": 0.0,
+      "affected_area_mae_percentage_points": 7.493082228392365,
+      "area_comparable_images": 2,
+      "predicted_no_leaf_images": 0,
+      "empty_lesion_images": 0,
+      "empty_lesion_false_positive_images": 0
+    },
+    "leaf_scald": {
+      "images": 2,
+      "confusion_matrix": [
+        [
+          4604402,
+          42511,
+          735
+        ],
+        [
+          5917,
+          346912,
+          708
+        ],
+        [
+          16401,
+          98302,
+          4112
+        ]
+      ],
+      "leaf_dice": 0.9321024986744433,
+      "leaf_iou": 0.8728389171408734,
+      "lesion_dice": 0.06612527136769317,
+      "lesion_iou": 0.03419315139117564,
+      "affected_area_mae_percentage_points": 23.686390775273463,
+      "area_comparable_images": 2,
+      "predicted_no_leaf_images": 0,
+      "empty_lesion_images": 0,
+      "empty_lesion_false_positive_images": 0
+    },
+    "narrow_brown_spot": {
+      "images": 2,
+      "confusion_matrix": [
+        [
+          4301621,
+          13309,
+          30
+        ],
+        [
+          1176,
+          786573,
+          0
+        ],
+        [
+          0,
+          17291,
+          0
+        ]
+      ],
+      "leaf_dice": 0.9910525118616631,
+      "leaf_iou": 0.9822637188881924,
+      "lesion_dice": 0.0,
+      "lesion_iou": 0.0,
+      "affected_area_mae_percentage_points": 2.1446687617075524,
+      "area_comparable_images": 2,
+      "predicted_no_leaf_images": 0,
+      "empty_lesion_images": 0,
+      "empty_lesion_false_positive_images": 0
+    }
+  },
+  "images": [
+    {
+      "image_path": "train/bacterial_leaf_blight/bacterial_leaf_blight (100).JPG",
+      "class_name": "bacterial_leaf_blight",
+      "reference_area_percent": 7.925392685622283,
+      "prediction": {
+        "leaf_pixels": 1274384,
+        "affected_pixels": 4584,
+        "affected_area_percent": 0.3597031977802609,
+        "status": "estimated",
+        "formula": "100 * affected_pixels / (unaffected_leaf_pixels + affected_pixels)",
+        "source": "U-Net predicted mask",
+        "pesticide_quantity": null,
+        "label_quality": "ai_visual_reviewed",
+        "quality_note": "Pilot trained against approximate AI-reviewed masks; validation measures agreement with those masks, not expert-validated disease segmentation accuracy.",
+        "field_validated": false,
+        "note": "Estimated visible leaf area; not field disease prevalence or a spray-rate multiplier."
+      },
+      "metrics": {
+        "images": 1,
+        "confusion_matrix": [
+          [
+            1274956,
+            12686,
+            2831
+          ],
+          [
+            7689,
+            1159920,
+            1303
+          ],
+          [
+            2971,
+            97194,
+            450
+          ]
+        ],
+        "leaf_dice": 0.9897099387517881,
+        "leaf_iou": 0.9796294912859015,
+        "lesion_dice": 0.008555214403178737,
+        "lesion_iou": 0.004295983732541599,
+        "affected_area_mae_percentage_points": 7.565689487842022,
+        "area_comparable_images": 1,
+        "predicted_no_leaf_images": 0,
+        "empty_lesion_images": 0,
+        "empty_lesion_false_positive_images": 0
+      }
+    },
+    {
+      "image_path": "train/bacterial_leaf_blight/bacterial_leaf_blight (249).JPG",
+      "class_name": "bacterial_leaf_blight",
+      "reference_area_percent": 29.964314492920458,
+      "prediction": {
+        "leaf_pixels": 259091,
+        "affected_pixels": 905,
+        "affected_area_percent": 0.34929812305329017,
+        "status": "estimated",
+        "formula": "100 * affected_pixels / (unaffected_leaf_pixels + affected_pixels)",
+        "source": "U-Net predicted mask",
+        "pesticide_quantity": null,
+        "label_quality": "ai_visual_reviewed",
+        "quality_note": "Pilot trained against approximate AI-reviewed masks; validation measures agreement with those masks, not expert-validated disease segmentation accuracy.",
+        "field_validated": false,
+        "note": "Estimated visible leaf area; not field disease prevalence or a spray-rate multiplier."
+      },
+      "metrics": {
+        "images": 1,
+        "confusion_matrix": [
+          [
+            2281396,
+            26672,
+            9
+          ],
+          [
+            12068,
+            164368,
+            0
+          ],
+          [
+            7445,
+            67146,
+            896
+          ]
+        ],
+        "leaf_dice": 0.909603259401895,
+        "leaf_iou": 0.8341947710729207,
+        "lesion_dice": 0.02345795371243062,
+        "lesion_iou": 0.011868178446540215,
+        "affected_area_mae_percentage_points": 29.615016369867163,
+        "area_comparable_images": 1,
+        "predicted_no_leaf_images": 0,
+        "empty_lesion_images": 0,
+        "empty_lesion_false_positive_images": 0
+      }
+    },
+    {
+      "image_path": "train/brown_spot/brown_spot (10).jpg",
+      "class_name": "brown_spot",
+      "reference_area_percent": 0.704973553902861,
+      "prediction": {
+        "leaf_pixels": 296885,
+        "affected_pixels": 19,
+        "affected_area_percent": 0.006399784428313993,
+        "status": "estimated",
+        "formula": "100 * affected_pixels / (unaffected_leaf_pixels + affected_pixels)",
+        "source": "U-Net predicted mask",
+        "pesticide_quantity": null,
+        "label_quality": "ai_visual_reviewed",
+        "quality_note": "Pilot trained against approximate AI-reviewed masks; validation measures agreement with those masks, not expert-validated disease segmentation accuracy.",
+        "field_validated": false,
+        "note": "Estimated visible leaf area; not field disease prevalence or a spray-rate multiplier."
+      },
+      "metrics": {
+        "images": 1,
+        "confusion_matrix": [
+          [
+            2262025,
+            37237,
+            19
+          ],
+          [
+            1090,
+            257791,
+            0
+          ],
+          [
+            0,
+            1838,
+            0
+          ]
+        ],
+        "leaf_dice": 0.9312307659199002,
+        "leaf_iou": 0.8713113516234583,
+        "lesion_dice": 0.0,
+        "lesion_iou": 0.0,
+        "affected_area_mae_percentage_points": 0.698573769474547,
+        "area_comparable_images": 1,
+        "predicted_no_leaf_images": 0,
+        "empty_lesion_images": 0,
+        "empty_lesion_false_positive_images": 0
+      }
+    },
+    {
+      "image_path": "train/brown_spot/brown_spot (27).jpg",
+      "class_name": "brown_spot",
+      "reference_area_percent": 5.081018518518519,
+      "prediction": {
+        "leaf_pixels": 462988,
+        "affected_pixels": 111,
+        "affected_area_percent": 0.02397470344803753,
+        "status": "estimated",
+        "formula": "100 * affected_pixels / (unaffected_leaf_pixels + affected_pixels)",
+        "source": "U-Net predicted mask",
+        "pesticide_quantity": null,
+        "label_quality": "ai_visual_reviewed",
+        "quality_note": "Pilot trained against approximate AI-reviewed masks; validation measures agreement with those masks, not expert-validated disease segmentation accuracy.",
+        "field_validated": false,
+        "note": "Estimated visible leaf area; not field disease prevalence or a spray-rate multiplier."
+      },
+      "metrics": {
+        "images": 1,
+        "confusion_matrix": [
+          [
+            2094156,
+            7833,
+            91
+          ],
+          [
+            2856,
+            431777,
+            20
+          ],
+          [
+            0,
+            23267,
+            0
+          ]
+        ],
+        "leaf_dice": 0.9882941618489578,
+        "leaf_iou": 0.9768592060861576,
+        "lesion_dice": 0.0,
+        "lesion_iou": 0.0,
+        "affected_area_mae_percentage_points": 5.057043815070481,
+        "area_comparable_images": 1,
+        "predicted_no_leaf_images": 0,
+        "empty_lesion_images": 0,
+        "empty_lesion_false_positive_images": 0
+      }
+    },
+    {
+      "image_path": "train/healthy/healthy (104).jpg",
+      "class_name": "healthy",
+      "reference_area_percent": 0.0,
+      "prediction": {
+        "leaf_pixels": 330675,
+        "affected_pixels": 87,
+        "affected_area_percent": 0.026309820821047856,
+        "status": "estimated",
+        "formula": "100 * affected_pixels / (unaffected_leaf_pixels + affected_pixels)",
+        "source": "U-Net predicted mask",
+        "pesticide_quantity": null,
+        "label_quality": "ai_visual_reviewed",
+        "quality_note": "Pilot trained against approximate AI-reviewed masks; validation measures agreement with those masks, not expert-validated disease segmentation accuracy.",
+        "field_validated": false,
+        "note": "Estimated visible leaf area; not field disease prevalence or a spray-rate multiplier."
+      },
+      "metrics": {
+        "images": 1,
+        "confusion_matrix": [
+          [
+            2229313,
+            71062,
+            87
+          ],
+          [
+            12,
+            259526,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "leaf_dice": 0.8794316628064783,
+        "leaf_iou": 0.7848085954391918,
+        "lesion_dice": 0.0,
+        "lesion_iou": 0.0,
+        "affected_area_mae_percentage_points": 0.026309820821047856,
+        "area_comparable_images": 1,
+        "predicted_no_leaf_images": 0,
+        "empty_lesion_images": 1,
+        "empty_lesion_false_positive_images": 1
+      }
+    },
+    {
+      "image_path": "train/healthy/healthy (271).jpg",
+      "class_name": "healthy",
+      "reference_area_percent": 0.0,
+      "prediction": {
+        "leaf_pixels": 434261,
+        "affected_pixels": 216,
+        "affected_area_percent": 0.04973967268532058,
+        "status": "estimated",
+        "formula": "100 * affected_pixels / (unaffected_leaf_pixels + affected_pixels)",
+        "source": "U-Net predicted mask",
+        "pesticide_quantity": null,
+        "label_quality": "ai_visual_reviewed",
+        "quality_note": "Pilot trained against approximate AI-reviewed masks; validation measures agreement with those masks, not expert-validated disease segmentation accuracy.",
+        "field_validated": false,
+        "note": "Estimated visible leaf area; not field disease prevalence or a spray-rate multiplier."
+      },
+      "metrics": {
+        "images": 1,
+        "confusion_matrix": [
+          [
+            2111194,
+            104788,
+            146
+          ],
+          [
+            14545,
+            329257,
+            70
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "leaf_dice": 0.8464542693858248,
+        "leaf_iou": 0.7337847533232622,
+        "lesion_dice": 0.0,
+        "lesion_iou": 0.0,
+        "affected_area_mae_percentage_points": 0.04973967268532058,
+        "area_comparable_images": 1,
+        "predicted_no_leaf_images": 0,
+        "empty_lesion_images": 1,
+        "empty_lesion_false_positive_images": 1
+      }
+    },
+    {
+      "image_path": "train/leaf_blast/leaf_blast (104).jpg",
+      "class_name": "leaf_blast",
+      "reference_area_percent": 13.354672181614385,
+      "prediction": {
+        "leaf_pixels": 286607,
+        "affected_pixels": 54,
+        "affected_area_percent": 0.01884113088654499,
+        "status": "estimated",
+        "formula": "100 * affected_pixels / (unaffected_leaf_pixels + affected_pixels)",
+        "source": "U-Net predicted mask",
+        "pesticide_quantity": null,
+        "label_quality": "ai_visual_reviewed",
+        "quality_note": "Pilot trained against approximate AI-reviewed masks; validation measures agreement with those masks, not expert-validated disease segmentation accuracy.",
+        "field_validated": false,
+        "note": "Estimated visible leaf area; not field disease prevalence or a spray-rate multiplier."
+      },
+      "metrics": {
+        "images": 1,
+        "confusion_matrix": [
+          [
+            2270242,
+            36332,
+            54
+          ],
+          [
+            3151,
+            216384,
+            0
+          ],
+          [
+            0,
+            33837,
+            0
+          ]
+        ],
+        "leaf_dice": 0.9267804859077853,
+        "leaf_iou": 0.86355165344874,
+        "lesion_dice": 0.0,
+        "lesion_iou": 0.0,
+        "affected_area_mae_percentage_points": 13.33583105072784,
+        "area_comparable_images": 1,
+        "predicted_no_leaf_images": 0,
+        "empty_lesion_images": 0,
+        "empty_lesion_false_positive_images": 0
+      }
+    },
+    {
+      "image_path": "train/leaf_blast/leaf_blast (257).jpg",
+      "class_name": "leaf_blast",
+      "reference_area_percent": 1.6622658333082063,
+      "prediction": {
+        "leaf_pixels": 511212,
+        "affected_pixels": 61,
+        "affected_area_percent": 0.01193242725131648,
+        "status": "estimated",
+        "formula": "100 * affected_pixels / (unaffected_leaf_pixels + affected_pixels)",
+        "source": "U-Net predicted mask",
+        "pesticide_quantity": null,
+        "label_quality": "ai_visual_reviewed",
+        "quality_note": "Pilot trained against approximate AI-reviewed masks; validation measures agreement with those masks, not expert-validated disease segmentation accuracy.",
+        "field_validated": false,
+        "note": "Estimated visible leaf area; not field disease prevalence or a spray-rate multiplier."
+      },
+      "metrics": {
+        "images": 1,
+        "confusion_matrix": [
+          [
+            2048579,
+            47054,
+            61
+          ],
+          [
+            209,
+            456379,
+            0
+          ],
+          [
+            0,
+            7718,
+            0
+          ]
+        ],
+        "leaf_dice": 0.9514883374781398,
+        "leaf_iou": 0.9074656691844879,
+        "lesion_dice": 0.0,
+        "lesion_iou": 0.0,
+        "affected_area_mae_percentage_points": 1.65033340605689,
+        "area_comparable_images": 1,
+        "predicted_no_leaf_images": 0,
+        "empty_lesion_images": 0,
+        "empty_lesion_false_positive_images": 0
+      }
+    },
+    {
+      "image_path": "train/leaf_scald/leaf_scald (104).jpg",
+      "class_name": "leaf_scald",
+      "reference_area_percent": 23.207612181610962,
+      "prediction": {
+        "leaf_pixels": 191775,
+        "affected_pixels": 2321,
+        "affected_area_percent": 1.2102724546995176,
+        "status": "estimated",
+        "formula": "100 * affected_pixels / (unaffected_leaf_pixels + affected_pixels)",
+        "source": "U-Net predicted mask",
+        "pesticide_quantity": null,
+        "label_quality": "ai_visual_reviewed",
+        "quality_note": "Pilot trained against approximate AI-reviewed masks; validation measures agreement with those masks, not expert-validated disease segmentation accuracy.",
+        "field_validated": false,
+        "note": "Estimated visible leaf area; not field disease prevalence or a spray-rate multiplier."
+      },
+      "metrics": {
+        "images": 1,
+        "confusion_matrix": [
+          [
+            2359111,
+            11774,
+            470
+          ],
+          [
+            2308,
+            142372,
+            185
+          ],
+          [
+            6806,
+            35308,
+            1666
+          ]
+        ],
+        "leaf_dice": 0.9438567898638347,
+        "leaf_iou": 0.8936825809277761,
+        "lesion_dice": 0.07227608945576018,
+        "lesion_iou": 0.037492967255541805,
+        "affected_area_mae_percentage_points": 21.997339726911445,
+        "area_comparable_images": 1,
+        "predicted_no_leaf_images": 0,
+        "empty_lesion_images": 0,
+        "empty_lesion_false_positive_images": 0
+      }
+    },
+    {
+      "image_path": "train/leaf_scald/leaf_scald (274).jpg",
+      "class_name": "leaf_scald",
+      "reference_area_percent": 26.448060851512302,
+      "prediction": {
+        "leaf_pixels": 301505,
+        "affected_pixels": 3234,
+        "affected_area_percent": 1.072619027876818,
+        "status": "estimated",
+        "formula": "100 * affected_pixels / (unaffected_leaf_pixels + affected_pixels)",
+        "source": "U-Net predicted mask",
+        "pesticide_quantity": null,
+        "label_quality": "ai_visual_reviewed",
+        "quality_note": "Pilot trained against approximate AI-reviewed masks; validation measures agreement with those masks, not expert-validated disease segmentation accuracy.",
+        "field_validated": false,
+        "note": "Estimated visible leaf area; not field disease prevalence or a spray-rate multiplier."
+      },
+      "metrics": {
+        "images": 1,
+        "confusion_matrix": [
+          [
+            2245291,
+            30737,
+            265
+          ],
+          [
+            3609,
+            204540,
+            523
+          ],
+          [
+            9595,
+            62994,
+            2446
+          ]
+        ],
+        "leaf_dice": 0.9244615626473824,
+        "leaf_iou": 0.8595337279836294,
+        "lesion_dice": 0.06250239558445872,
+        "lesion_iou": 0.0322593408332564,
+        "affected_area_mae_percentage_points": 25.37544182363548,
+        "area_comparable_images": 1,
+        "predicted_no_leaf_images": 0,
+        "empty_lesion_images": 0,
+        "empty_lesion_false_positive_images": 0
+      }
+    },
+    {
+      "image_path": "train/narrow_brown_spot/narrow_brown (10).jpg",
+      "class_name": "narrow_brown_spot",
+      "reference_area_percent": 2.0977868312028263,
+      "prediction": {
+        "leaf_pixels": 413869,
+        "affected_pixels": 15,
+        "affected_area_percent": 0.0036243352365120363,
+        "status": "estimated",
+        "formula": "100 * affected_pixels / (unaffected_leaf_pixels + affected_pixels)",
+        "source": "U-Net predicted mask",
+        "pesticide_quantity": null,
+        "label_quality": "ai_visual_reviewed",
+        "quality_note": "Pilot trained against approximate AI-reviewed masks; validation measures agreement with those masks, not expert-validated disease segmentation accuracy.",
+        "field_validated": false,
+        "note": "Estimated visible leaf area; not field disease prevalence or a spray-rate multiplier."
+      },
+      "metrics": {
+        "images": 1,
+        "confusion_matrix": [
+          [
+            2145516,
+            7993,
+            15
+          ],
+          [
+            615,
+            397334,
+            0
+          ],
+          [
+            0,
+            8527,
+            0
+          ]
+        ],
+        "leaf_dice": 0.9894885688338443,
+        "leaf_iou": 0.9791958193802415,
+        "lesion_dice": 0.0,
+        "lesion_iou": 0.0,
+        "affected_area_mae_percentage_points": 2.094162495966314,
+        "area_comparable_images": 1,
+        "predicted_no_leaf_images": 0,
+        "empty_lesion_images": 0,
+        "empty_lesion_false_positive_images": 0
+      }
+    },
+    {
+      "image_path": "train/narrow_brown_spot/narrow_brown (244).jpg",
+      "class_name": "narrow_brown_spot",
+      "reference_area_percent": 2.1988940295661425,
+      "prediction": {
+        "leaf_pixels": 403334,
+        "affected_pixels": 15,
+        "affected_area_percent": 0.0037190021173518725,
+        "status": "estimated",
+        "formula": "100 * affected_pixels / (unaffected_leaf_pixels + affected_pixels)",
+        "source": "U-Net predicted mask",
+        "pesticide_quantity": null,
+        "label_quality": "ai_visual_reviewed",
+        "quality_note": "Pilot trained against approximate AI-reviewed masks; validation measures agreement with those masks, not expert-validated disease segmentation accuracy.",
+        "field_validated": false,
+        "note": "Estimated visible leaf area; not field disease prevalence or a spray-rate multiplier."
+      },
+      "metrics": {
+        "images": 1,
+        "confusion_matrix": [
+          [
+            2156105,
+            5316,
+            15
+          ],
+          [
+            561,
+            389239,
+            0
+          ],
+          [
+            0,
+            8764,
+            0
+          ]
+        ],
+        "leaf_dice": 0.9926524321048313,
+        "leaf_iou": 0.9854120501615519,
+        "lesion_dice": 0.0,
+        "lesion_iou": 0.0,
+        "affected_area_mae_percentage_points": 2.1951750274487907,
+        "area_comparable_images": 1,
+        "predicted_no_leaf_images": 0,
+        "empty_lesion_images": 0,
+        "empty_lesion_false_positive_images": 0
+      }
+    }
+  ],
+  "evaluated_masks": [
+    {
+      "image_path": "train/bacterial_leaf_blight/bacterial_leaf_blight (100).JPG",
+      "source_sha256": "0a2ef9451b568a713b282be304e4102d102e7c508d84c973c35bc7ecdc739cd0",
+      "mask_sha256": "7ef4e61243d91bd9018f9b56acdecbad6b2b704371a1bb6e5f6b7abc0dc9a0d1",
+      "split": "validation",
+      "reviewed_by": "Codex AI visual review (not an expert annotation)",
+      "review_method": "ai_visual",
+      "review_record": "artifacts\\boundary_review_20261010\\correction_records.json"
+    },
+    {
+      "image_path": "train/bacterial_leaf_blight/bacterial_leaf_blight (249).JPG",
+      "source_sha256": "cc854941adb415801ebeef453cc398e03240cfb0f21a9379390c8883b7ddc906",
+      "mask_sha256": "6ce78ca5a8d2f29f25f4ea6be67488732b76af333533cce57f762b01b63b3576",
+      "split": "validation",
+      "reviewed_by": "Codex AI visual review (not an expert annotation)",
+      "review_method": "ai_visual",
+      "review_record": "artifacts\\boundary_review_20261010\\correction_records.json"
+    },
+    {
+      "image_path": "train/brown_spot/brown_spot (10).jpg",
+      "source_sha256": "a1dc12b64898b0c016597a175725857df0e2af9efe4fa4eb2260796195ecf197",
+      "mask_sha256": "041a5b96fa3e7dbefcb38ac863638c7970900d2d603d49cc59b3a615d1ddb424",
+      "split": "validation",
+      "reviewed_by": "Codex AI visual review (not an expert annotation)",
+      "review_method": "ai_visual",
+      "review_record": "artifacts\\boundary_review_20261010\\correction_records.json"
+    },
+    {
+      "image_path": "train/brown_spot/brown_spot (27).jpg",
+      "source_sha256": "1bf024d4ca1818783b20eadc40882368fdc165f4c2636dbe28c996b6273f3ba4",
+      "mask_sha256": "46cef5ac64b471e0ad5943cc71ae13e335b6960515cc48876550dd16d3e63e45",
+      "split": "validation",
+      "reviewed_by": "Codex AI visual review (not an expert annotation)",
+      "review_method": "ai_visual",
+      "review_record": "artifacts\\boundary_review_20261010\\correction_records.json"
+    },
+    {
+      "image_path": "train/healthy/healthy (104).jpg",
+      "source_sha256": "1910ebede751fe6015f291c0e5a16580a5e04a66614cc81c4f2597c6fc2cb8fd",
+      "mask_sha256": "6f8d0a8a49e027f24b523c49a65079316634d6952d5d10137e64ea03bcbffd8f",
+      "split": "validation",
+      "reviewed_by": "Codex AI visual review (not an expert annotation)",
+      "review_method": "ai_visual",
+      "review_record": "artifacts\\boundary_review_20261010\\correction_records.json"
+    },
+    {
+      "image_path": "train/healthy/healthy (271).jpg",
+      "source_sha256": "9667e4db093c5d323410e397c638886dbb48678ea45d3ae4fa1c8243d514fd03",
+      "mask_sha256": "040f9bb49acb9476a0bcaaa03987d4f520a3b42e9fa4d6239130b9a8542d3ee8",
+      "split": "validation",
+      "reviewed_by": "Codex AI visual review (not an expert annotation)",
+      "review_method": "ai_visual",
+      "review_record": "artifacts\\boundary_review_20261010\\correction_records.json"
+    },
+    {
+      "image_path": "train/leaf_blast/leaf_blast (104).jpg",
+      "source_sha256": "5e3597b221ffe5653c90a4221ad1b85a2f14c73f2a2b4a341055e69238da394d",
+      "mask_sha256": "637d555bc7be1f6dbea48d98053baedad9bacb708b432beb3bc753e5ba5a864c",
+      "split": "validation",
+      "reviewed_by": "Codex AI visual review (not an expert annotation)",
+      "review_method": "ai_visual",
+      "review_record": "artifacts\\boundary_review_20261010\\correction_records.json"
+    },
+    {
+      "image_path": "train/leaf_blast/leaf_blast (257).jpg",
+      "source_sha256": "55cb15996ce1777c72d5220955b9beef2b223009ed742e14909a4adf43ce0f58",
+      "mask_sha256": "35c7884d405216cc389d7e34428085271d403c38230e49f4f9fb4bb412fcc481",
+      "split": "validation",
+      "reviewed_by": "Codex AI visual review (not an expert annotation)",
+      "review_method": "ai_visual",
+      "review_record": "artifacts\\boundary_review_20261010\\correction_records.json"
+    },
+    {
+      "image_path": "train/leaf_scald/leaf_scald (104).jpg",
+      "source_sha256": "6d37780c9b44d553cde26917c5aae141331ffc8609d3392296cc0db147f9616f",
+      "mask_sha256": "5c9eff123be3a3cca8b535fb4623ac8df33e00b742ad6b1c6005aa8786d830c8",
+      "split": "validation",
+      "reviewed_by": "Codex AI visual review (not an expert annotation)",
+      "review_method": "ai_visual",
+      "review_record": "artifacts\\boundary_review_20261010\\correction_records.json"
+    },
+    {
+      "image_path": "train/leaf_scald/leaf_scald (274).jpg",
+      "source_sha256": "4ff4d615064f6d5b9cf09148b8ec36b17d612fee57f087d8fb0a25df3f83e678",
+      "mask_sha256": "2633ce53b34bc9985e1ce354c328a28ad4e4cbcdfb0ca232a59442d707116e46",
+      "split": "validation",
+      "reviewed_by": "Codex AI visual review (not an expert annotation)",
+      "review_method": "ai_visual",
+      "review_record": "artifacts\\boundary_review_20261010\\correction_records.json"
+    },
+    {
+      "image_path": "train/narrow_brown_spot/narrow_brown (10).jpg",
+      "source_sha256": "00ac658b66a194de379c7bb41538af21167947b99b8c2693c9d9a2222fa4ede6",
+      "mask_sha256": "5a3b7ad9175cf74b6c0b570c82831ad2cc4227f83b84c35b3c0f1f316f750b52",
+      "split": "validation",
+      "reviewed_by": "Codex AI visual review (not an expert annotation)",
+      "review_method": "ai_visual",
+      "review_record": "artifacts\\boundary_review_20261010\\correction_records.json"
+    },
+    {
+      "image_path": "train/narrow_brown_spot/narrow_brown (244).jpg",
+      "source_sha256": "8b1e93f230936672143e0210d46f65a2cdfdac8fc20420fa365e080dd28bd1d4",
+      "mask_sha256": "f1f165d65f657f00ebb4edad7f25edcb1a98af721b15b6eba7392d4a7528d5f8",
+      "split": "validation",
+      "reviewed_by": "Codex AI visual review (not an expert annotation)",
+      "review_method": "ai_visual",
+      "review_record": "artifacts\\boundary_review_20261010\\correction_records.json"
+    }
+  ],
+  "field_validated": false
+}

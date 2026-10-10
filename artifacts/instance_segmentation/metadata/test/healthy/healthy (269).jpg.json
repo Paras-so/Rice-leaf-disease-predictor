@@ -1,0 +1,40 @@
+{
+  "source_path": "test/healthy/healthy (269).jpg",
+  "source_sha256": "6e03b7d3075e1460d6d701f0ad119b72c53feb021ee6dc2e51c6df86dbdb4fda",
+  "split": "test",
+  "image_class": "healthy",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v3",
+  "quality_status": "requires_pixel_review",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/test/healthy/healthy (269).jpg.png",
+    "lesion_instances": "lesion_instances/test/healthy/healthy (269).jpg.png",
+    "overlays": "overlays/test/healthy/healthy (269).jpg.jpg",
+    "metadata": "metadata/test/healthy/healthy (269).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        0,
+        260,
+        1600,
+        1292
+      ],
+      "area_pixels": 724716
+    }
+  ],
+  "lesion_candidates": [],
+  "review_flags": [
+    "requires_human_review"
+  ]
+}

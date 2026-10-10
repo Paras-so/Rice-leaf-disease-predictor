@@ -1,8 +1,16 @@
 # Pixel-level annotation is the next data requirement
 
-The supplied dataset contains six image-level classification labels and no pixel
-masks. The software therefore does not claim to predict lesion masks or severity.
+The supplied dataset contains six image-level classification labels and no expert
+pixel masks. A [U-Net pilot](UNET_SEGMENTATION.md) now uses 56 corrected AI-reviewed
+masks (44 training, 12 validation); 1,885 remain unreviewed. Approximate AI references
+do not establish expert-validated segmentation accuracy.
 No growth-stage model or hardware interface is included.
+
+An optional [instance candidate export](INSTANCE_SEGMENTATION.md) now generates
+unreviewed leaf and lesion instance masks with classical colour/morphology rules.
+These pseudo-masks can assist annotation; they do not replace reviewed labels or
+establish segmentation accuracy. The app also supports U-Net predicted area, with
+the pilot's annotation quality displayed explicitly.
 
 ## Annotation protocol
 
@@ -24,7 +32,9 @@ images with plant/field identifiers before claiming field-level generalization.
 
 ## Model and evaluation plan
 
-After sufficient reviewed masks exist, compare a compact U-Net baseline with a
+After sufficient reviewed masks exist, train the implemented compact U-Net baseline.
+It includes paired augmentation, train/validation isolation, separate test evaluation,
+leaf and lesion Dice/IoU and affected-area error. Later compare it with a
 pretrained segmentation encoder or DeepLab model. Split at plant or field level
 where those identifiers are available. Use nearest-neighbor resizing for labels,
 and apply exactly the same geometric transforms to an image and its mask.

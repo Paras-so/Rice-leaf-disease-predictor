@@ -1,0 +1,89 @@
+{
+  "source_path": "test/brown_spot/brown_spot (109).jpg",
+  "source_sha256": "610222587af8c780db949291d058907fd807c54c2cef2aa54718d24367a7290f",
+  "split": "test",
+  "image_class": "brown_spot",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v3",
+  "quality_status": "requires_pixel_review",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/test/brown_spot/brown_spot (109).jpg.png",
+    "lesion_instances": "lesion_instances/test/brown_spot/brown_spot (109).jpg.png",
+    "overlays": "overlays/test/brown_spot/brown_spot (109).jpg.jpg",
+    "metadata": "metadata/test/brown_spot/brown_spot (109).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        670,
+        0,
+        422,
+        1600
+      ],
+      "area_pixels": 420848
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        704,
+        508,
+        36,
+        520
+      ],
+      "area_pixels": 11712,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        800,
+        1080,
+        24,
+        128
+      ],
+      "area_pixels": 2504,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        688,
+        1134,
+        4,
+        8
+      ],
+      "area_pixels": 32,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        684,
+        1186,
+        6,
+        14
+      ],
+      "area_pixels": 60,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review"
+  ]
+}

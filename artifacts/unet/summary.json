@@ -1,0 +1,97 @@
+{
+  "status": "trained",
+  "best_validation_score": 0.8435415710663152,
+  "epochs_run": 40,
+  "train_images": 44,
+  "validation_images": 12,
+  "test_images_used": 0,
+  "label_quality": "ai_visual_reviewed",
+  "field_validated": false,
+  "review_methods": {
+    "ai_visual": 56
+  },
+  "quality_note": "Pilot trained against approximate AI-reviewed masks; validation measures agreement with those masks, not expert-validated disease segmentation accuracy.",
+  "class_counts": {
+    "train": {
+      "bacterial_leaf_blight": 8,
+      "brown_spot": 6,
+      "healthy": 8,
+      "leaf_blast": 7,
+      "leaf_scald": 7,
+      "narrow_brown_spot": 8
+    },
+    "validation": {
+      "bacterial_leaf_blight": 2,
+      "brown_spot": 2,
+      "healthy": 2,
+      "leaf_blast": 2,
+      "leaf_scald": 2,
+      "narrow_brown_spot": 2
+    }
+  },
+  "checkpoint_sha256": "aed0f3e6a093b4bd788cc66b2ab2d4d221f2a90bb189c81e638294814f4972f8",
+  "best_epoch": 32,
+  "validation_at_model_resolution": {
+    "images": 12,
+    "confusion_matrix": [
+      [
+        659213,
+        3107,
+        200
+      ],
+      [
+        3393,
+        109590,
+        1264
+      ],
+      [
+        1020,
+        2407,
+        6238
+      ]
+    ],
+    "leaf_dice": 0.9687092145688599,
+    "leaf_iou": 0.9393172403493188,
+    "lesion_dice": 0.7183739275637704,
+    "lesion_iou": 0.5605175667175847,
+    "affected_area_mae_percentage_points": 2.883915982223129,
+    "area_comparable_images": 12,
+    "predicted_no_leaf_images": 0,
+    "empty_lesion_images": 2,
+    "empty_lesion_false_positive_images": 0
+  },
+  "validation_at_original_resolution": {
+    "images": 12,
+    "confusion_matrix": [
+      [
+        25758566,
+        116305,
+        6560
+      ],
+      [
+        133530,
+        4281402,
+        44769
+      ],
+      [
+        43548,
+        100759,
+        234561
+      ]
+    ],
+    "leaf_dice": 0.9688303712228871,
+    "leaf_iou": 0.9395450992596093,
+    "lesion_dice": 0.7057034289169893,
+    "lesion_iou": 0.545240901261515,
+    "affected_area_mae_percentage_points": 3.1499878152535796,
+    "area_comparable_images": 12,
+    "predicted_no_leaf_images": 0,
+    "empty_lesion_images": 2,
+    "empty_lesion_false_positive_images": 0
+  },
+  "validation_report": "validation_review/metrics.json",
+  "review_report": "../boundary_review_20261010/index.html",
+  "initial_run": "../archive/unet_initial_20261010",
+  "remaining_unreviewed_masks": 1885,
+  "expert_validated": false
+}

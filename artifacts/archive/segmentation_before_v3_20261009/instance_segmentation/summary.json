@@ -1,0 +1,78 @@
+{
+  "method": "colour_connected_components_v2",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "dataset": "C:\\paras\\college\\project\\Final Year Project\\Dataset\\clean_dataset-20261001T114830Z-1-001\\clean_dataset",
+  "manifest_sha256": "773016ba6a13f0f92da7520a5461bda2bf70f036fc96d75c24beba52d036c026",
+  "parameters": {
+    "max_side": 800,
+    "leaf_min_fraction": 0.001,
+    "lesion_min_pixels": 8,
+    "strong_saturation": 0.22,
+    "weak_saturation": 0.13,
+    "lesion_red_green_ratio": 1.08,
+    "lesion_min_red_green_difference": 0.025,
+    "lesion_median_size": 3
+  },
+  "limitations": [
+    "Unreviewed algorithm-generated candidates, not ground-truth annotations.",
+    "Colour cannot distinguish disease from aging, shadows, lighting or nutrient stress.",
+    "Touching/overlapping leaves or lesions can merge; fragmented objects can split.",
+    "Small lesions may be lost at processing resolution; restored edges are approximate.",
+    "Pale necrotic tissue can be missed and coloured background can be included.",
+    "No trained segmentation model, IoU, Dice, mask AP or severity estimate is produced."
+  ],
+  "requested_images": 1941,
+  "processed": 1941,
+  "failed": 0,
+  "leaf_instances": 1967,
+  "lesion_candidates": 51818,
+  "review_flags": {
+    "requires_human_review": 1941,
+    "multiple_leaf_components": 22,
+    "high_candidate_coverage": 259,
+    "high_foreground_coverage": 11,
+    "candidate_on_healthy_image": 347,
+    "no_candidate_on_diseased_image": 4
+  },
+  "by_class": {
+    "bacterial_leaf_blight": {
+      "images": 297,
+      "leaf_instances": 301,
+      "lesion_candidates": 5698
+    },
+    "brown_spot": {
+      "images": 320,
+      "leaf_instances": 325,
+      "lesion_candidates": 10935
+    },
+    "healthy": {
+      "images": 348,
+      "leaf_instances": 348,
+      "lesion_candidates": 6620
+    },
+    "leaf_blast": {
+      "images": 337,
+      "leaf_instances": 340,
+      "lesion_candidates": 9020
+    },
+    "leaf_scald": {
+      "images": 308,
+      "leaf_instances": 322,
+      "lesion_candidates": 4929
+    },
+    "narrow_brown_spot": {
+      "images": 331,
+      "leaf_instances": 331,
+      "lesion_candidates": 14616
+    }
+  },
+  "by_split": {
+    "train": 1241,
+    "validation": 311,
+    "test": 389
+  },
+  "failures": [],
+  "metrics": null,
+  "status": "complete",
+  "elapsed_seconds": 906.05
+}

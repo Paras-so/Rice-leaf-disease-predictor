@@ -1,0 +1,89 @@
+{
+  "source_path": "train/leaf_blast/leaf_blast (87).jpg",
+  "source_sha256": "8f0495747de1d2c91f42e8f58a378a02cdac2fecaaee90c1bc064e03b754876f",
+  "split": "train",
+  "image_class": "leaf_blast",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v3",
+  "quality_status": "requires_pixel_review",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/train/leaf_blast/leaf_blast (87).jpg.png",
+    "lesion_instances": "lesion_instances/train/leaf_blast/leaf_blast (87).jpg.png",
+    "overlays": "overlays/train/leaf_blast/leaf_blast (87).jpg.jpg",
+    "metadata": "metadata/train/leaf_blast/leaf_blast (87).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        0,
+        0,
+        1600,
+        1204
+      ],
+      "area_pixels": 677284
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        666,
+        396,
+        12,
+        8
+      ],
+      "area_pixels": 64,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        746,
+        446,
+        294,
+        182
+      ],
+      "area_pixels": 8156,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        1334,
+        850,
+        80,
+        62
+      ],
+      "area_pixels": 2300,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        1432,
+        976,
+        26,
+        20
+      ],
+      "area_pixels": 268,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review"
+  ]
+}

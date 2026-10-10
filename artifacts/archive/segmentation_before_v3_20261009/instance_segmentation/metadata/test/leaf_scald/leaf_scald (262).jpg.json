@@ -1,0 +1,89 @@
+{
+  "source_path": "test/leaf_scald/leaf_scald (262).jpg",
+  "source_sha256": "fe791080cf509701a5aad8f5b7a95a9588e843211b56bc1dc3c729bdd0268ef4",
+  "split": "test",
+  "image_class": "leaf_scald",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v2",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/test/leaf_scald/leaf_scald (262).jpg.png",
+    "lesion_instances": "lesion_instances/test/leaf_scald/leaf_scald (262).jpg.png",
+    "overlays": "overlays/test/leaf_scald/leaf_scald (262).jpg.jpg",
+    "metadata": "metadata/test/leaf_scald/leaf_scald (262).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        650,
+        148,
+        328,
+        1304
+      ],
+      "area_pixels": 312688
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        650,
+        148,
+        328,
+        1304
+      ],
+      "area_pixels": 265296,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        804,
+        922,
+        28,
+        34
+      ],
+      "area_pixels": 664,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        808,
+        1022,
+        8,
+        8
+      ],
+      "area_pixels": 40,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        852,
+        1436,
+        66,
+        16
+      ],
+      "area_pixels": 548,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review",
+    "high_candidate_coverage"
+  ]
+}

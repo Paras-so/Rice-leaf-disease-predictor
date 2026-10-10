@@ -1,0 +1,42 @@
+{
+  "status": "awaiting_reviewed_masks",
+  "architecture": "U-Net",
+  "parameters": 1964131,
+  "classes": [
+    "background",
+    "unaffected_leaf",
+    "affected_leaf"
+  ],
+  "annotation_drafts": 1941,
+  "reviewed_masks": 0,
+  "rice_checkpoint_exists": false,
+  "formula": "100 * affected_leaf_pixels / (unaffected_leaf_pixels + affected_leaf_pixels)",
+  "application": {
+    "country": "India",
+    "state": "Tripura",
+    "region": "India/Tripura",
+    "crop": "rice",
+    "spray_tank_ml": 100,
+    "product_selection": "Disease-specific verified product-label rule only",
+    "affected_area_scales_dose": false,
+    "application_authorized": false
+  },
+  "pesticide_rule_enabled": false,
+  "training_command": ".\\.venv\\Scripts\\python.exe -u -m rice_disease.train_segmentation train",
+  "documentation": "docs/UNET_SEGMENTATION.md",
+  "checked_at_utc": "2026-10-09T06:57:30.547952+00:00",
+  "mask_audit": "artifacts/pixel_mask_audit.json",
+  "valid_mask_files": 1941,
+  "training_ready": false,
+  "training_blockers": [
+    "train: at least two valid reviewed masks required by the trainer.",
+    "train: reviewed affected-leaf pixels are missing.",
+    "validation: at least two valid reviewed masks required by the trainer.",
+    "validation: reviewed affected-leaf pixels are missing."
+  ],
+  "conditional_product_reference_diseases": [
+    "leaf_blast",
+    "brown_spot"
+  ],
+  "required_quantity_per_plant": null
+}

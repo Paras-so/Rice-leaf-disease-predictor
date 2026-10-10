@@ -1,0 +1,89 @@
+{
+  "source_path": "train/brown_spot/brown_spot (235).jpg",
+  "source_sha256": "969080d2f037178e76bf9a9c0d0ce055db0d43e59ddeb8e59c962b9076ba42eb",
+  "split": "train",
+  "image_class": "brown_spot",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v3",
+  "quality_status": "requires_pixel_review",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/train/brown_spot/brown_spot (235).jpg.png",
+    "lesion_instances": "lesion_instances/train/brown_spot/brown_spot (235).jpg.png",
+    "overlays": "overlays/train/brown_spot/brown_spot (235).jpg.jpg",
+    "metadata": "metadata/train/brown_spot/brown_spot (235).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        0,
+        484,
+        1600,
+        778
+      ],
+      "area_pixels": 398884
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        994,
+        770,
+        114,
+        50
+      ],
+      "area_pixels": 3484,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        384,
+        1116,
+        14,
+        10
+      ],
+      "area_pixels": 68,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        352,
+        1126,
+        20,
+        14
+      ],
+      "area_pixels": 116,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        298,
+        1142,
+        38,
+        14
+      ],
+      "area_pixels": 272,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review"
+  ]
+}

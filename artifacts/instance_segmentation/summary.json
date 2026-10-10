@@ -1,0 +1,83 @@
+{
+  "method": "colour_connected_components_v3",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "dataset": "C:\\paras\\college\\project\\Final Year Project\\Dataset\\clean_dataset-20261001T114830Z-1-001\\clean_dataset",
+  "manifest_sha256": "773016ba6a13f0f92da7520a5461bda2bf70f036fc96d75c24beba52d036c026",
+  "parameters": {
+    "max_side": 800,
+    "leaf_min_fraction": 0.001,
+    "lesion_min_pixels": 8,
+    "strong_saturation": 0.3,
+    "weak_saturation": 0.2,
+    "foreground_blue_gap": 0.06,
+    "lesion_red_green_ratio": 1.22,
+    "lesion_min_red_green_difference": 0.045,
+    "lesion_median_size": 3,
+    "pale_seed_distance": 3
+  },
+  "limitations": [
+    "Unreviewed algorithm-generated candidates, not ground-truth annotations.",
+    "Colour cannot distinguish disease from aging, shadows, lighting or nutrient stress.",
+    "Touching/overlapping leaves or lesions can merge; fragmented objects can split.",
+    "Small lesions may be lost at processing resolution; restored edges are approximate.",
+    "Pale necrotic tissue can be missed and coloured background can be included.",
+    "Conservative colour thresholds reduce false regions but can miss pale/low-contrast damage; an empty candidate mask does not mean healthy.",
+    "No trained segmentation model, IoU, Dice, mask AP or severity estimate is produced."
+  ],
+  "requested_images": 1941,
+  "processed": 1941,
+  "failed": 0,
+  "leaf_instances": 2033,
+  "lesion_candidates": 27735,
+  "review_flags": {
+    "requires_human_review": 1941,
+    "multiple_leaf_components": 57,
+    "no_candidate_on_diseased_image": 24,
+    "high_foreground_coverage": 11,
+    "complex_foreground_review": 21,
+    "candidate_on_healthy_image": 199,
+    "high_candidate_coverage": 72,
+    "large_connected_candidate_review": 147
+  },
+  "by_class": {
+    "bacterial_leaf_blight": {
+      "images": 297,
+      "leaf_instances": 307,
+      "lesion_candidates": 4149
+    },
+    "brown_spot": {
+      "images": 320,
+      "leaf_instances": 321,
+      "lesion_candidates": 4693
+    },
+    "healthy": {
+      "images": 348,
+      "leaf_instances": 350,
+      "lesion_candidates": 1854
+    },
+    "leaf_blast": {
+      "images": 337,
+      "leaf_instances": 369,
+      "lesion_candidates": 3064
+    },
+    "leaf_scald": {
+      "images": 308,
+      "leaf_instances": 346,
+      "lesion_candidates": 5058
+    },
+    "narrow_brown_spot": {
+      "images": 331,
+      "leaf_instances": 340,
+      "lesion_candidates": 8917
+    }
+  },
+  "by_split": {
+    "train": 1241,
+    "validation": 311,
+    "test": 389
+  },
+  "failures": [],
+  "metrics": null,
+  "status": "complete",
+  "elapsed_seconds": 658.4
+}

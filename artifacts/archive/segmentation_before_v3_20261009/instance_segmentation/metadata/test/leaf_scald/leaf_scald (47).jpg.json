@@ -1,0 +1,89 @@
+{
+  "source_path": "test/leaf_scald/leaf_scald (47).jpg",
+  "source_sha256": "a1423ca02fdf982189691feae10acd7ebb7c0e53e259e5a9c8930d9b476e161c",
+  "split": "test",
+  "image_class": "leaf_scald",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v2",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/test/leaf_scald/leaf_scald (47).jpg.png",
+    "lesion_instances": "lesion_instances/test/leaf_scald/leaf_scald (47).jpg.png",
+    "overlays": "overlays/test/leaf_scald/leaf_scald (47).jpg.jpg",
+    "metadata": "metadata/test/leaf_scald/leaf_scald (47).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        704,
+        0,
+        204,
+        1600
+      ],
+      "area_pixels": 287704
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        704,
+        0,
+        204,
+        1600
+      ],
+      "area_pixels": 246860,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        786,
+        970,
+        22,
+        40
+      ],
+      "area_pixels": 680,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        786,
+        1218,
+        6,
+        16
+      ],
+      "area_pixels": 60,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        824,
+        1586,
+        10,
+        14
+      ],
+      "area_pixels": 72,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review",
+    "high_candidate_coverage"
+  ]
+}

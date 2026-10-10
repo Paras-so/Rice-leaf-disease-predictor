@@ -16,6 +16,8 @@ from .data import ROOT
 from .models import load_checkpoint
 from .preprocessing import image_tensor
 from .binary import health_status
+from .quantity import disease_product_reference
+from .unet import load_unet, predict_mask
 
 
 def predict(model, checkpoint, image):
@@ -29,7 +31,7 @@ def predict(model, checkpoint, image):
             "disease": disease, "softmax_score": scores[disease], "scores": scores,
             "architecture": checkpoint["architecture"],
             "confidence_note": "Uncalibrated model score; not a probability that the diagnosis is correct. No unknown-class detector is trained.",
-            "affected_area_percent": None, "segmentation_status": "No trained segmentation model or labelled masks available."}
+            "affected_area_percent": None, "segmentation_status": "Segmentation has not been run; classification scores do not measure affected area."}
 
 
 def management(disease):
@@ -42,6 +44,10 @@ if __name__ == "__main__":
     parser.add_argument("image", type=Path)
     parser.add_argument("--checkpoint", type=Path,
                         help="Defaults to the checkpoint in artifacts/selected_model.json")
+    parser.add_argument("--segmentation-checkpoint", type=Path,
+                        default=ROOT / 'artifacts/unet/model.pt')
+    parser.add_argument("--water-ml", type=float, default=100,
+                        help="Water volume for label-reference arithmetic, not a per-plant spray volume (default: 100)")
     args = parser.parse_args()
     if args.checkpoint is None:
         selection = json.loads((ROOT / "artifacts/selected_model.json").read_text())
@@ -50,5 +56,17 @@ if __name__ == "__main__":
     model, checkpoint = load_checkpoint(args.checkpoint)
     with Image.open(args.image) as image:
         result = predict(model, checkpoint, image)
+        if args.segmentation_checkpoint.is_file():
+            segmentation_model, segmentation_checkpoint = load_unet(args.segmentation_checkpoint)
+            _, area, _ = predict_mask(segmentation_model, segmentation_checkpoint, image)
+            result['segmentation'] = area
+            result['affected_area_percent'] = area['affected_area_percent']
+            result['segmentation_status'] = area['status']
+        else:
+            result['segmentation_status'] = 'unavailable: no trained U-Net checkpoint; reviewed masks are required'
     result["management"] = management(result["disease"])
+    try:
+        result['pesticide_reference'] = disease_product_reference(result['disease'], water_ml=args.water_ml)
+    except ValueError as exc:
+        parser.exit(1, f'Quantity error: {exc}\n')
     print(json.dumps(result, indent=2))

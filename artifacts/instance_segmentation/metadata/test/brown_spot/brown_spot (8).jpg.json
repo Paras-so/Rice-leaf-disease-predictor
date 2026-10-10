@@ -1,0 +1,89 @@
+{
+  "source_path": "test/brown_spot/brown_spot (8).jpg",
+  "source_sha256": "cf59d7dbc8f7ffa851777ccac830d3c82fcbecac364c3660ef0e0a5a6495ff53",
+  "split": "test",
+  "image_class": "brown_spot",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v3",
+  "quality_status": "requires_pixel_review",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/test/brown_spot/brown_spot (8).jpg.png",
+    "lesion_instances": "lesion_instances/test/brown_spot/brown_spot (8).jpg.png",
+    "overlays": "overlays/test/brown_spot/brown_spot (8).jpg.jpg",
+    "metadata": "metadata/test/brown_spot/brown_spot (8).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        16,
+        0,
+        1584,
+        1600
+      ],
+      "area_pixels": 416512
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        92,
+        16,
+        154,
+        168
+      ],
+      "area_pixels": 7960,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        98,
+        58,
+        14,
+        10
+      ],
+      "area_pixels": 104,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        256,
+        282,
+        30,
+        38
+      ],
+      "area_pixels": 516,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        478,
+        554,
+        8,
+        10
+      ],
+      "area_pixels": 44,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review"
+  ]
+}

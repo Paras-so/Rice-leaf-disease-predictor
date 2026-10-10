@@ -1,0 +1,90 @@
+{
+  "source_path": "train/leaf_scald/leaf_scald (218).jpg",
+  "source_sha256": "fc94f7aca564852f4da2366d91ae2de6035a57bb8b92dce3bc8998def122a7a6",
+  "split": "train",
+  "image_class": "leaf_scald",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v3",
+  "quality_status": "requires_pixel_review",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/train/leaf_scald/leaf_scald (218).jpg.png",
+    "lesion_instances": "lesion_instances/train/leaf_scald/leaf_scald (218).jpg.png",
+    "overlays": "overlays/train/leaf_scald/leaf_scald (218).jpg.jpg",
+    "metadata": "metadata/train/leaf_scald/leaf_scald (218).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        602,
+        24,
+        270,
+        1576
+      ],
+      "area_pixels": 201768
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        644,
+        240,
+        220,
+        1040
+      ],
+      "area_pixels": 78756,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        792,
+        292,
+        18,
+        158
+      ],
+      "area_pixels": 1476,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        794,
+        452,
+        4,
+        18
+      ],
+      "area_pixels": 60,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        640,
+        1242,
+        8,
+        10
+      ],
+      "area_pixels": 56,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review",
+    "large_connected_candidate_review"
+  ]
+}

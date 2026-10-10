@@ -1,0 +1,131 @@
+{
+  "checked_at_utc": "2026-10-09T06:57:30.547952+00:00",
+  "status": "awaiting_reviewed_masks",
+  "training_ready": false,
+  "expected_images": 1941,
+  "annotation_records": 1941,
+  "valid_masks": 1941,
+  "reviewed_masks": 0,
+  "valid_reviewed_masks": 0,
+  "unreviewed_masks": 1941,
+  "by_split": {
+    "train": {
+      "annotations": 1241,
+      "reviewed": 0,
+      "unreviewed": 1241,
+      "valid_masks": 1241,
+      "valid_reviewed_masks": 0,
+      "invalid_masks": 0,
+      "reviewed_affected_pixels": 0,
+      "healthy_with_affected_pixels": 222,
+      "diseased_without_affected_pixels": 3
+    },
+    "validation": {
+      "annotations": 311,
+      "reviewed": 0,
+      "unreviewed": 311,
+      "valid_masks": 311,
+      "valid_reviewed_masks": 0,
+      "invalid_masks": 0,
+      "reviewed_affected_pixels": 0,
+      "healthy_with_affected_pixels": 55,
+      "diseased_without_affected_pixels": 1
+    },
+    "test": {
+      "annotations": 389,
+      "reviewed": 0,
+      "unreviewed": 389,
+      "valid_masks": 389,
+      "valid_reviewed_masks": 0,
+      "invalid_masks": 0,
+      "reviewed_affected_pixels": 0,
+      "healthy_with_affected_pixels": 70,
+      "diseased_without_affected_pixels": 0
+    }
+  },
+  "by_class": {
+    "bacterial_leaf_blight": {
+      "annotations": 297,
+      "reviewed": 0,
+      "unreviewed": 297,
+      "valid_masks": 297,
+      "valid_reviewed_masks": 0,
+      "invalid_masks": 0,
+      "reviewed_affected_pixels": 0,
+      "healthy_with_affected_pixels": 0,
+      "diseased_without_affected_pixels": 0
+    },
+    "brown_spot": {
+      "annotations": 320,
+      "reviewed": 0,
+      "unreviewed": 320,
+      "valid_masks": 320,
+      "valid_reviewed_masks": 0,
+      "invalid_masks": 0,
+      "reviewed_affected_pixels": 0,
+      "healthy_with_affected_pixels": 0,
+      "diseased_without_affected_pixels": 0
+    },
+    "healthy": {
+      "annotations": 348,
+      "reviewed": 0,
+      "unreviewed": 348,
+      "valid_masks": 348,
+      "valid_reviewed_masks": 0,
+      "invalid_masks": 0,
+      "reviewed_affected_pixels": 0,
+      "healthy_with_affected_pixels": 347,
+      "diseased_without_affected_pixels": 0
+    },
+    "leaf_blast": {
+      "annotations": 337,
+      "reviewed": 0,
+      "unreviewed": 337,
+      "valid_masks": 337,
+      "valid_reviewed_masks": 0,
+      "invalid_masks": 0,
+      "reviewed_affected_pixels": 0,
+      "healthy_with_affected_pixels": 0,
+      "diseased_without_affected_pixels": 4
+    },
+    "leaf_scald": {
+      "annotations": 308,
+      "reviewed": 0,
+      "unreviewed": 308,
+      "valid_masks": 308,
+      "valid_reviewed_masks": 0,
+      "invalid_masks": 0,
+      "reviewed_affected_pixels": 0,
+      "healthy_with_affected_pixels": 0,
+      "diseased_without_affected_pixels": 0
+    },
+    "narrow_brown_spot": {
+      "annotations": 331,
+      "reviewed": 0,
+      "unreviewed": 331,
+      "valid_masks": 331,
+      "valid_reviewed_masks": 0,
+      "invalid_masks": 0,
+      "reviewed_affected_pixels": 0,
+      "healthy_with_affected_pixels": 0,
+      "diseased_without_affected_pixels": 0
+    }
+  },
+  "missing_annotations": [],
+  "integrity_errors": [],
+  "training_blockers": [
+    "train: at least two valid reviewed masks required by the trainer.",
+    "train: reviewed affected-leaf pixels are missing.",
+    "validation: at least two valid reviewed masks required by the trainer.",
+    "validation: reviewed affected-leaf pixels are missing."
+  ],
+  "annotation_manifest_sha256": "692dc40d077c1e5a78368fe0e80435f3fbec36ac3f6ed99f8a1154e026e48e19",
+  "split_manifest_sha256": "773016ba6a13f0f92da7520a5461bda2bf70f036fc96d75c24beba52d036c026",
+  "mask_labels": {
+    "0": "background",
+    "1": "unaffected_leaf",
+    "2": "affected_leaf"
+  },
+  "accuracy_evaluated": false,
+  "note": "File validity is not boundary accuracy. Unreviewed masks remain drafts. Minimum training counts are software guards, not sufficient dataset sizes. Test masks are checked for integrity only; no model predictions or scores are computed."
+}

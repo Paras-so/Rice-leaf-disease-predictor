@@ -1,0 +1,90 @@
+{
+  "source_path": "train/healthy/healthy (161).jpg",
+  "source_sha256": "fbf8ff6a08884450c9b49564573420aeff624002c29435d2f385d5592f4ad124",
+  "split": "train",
+  "image_class": "healthy",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v3",
+  "quality_status": "requires_pixel_review",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/train/healthy/healthy (161).jpg.png",
+    "lesion_instances": "lesion_instances/train/healthy/healthy (161).jpg.png",
+    "overlays": "overlays/train/healthy/healthy (161).jpg.jpg",
+    "metadata": "metadata/train/healthy/healthy (161).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        334,
+        0,
+        1072,
+        1600
+      ],
+      "area_pixels": 288920
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        406,
+        594,
+        476,
+        876
+      ],
+      "area_pixels": 10732,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        376,
+        1478,
+        32,
+        50
+      ],
+      "area_pixels": 624,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        366,
+        1530,
+        10,
+        14
+      ],
+      "area_pixels": 100,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        340,
+        1550,
+        28,
+        50
+      ],
+      "area_pixels": 412,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review",
+    "candidate_on_healthy_image"
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "source_path": "train/narrow_brown_spot/narrow_brown (68).jpg",
+  "source_sha256": "f68e330e714c887023509a610dfca2aead94c557c3bc16b5d190ee80d7f3ac04",
+  "split": "train",
+  "image_class": "narrow_brown_spot",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v3",
+  "quality_status": "requires_pixel_review",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/train/narrow_brown_spot/narrow_brown (68).jpg.png",
+    "lesion_instances": "lesion_instances/train/narrow_brown_spot/narrow_brown (68).jpg.png",
+    "overlays": "overlays/train/narrow_brown_spot/narrow_brown (68).jpg.jpg",
+    "metadata": "metadata/train/narrow_brown_spot/narrow_brown (68).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        730,
+        0,
+        116,
+        1600
+      ],
+      "area_pixels": 160372
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        814,
+        370,
+        12,
+        652
+      ],
+      "area_pixels": 5956,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        780,
+        578,
+        22,
+        514
+      ],
+      "area_pixels": 7012,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review"
+  ]
+}

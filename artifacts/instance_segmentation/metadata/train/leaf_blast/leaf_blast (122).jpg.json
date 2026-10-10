@@ -1,0 +1,137 @@
+{
+  "source_path": "train/leaf_blast/leaf_blast (122).jpg",
+  "source_sha256": "1ef8e89009328b2e1a11ab39071ccdf9e8bec68ed91bbc2dd7d265ac1edddf46",
+  "split": "train",
+  "image_class": "leaf_blast",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v3",
+  "quality_status": "requires_pixel_review",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/train/leaf_blast/leaf_blast (122).jpg.png",
+    "lesion_instances": "lesion_instances/train/leaf_blast/leaf_blast (122).jpg.png",
+    "overlays": "overlays/train/leaf_blast/leaf_blast (122).jpg.jpg",
+    "metadata": "metadata/train/leaf_blast/leaf_blast (122).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        580,
+        84,
+        428,
+        1448
+      ],
+      "area_pixels": 325232
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        602,
+        134,
+        78,
+        196
+      ],
+      "area_pixels": 8632,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        744,
+        242,
+        40,
+        64
+      ],
+      "area_pixels": 1688,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        780,
+        340,
+        26,
+        54
+      ],
+      "area_pixels": 680,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        652,
+        556,
+        86,
+        250
+      ],
+      "area_pixels": 10324,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 5,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        696,
+        928,
+        86,
+        316
+      ],
+      "area_pixels": 11804,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 6,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        942,
+        1220,
+        28,
+        102
+      ],
+      "area_pixels": 2024,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 7,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        944,
+        1330,
+        64,
+        200
+      ],
+      "area_pixels": 4920,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 8,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        732,
+        1344,
+        116,
+        186
+      ],
+      "area_pixels": 7768,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review"
+  ]
+}

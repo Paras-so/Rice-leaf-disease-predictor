@@ -1,0 +1,89 @@
+{
+  "source_path": "train/healthy/healthy (223).jpg",
+  "source_sha256": "9c4289a5d31aa2b90957b35958ef86b355364b28b2661f10f50925172c945d3e",
+  "split": "validation",
+  "image_class": "healthy",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v2",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/validation/healthy/healthy (223).jpg.png",
+    "lesion_instances": "lesion_instances/validation/healthy/healthy (223).jpg.png",
+    "overlays": "overlays/validation/healthy/healthy (223).jpg.jpg",
+    "metadata": "metadata/validation/healthy/healthy (223).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        0,
+        84,
+        1600,
+        1516
+      ],
+      "area_pixels": 499180
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        1550,
+        302,
+        50,
+        50
+      ],
+      "area_pixels": 612,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        0,
+        344,
+        1556,
+        1256
+      ],
+      "area_pixels": 113452,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        838,
+        938,
+        16,
+        14
+      ],
+      "area_pixels": 64,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        822,
+        958,
+        10,
+        8
+      ],
+      "area_pixels": 36,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review",
+    "candidate_on_healthy_image"
+  ]
+}

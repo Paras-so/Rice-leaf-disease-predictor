@@ -1,0 +1,41 @@
+{
+  "source_path": "train/bacterial_leaf_blight/bacterial_leaf_blight (280).jpg",
+  "source_sha256": "f5dafddf7e27734ccaa1efaee75775b4be0b493d4495a23f3a7fdb6e7083e936",
+  "split": "validation",
+  "image_class": "bacterial_leaf_blight",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v3",
+  "quality_status": "requires_pixel_review",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/validation/bacterial_leaf_blight/bacterial_leaf_blight (280).jpg.png",
+    "lesion_instances": "lesion_instances/validation/bacterial_leaf_blight/bacterial_leaf_blight (280).jpg.png",
+    "overlays": "overlays/validation/bacterial_leaf_blight/bacterial_leaf_blight (280).jpg.jpg",
+    "metadata": "metadata/validation/bacterial_leaf_blight/bacterial_leaf_blight (280).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        530,
+        0,
+        442,
+        1600
+      ],
+      "area_pixels": 664536
+    }
+  ],
+  "lesion_candidates": [],
+  "review_flags": [
+    "requires_human_review",
+    "no_candidate_on_diseased_image"
+  ]
+}

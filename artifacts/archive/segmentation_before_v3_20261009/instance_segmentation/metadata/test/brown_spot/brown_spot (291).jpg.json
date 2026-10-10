@@ -1,0 +1,89 @@
+{
+  "source_path": "test/brown_spot/brown_spot (291).jpg",
+  "source_sha256": "086fc6922fc8393b8b5e66d5b444b741c137a94712170129d9d3146a21700f94",
+  "split": "test",
+  "image_class": "brown_spot",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v2",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/test/brown_spot/brown_spot (291).jpg.png",
+    "lesion_instances": "lesion_instances/test/brown_spot/brown_spot (291).jpg.png",
+    "overlays": "overlays/test/brown_spot/brown_spot (291).jpg.jpg",
+    "metadata": "metadata/test/brown_spot/brown_spot (291).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        0,
+        726,
+        1600,
+        274
+      ],
+      "area_pixels": 354788
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        0,
+        726,
+        1600,
+        274
+      ],
+      "area_pixels": 294792,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        416,
+        880,
+        32,
+        6
+      ],
+      "area_pixels": 180,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        16,
+        896,
+        66,
+        10
+      ],
+      "area_pixels": 528,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        0,
+        912,
+        22,
+        16
+      ],
+      "area_pixels": 312,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review",
+    "high_candidate_coverage"
+  ]
+}

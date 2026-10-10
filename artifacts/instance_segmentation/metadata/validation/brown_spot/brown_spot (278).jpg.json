@@ -1,0 +1,89 @@
+{
+  "source_path": "train/brown_spot/brown_spot (278).jpg",
+  "source_sha256": "aba0367581428d811e16a1ac0cd63367fa586e8b806ccd1589f29f3c47b5c702",
+  "split": "validation",
+  "image_class": "brown_spot",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v3",
+  "quality_status": "requires_pixel_review",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/validation/brown_spot/brown_spot (278).jpg.png",
+    "lesion_instances": "lesion_instances/validation/brown_spot/brown_spot (278).jpg.png",
+    "overlays": "overlays/validation/brown_spot/brown_spot (278).jpg.jpg",
+    "metadata": "metadata/validation/brown_spot/brown_spot (278).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        558,
+        0,
+        304,
+        1600
+      ],
+      "area_pixels": 303904
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        626,
+        482,
+        22,
+        50
+      ],
+      "area_pixels": 772,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        676,
+        938,
+        20,
+        32
+      ],
+      "area_pixels": 412,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        716,
+        1078,
+        24,
+        62
+      ],
+      "area_pixels": 1144,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        690,
+        1114,
+        12,
+        54
+      ],
+      "area_pixels": 356,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review"
+  ]
+}

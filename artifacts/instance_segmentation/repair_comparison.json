@@ -1,0 +1,116 @@
+{
+  "previous": "C:\\paras\\college\\project\\Final Year Project\\artifacts\\archive\\segmentation_before_v3_20261009\\instance_segmentation",
+  "current": "C:\\paras\\college\\project\\Final Year Project\\artifacts\\instance_segmentation",
+  "accuracy_evaluated": false,
+  "note": "Candidate coverage statistics, not accuracy. Lower coverage can also indicate missed pale damage. All masks remain unreviewed; thresholds were chosen on training examples only.",
+  "by_class": {
+    "bacterial_leaf_blight": {
+      "before": {
+        "images": 297,
+        "mean_candidate_percent": 17.23498982697339,
+        "median_candidate_percent": 14.567939509808987,
+        "max_candidate_percent": 44.95293233747293,
+        "with_candidates": 297,
+        "above_50_percent": 0
+      },
+      "after": {
+        "images": 297,
+        "mean_candidate_percent": 4.513562270047817,
+        "median_candidate_percent": 2.173334853147916,
+        "max_candidate_percent": 20.710138694764005,
+        "with_candidates": 289,
+        "above_50_percent": 0
+      }
+    },
+    "brown_spot": {
+      "before": {
+        "images": 320,
+        "mean_candidate_percent": 22.327078009706945,
+        "median_candidate_percent": 16.27207221301638,
+        "max_candidate_percent": 87.26288900012082,
+        "with_candidates": 320,
+        "above_50_percent": 24
+      },
+      "after": {
+        "images": 320,
+        "mean_candidate_percent": 6.376800781424512,
+        "median_candidate_percent": 3.5923201406318066,
+        "max_candidate_percent": 40.64353357566482,
+        "with_candidates": 319,
+        "above_50_percent": 0
+      }
+    },
+    "healthy": {
+      "before": {
+        "images": 348,
+        "mean_candidate_percent": 14.225340489848085,
+        "median_candidate_percent": 12.098077707935289,
+        "max_candidate_percent": 48.11746820834905,
+        "with_candidates": 347,
+        "above_50_percent": 0
+      },
+      "after": {
+        "images": 348,
+        "mean_candidate_percent": 0.7874215282936988,
+        "median_candidate_percent": 0.03695285434342138,
+        "max_candidate_percent": 24.145813427510554,
+        "with_candidates": 199,
+        "above_50_percent": 0
+      }
+    },
+    "leaf_blast": {
+      "before": {
+        "images": 337,
+        "mean_candidate_percent": 19.554499753961935,
+        "median_candidate_percent": 14.950828303341419,
+        "max_candidate_percent": 92.6692824249618,
+        "with_candidates": 333,
+        "above_50_percent": 7
+      },
+      "after": {
+        "images": 337,
+        "mean_candidate_percent": 8.015269043184544,
+        "median_candidate_percent": 2.168911709789277,
+        "max_candidate_percent": 86.86817745530267,
+        "with_candidates": 322,
+        "above_50_percent": 1
+      }
+    },
+    "leaf_scald": {
+      "before": {
+        "images": 308,
+        "mean_candidate_percent": 58.297651014789665,
+        "median_candidate_percent": 60.02011346724284,
+        "max_candidate_percent": 97.70094079922558,
+        "with_candidates": 308,
+        "above_50_percent": 217
+      },
+      "after": {
+        "images": 308,
+        "mean_candidate_percent": 30.997114993468333,
+        "median_candidate_percent": 32.51727802320787,
+        "max_candidate_percent": 76.22428666224286,
+        "with_candidates": 308,
+        "above_50_percent": 68
+      }
+    },
+    "narrow_brown_spot": {
+      "before": {
+        "images": 331,
+        "mean_candidate_percent": 15.192333622463153,
+        "median_candidate_percent": 11.617322630281233,
+        "max_candidate_percent": 87.59600156667746,
+        "with_candidates": 331,
+        "above_50_percent": 11
+      },
+      "after": {
+        "images": 331,
+        "mean_candidate_percent": 9.072234503601763,
+        "median_candidate_percent": 8.222052016384161,
+        "max_candidate_percent": 63.22367846221057,
+        "with_candidates": 331,
+        "above_50_percent": 3
+      }
+    }
+  }
+}

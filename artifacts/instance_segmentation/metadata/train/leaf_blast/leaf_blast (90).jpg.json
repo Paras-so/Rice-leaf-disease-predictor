@@ -1,0 +1,89 @@
+{
+  "source_path": "train/leaf_blast/leaf_blast (90).jpg",
+  "source_sha256": "0f0833c337099c21c291930eb1c9a483db099f769d49e3e00bac5dfb8981e50f",
+  "split": "train",
+  "image_class": "leaf_blast",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v3",
+  "quality_status": "requires_pixel_review",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/train/leaf_blast/leaf_blast (90).jpg.png",
+    "lesion_instances": "lesion_instances/train/leaf_blast/leaf_blast (90).jpg.png",
+    "overlays": "overlays/train/leaf_blast/leaf_blast (90).jpg.jpg",
+    "metadata": "metadata/train/leaf_blast/leaf_blast (90).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        0,
+        0,
+        1600,
+        1600
+      ],
+      "area_pixels": 554472
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        972,
+        572,
+        212,
+        172
+      ],
+      "area_pixels": 8316,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        956,
+        752,
+        16,
+        16
+      ],
+      "area_pixels": 68,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        554,
+        998,
+        156,
+        126
+      ],
+      "area_pixels": 4384,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        530,
+        1134,
+        14,
+        10
+      ],
+      "area_pixels": 60,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review"
+  ]
+}

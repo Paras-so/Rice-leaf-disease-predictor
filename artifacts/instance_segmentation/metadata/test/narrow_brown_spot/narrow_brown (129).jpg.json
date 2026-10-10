@@ -1,0 +1,89 @@
+{
+  "source_path": "test/narrow_brown_spot/narrow_brown (129).jpg",
+  "source_sha256": "5dc13563dc3d69c57385bb93fa8e4de69be581c1e3826147c6cabe390d93ab83",
+  "split": "test",
+  "image_class": "narrow_brown_spot",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "method": "colour_connected_components_v3",
+  "quality_status": "requires_pixel_review",
+  "width": 1600,
+  "height": 1600,
+  "processing_size": [
+    800,
+    800
+  ],
+  "mask_encoding": "uint16 PNG, 0=background; IDs are local to each image and category",
+  "orientation": "EXIF corrected",
+  "files": {
+    "leaf_instances": "leaf_instances/test/narrow_brown_spot/narrow_brown (129).jpg.png",
+    "lesion_instances": "lesion_instances/test/narrow_brown_spot/narrow_brown (129).jpg.png",
+    "overlays": "overlays/test/narrow_brown_spot/narrow_brown (129).jpg.jpg",
+    "metadata": "metadata/test/narrow_brown_spot/narrow_brown (129).jpg.json"
+  },
+  "leaves": [
+    {
+      "instance_id": 1,
+      "category": "leaf",
+      "bbox_xywh": [
+        676,
+        0,
+        240,
+        1600
+      ],
+      "area_pixels": 346020
+    }
+  ],
+  "lesion_candidates": [
+    {
+      "instance_id": 1,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        732,
+        0,
+        10,
+        34
+      ],
+      "area_pixels": 248,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 2,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        758,
+        8,
+        48,
+        648
+      ],
+      "area_pixels": 18072,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 3,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        822,
+        32,
+        58,
+        880
+      ],
+      "area_pixels": 20644,
+      "leaf_instance_id": 1
+    },
+    {
+      "instance_id": 4,
+      "category": "lesion_candidate",
+      "bbox_xywh": [
+        870,
+        156,
+        10,
+        48
+      ],
+      "area_pixels": 292,
+      "leaf_instance_id": 1
+    }
+  ],
+  "review_flags": [
+    "requires_human_review"
+  ]
+}

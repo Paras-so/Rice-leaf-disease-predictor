@@ -1,0 +1,72 @@
+{
+  "method": "colour_connected_components_v1",
+  "annotation_status": "unreviewed_pseudo_masks",
+  "dataset": "C:\\paras\\college\\project\\Final Year Project\\Dataset\\clean_dataset-20261001T114830Z-1-001\\clean_dataset",
+  "manifest_sha256": "773016ba6a13f0f92da7520a5461bda2bf70f036fc96d75c24beba52d036c026",
+  "parameters": {
+    "max_side": 800,
+    "leaf_min_fraction": 0.001,
+    "lesion_min_pixels": 8,
+    "strong_saturation": 0.22,
+    "weak_saturation": 0.13,
+    "lesion_red_green_ratio": 0.96
+  },
+  "limitations": [
+    "Unreviewed algorithm-generated candidates, not ground-truth annotations.",
+    "Colour cannot distinguish disease from aging, shadows, lighting or nutrient stress.",
+    "Touching/overlapping leaves or lesions can merge; fragmented objects can split.",
+    "Small lesions may be lost at processing resolution; restored edges are approximate.",
+    "Pale necrotic tissue can be missed and coloured background can be included.",
+    "No trained segmentation model, IoU, Dice, mask AP or severity estimate is produced."
+  ],
+  "requested_images": 12,
+  "processed": 12,
+  "failed": 0,
+  "leaf_instances": 14,
+  "lesion_candidates": 519,
+  "review_flags": {
+    "requires_human_review": 12,
+    "high_candidate_coverage": 4,
+    "candidate_on_healthy_image": 2,
+    "multiple_leaf_components": 1
+  },
+  "by_class": {
+    "bacterial_leaf_blight": {
+      "images": 2,
+      "leaf_instances": 2,
+      "lesion_candidates": 284
+    },
+    "brown_spot": {
+      "images": 2,
+      "leaf_instances": 2,
+      "lesion_candidates": 8
+    },
+    "healthy": {
+      "images": 2,
+      "leaf_instances": 2,
+      "lesion_candidates": 76
+    },
+    "leaf_blast": {
+      "images": 2,
+      "leaf_instances": 2,
+      "lesion_candidates": 72
+    },
+    "leaf_scald": {
+      "images": 2,
+      "leaf_instances": 4,
+      "lesion_candidates": 10
+    },
+    "narrow_brown_spot": {
+      "images": 2,
+      "leaf_instances": 2,
+      "lesion_candidates": 69
+    }
+  },
+  "by_split": {
+    "train": 12
+  },
+  "failures": [],
+  "metrics": null,
+  "status": "complete",
+  "elapsed_seconds": 20.29
+}
