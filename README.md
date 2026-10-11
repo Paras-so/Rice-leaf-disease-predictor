@@ -18,6 +18,7 @@ stages autonomously, without requesting command output from the user.
 From this project directory:
 
 ```powershell
+python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 .\.venv\Scripts\python.exe -m streamlit run app.py --server.address 127.0.0.1 --server.port 8501
 ```
@@ -31,6 +32,36 @@ Open http://127.0.0.1:8501. Choose a rice leaf image and click **Analyze leaf** 
 uncalibrated model scores, and sourced cultural-management information. The app uses
 only the final selected checkpoint; there is no classifier dropdown. The Final model
 and Dataset tabs show its results and dataset details.
+
+### Running on a new computer
+
+Create `.venv` once with the command above; do not copy another computer's virtual
+environment. A ready-to-run checkout needs these saved model files:
+
+- `artifacts/selected_model.json`: identifies the selected classifier and its SHA-256.
+- `artifacts/final_model/hyperparameter_search_v2/model.pt`: the selected ResNet50
+  classifier (about 94 MB). This file must be committed along with the code.
+- `artifacts/unet/model.pt`: the segmentation model used for affected-area estimates.
+
+The dataset and training caches are not required to analyze uploaded photos.
+There is no need to repeat training or model selection on another computer.
+
+Older repository versions excluded the classifier checkpoint through `.gitignore`.
+That causes the message "The final classifier is not available yet" even though
+model selection is already complete. Pull a version containing the checkpoint, or
+copy `artifacts/final_model/hyperparameter_search_v2/model.pt` from the working
+computer into the same relative folder on the new computer, then restart the app.
+Keep the checkpoint paired with its original `artifacts/selected_model.json`;
+the app verifies the checkpoint's SHA-256 before loading it.
+
+When publishing this fix from the working computer, include the checkpoint:
+
+```powershell
+git add .gitignore app.py README.md rice_disease/models.py tests/test_app.py artifacts/final_model/hyperparameter_search_v2/model.pt
+```
+
+Commit and push these files together with any accompanying code/test fixes so future
+clones include the trained classifier. Other training checkpoints remain ignored.
 
 An experimental three-class U-Net was trained for 40 epochs using 56 corrected AI-reviewed masks (44 training,
 12 validation); 1,885 masks remain unreviewed. These are approximate references,

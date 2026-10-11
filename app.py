@@ -49,8 +49,12 @@ def cached_segmentation(path, modified):
 with analyze_tab:
     st.write("Choose a clear rice leaf photo below, then click Analyze leaf to see the prediction.")
     path = ROOT / "artifacts" / selection["checkpoint"] if selection else None
-    if path is None or not path.is_file():
-        st.info("The final classifier is not available yet. Complete model selection before analyzing a leaf.")
+    if path is None:
+        st.info("No final model selection was found. Restore artifacts/selected_model.json from the repository, or complete model selection if training a new model.")
+    elif not path.is_file():
+        st.error("The final classifier has been selected, but its model file is missing from this setup.")
+        st.code(path.relative_to(ROOT).as_posix(), language=None)
+        st.info("Pull the latest repository version that includes this checkpoint, or copy the file from the working setup to the same location above. Restart the app after restoring it; retraining is not required. See the new-computer setup instructions in README.md.")
     else:
         if st.session_state.get("model_hash") != selection["checkpoint_sha256"]:
             reset_analysis()

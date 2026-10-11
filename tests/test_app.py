@@ -1,7 +1,11 @@
 """Exercise photo selection, explicit analysis, and upload error recovery."""
 
 import csv
+import json
+from pathlib import Path
+import tempfile
 import unittest
+from unittest.mock import patch
 
 from streamlit.testing.v1 import AppTest
 
@@ -9,6 +13,30 @@ from rice_disease.data import DEFAULT_DATASET, ROOT
 
 
 class UploadTests(unittest.TestCase):
+    def test_missing_checkpoint_explains_how_to_restore_selected_model(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "artifacts").mkdir()
+            selection = json.loads((ROOT / "artifacts/selected_model.json").read_text())
+            (root / "artifacts/selected_model.json").write_text(json.dumps(selection))
+            with patch("rice_disease.data.ROOT", root):
+                app = AppTest.from_file(str(ROOT / "app.py"), default_timeout=60).run()
+            self.assertFalse(app.exception)
+            self.assertEqual(len(app.error), 1)
+            self.assertIn("model file is missing", app.error[0].value)
+            self.assertEqual(app.code[0].value, "artifacts/" + selection["checkpoint"])
+            self.assertTrue(any("retraining is not required" in item.value for item in app.info))
+            self.assertFalse(app.file_uploader)
+
+    def test_missing_selection_explains_how_to_restore_metadata(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            with patch("rice_disease.data.ROOT", Path(temporary)):
+                app = AppTest.from_file(str(ROOT / "app.py"), default_timeout=60).run()
+            self.assertFalse(app.exception)
+            self.assertFalse(app.error)
+            self.assertTrue(any("artifacts/selected_model.json" in item.value for item in app.info))
+            self.assertFalse(app.file_uploader)
+
     def test_upload_analyze_and_replace_photo(self):
         with (ROOT / "artifacts/split_manifest.csv").open(newline="") as source:
             row = next(row for row in csv.DictReader(source)

@@ -61,5 +61,9 @@ if __name__ == "__main__":
     print("Available architectures (six-class classification):")
     for name in BUILDERS:
         print(f"  {name}: pretrained weights IMAGENET1K_V1; only the final head is trained")
+        model, _ = create_model(name, pretrained=False)
+        total_params = sum(p.numel() for p in model.parameters())
+        print(f"    Parameters: {total_params:,}")
+        print(f"    FP32 weights: {total_params * 4 / (1024**2):.2f} MiB")
     print("Train/compare: python -m rice_disease.benchmark\n"
           "Predict: python -m rice_disease.inference path/to/leaf.jpg")
