@@ -90,6 +90,19 @@ See [segmentation repair and remaining review requirements](docs/INSTANCE_SEGMEN
 - Hashes do not establish independence of transformed near-duplicates or images
   from the same plant. Plant/field identifiers are not supplied.
 
+## Check model parameter counts
+
+```powershell
+.\.venv\Scripts\python.exe -m rice_disease.models
+```
+
+Prints total, trainable, and frozen parameters for MobileNetV3 Small,
+EfficientNet-B0, ResNet18, and ResNet50 with the project's six-class heads.
+Only the final classification layer is trainable in the current setup.
+The command also estimates FP32 parameter storage and does not download weights
+or train models. In Python, use `parameter_counts(model)` from
+`rice_disease.models` to inspect an existing model's current training flags.
+
 ## Reproduce the pipeline
 
 ### Inspect preprocessing output

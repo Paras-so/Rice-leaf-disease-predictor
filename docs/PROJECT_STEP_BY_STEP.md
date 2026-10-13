@@ -31,6 +31,25 @@ see [instance segmentation and U-Net training](SEGMENTATION_STEP_BY_STEP.md).
 
 14. I used the Torchvision model builders, replaced each model's final layer with a six-class output layer, and froze the other layers. I trained only the final layer of each model. **File:** `rice_disease/models.py`.
 
+    To check how many parameters each model handles, run this command from the project root:
+
+    ```powershell
+    .\.venv\Scripts\python.exe -m rice_disease.models
+    ```
+
+    The command reports the following counts for the project's six-class classifiers:
+
+    | Model | Total parameters | Trainable parameters | Frozen parameters | FP32 parameter storage (MiB) |
+    |---|---:|---:|---:|---:|
+    | MobileNetV3-Small | 1,524,006 | 6,150 | 1,517,856 | 5.81 |
+    | EfficientNet-B0 | 4,015,234 | 7,686 | 4,007,548 | 15.32 |
+    | ResNet18 | 11,179,590 | 3,078 | 11,176,512 | 42.65 |
+    | ResNet50 | 23,520,326 | 12,294 | 23,508,032 | 89.72 |
+
+    **Total** counts all scalar model parameters. **Trainable** counts the parameters updated during training; in this setup, these belong only to the final classification layer. **Frozen** parameters remain fixed but are still used to extract features and make predictions. Total equals trainable plus frozen.
+
+    The command builds the model architectures without downloading pretrained weights or running training; weight values do not affect parameter counts. FP32 storage is estimated as `total_parameters * 4 / (1024**2)` and excludes buffers, activations, and optimizer state, so it is not the full runtime memory requirement or checkpoint file size. To inspect an existing model in Python, call `parameter_counts(model)` from `rice_disease.models`.
+
 15. I set the shared **baseline** training settings: **AdamW**, cross-entropy loss, learning rate **0.001**, weight decay **0.0001**, batch size **32**, and a maximum of **40 epochs**. I used early stopping after eight epochs without improved validation macro F1. These remain the original base parameters for all later comparisons. **Files:** `configs/benchmark.json`, `rice_disease/benchmark.py`.
 
 16. I loaded training and validation images in batches, extracted features using the frozen models, and cached those features for reuse during training and tuning. **Files:** `rice_disease/preprocessing.py`, `rice_disease/benchmark.py`.

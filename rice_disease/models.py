@@ -54,16 +54,26 @@ def load_checkpoint(path, device="cpu"):
     return model.to(device).eval(), checkpoint
 
 
+def parameter_counts(model):
+    """Count scalar parameters according to the model's current training flags."""
+    total = sum(parameter.numel() for parameter in model.parameters())
+    trainable = sum(parameter.numel() for parameter in model.parameters()
+                    if parameter.requires_grad)
+    return {"total": total, "trainable": trainable, "frozen": total - trainable}
+
+
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description=__doc__)
     parser.parse_args()
-    print("Available architectures (six-class classification):")
+    print("Parameter counts for six-class classifiers (only the final head is trained):")
+    print(f"{'Model':<22} {'Total':>14} {'Trainable':>14} {'Frozen':>14} {'FP32 MiB':>10}")
     for name in BUILDERS:
-        print(f"  {name}: pretrained weights IMAGENET1K_V1; only the final head is trained")
+        # Weight values do not affect counts; avoid downloading ImageNet weights.
         model, _ = create_model(name, pretrained=False)
-        total_params = sum(p.numel() for p in model.parameters())
-        print(f"    Parameters: {total_params:,}")
-        print(f"    FP32 weights: {total_params * 4 / (1024**2):.2f} MiB")
+        counts = parameter_counts(model)
+        print(f"{name:<22} {counts['total']:>14,} {counts['trainable']:>14,} "
+              f"{counts['frozen']:>14,} {counts['total'] * 4 / (1024**2):>10.2f}")
+    print("FP32 MiB estimates parameter storage only; excludes buffers, activations, and optimizer state.")
     print("Train/compare: python -m rice_disease.benchmark\n"
           "Predict: python -m rice_disease.inference path/to/leaf.jpg")
